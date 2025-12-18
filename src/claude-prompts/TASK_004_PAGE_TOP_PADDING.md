@@ -1,5 +1,7 @@
 # TASK 004: Fix Page Title Overflow
 
+## Skills: `frontend-design`, `verification-before-completion`
+
 ## Priority: HIGH
 
 ## Affected Pages
@@ -11,29 +13,28 @@
 ## Problem
 Page headlines are cut off at the top because they don't account for the fixed navbar height (h-20 = 80px).
 
-## Solution
+---
 
-### 1. Add Hero Section with Proper Padding
+## Explicit Reasoning Protocol
 
-Every internal page should have a hero/header section like this:
-
-```html
-<!-- Page Hero - with proper top padding for fixed navbar -->
-<section class="relative pt-32 pb-16 bg-gradient-to-b from-surface-dark to-background-dark">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-4" 
-        data-i18n="partners.title">
-      Nos Partenaires
-    </h1>
-    <p class="text-lg md:text-xl text-subtext-dark max-w-3xl mx-auto" 
-       data-i18n="partners.description">
-      Ensemble, nous construisons des ponts...
-    </p>
-  </div>
-</section>
+Before each page modification:
+```
+DOING: Add padding-top to [page].html first content section
+EXPECT: Title visible below navbar with proper spacing
+IF YES: Proceed to next page
+IF NO: Adjust padding value, verify again
 ```
 
-### 2. CSS for Internal Page Headers
+---
+
+## Solution
+
+### Step 1: Add CSS for Internal Page Headers
+
+```
+DOING: Add .page-hero class to /assets/css/main.css
+EXPECT: Class provides proper top padding for internal pages
+```
 
 Add to main.css:
 
@@ -64,57 +65,119 @@ main > section:first-child,
 }
 ```
 
-### 3. Quick Fix for Existing Pages
-
-If restructuring isn't possible, add this class to the first content container:
-
-```html
-<div class="pt-24 md:pt-32">
-  <!-- existing content -->
-</div>
-```
-
-Or add inline style:
-```html
-<section style="padding-top: 8rem;">
-```
-
-## Files to Modify
+### Step 2: Update Each Internal Page
 
 For each page, ensure the main content section has adequate top padding:
 
-### partners.html (all language versions)
+#### Template Structure
 ```html
-<main class="pt-24">
-  <!-- or -->
+<!-- Page Hero - with proper top padding for fixed navbar -->
+<section class="page-hero">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-4" 
+        data-i18n="[page].title">
+      Page Title
+    </h1>
+    <p class="text-lg md:text-xl text-subtext-dark max-w-3xl mx-auto" 
+       data-i18n="[page].description">
+      Page description...
+    </p>
+  </div>
+</section>
+```
+
+### Step 3: Update Specific Pages
+
+#### partners.html (all versions)
+```
+DOING: Add page-hero class or pt-32 to partners.html main section
+EXPECT: "Nos Partenaires" title fully visible
+```
+
+```html
+<main>
   <section class="page-hero">
-    <h1 data-i18n="partners.title">Partenaires</h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-4" 
+          data-i18n="partners.title">Nos Partenaires</h1>
+      <p class="text-lg md:text-xl text-subtext-dark max-w-3xl mx-auto" 
+         data-i18n="partners.description">Ensemble, nous construisons des ponts...</p>
+    </div>
   </section>
+  <!-- rest of content -->
 </main>
 ```
 
-### contact.html (all language versions)
+#### contact.html (all versions)
 ```html
-<main class="pt-24">
+<main>
   <section class="page-hero">
-    <h1 data-i18n="contact.title">Contact</h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-4" 
+          data-i18n="contact.title">Contact</h1>
+    </div>
   </section>
+  <!-- rest of content -->
 </main>
 ```
 
-### our-actions.html / mission.html
+#### our-actions.html / mission.html
 ```html
-<main class="pt-24">
+<main>
   <section class="page-hero">
-    <h1 data-i18n="actions.title">Nos Actions</h1>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-4" 
+          data-i18n="actions.title">Nos Actions</h1>
+    </div>
   </section>
+  <!-- rest of content -->
 </main>
 ```
+
+### Quick Fix Alternative
+
+If restructuring isn't possible, add inline class:
+```html
+<main class="pt-24 md:pt-32">
+  <!-- existing content -->
+</main>
+```
+
+---
+
+## ⛳ Verification Checkpoint
+
+```
+DOING: Open each page in browser
+EXPECT: Page title fully visible below navbar
+
+Test each:
+- /partners.html → RESULT: [visible/cut off]
+- /fr/partners.html → RESULT: [visible/cut off]
+- /uk/partners.html → RESULT: [visible/cut off]
+- /de/partners.html → RESULT: [visible/cut off]
+- /contact.html → RESULT: [visible/cut off]
+- /fr/contact.html → RESULT: [visible/cut off]
+...
+
+MATCHES: [all visible = yes]
+THEREFORE: [proceed to TASK_005 or list issues]
+```
+
+---
 
 ## Verification Checklist
-- [ ] Partners page title fully visible
-- [ ] Contact page title fully visible  
-- [ ] Mission/Actions page title fully visible
-- [ ] About page title fully visible
+- [ ] Partners page title fully visible (all languages)
+- [ ] Contact page title fully visible (all languages)
+- [ ] Mission/Actions page title fully visible (all languages)
+- [ ] About page title fully visible (all languages)
 - [ ] No text overlapping with navbar shadow
 - [ ] Works on all screen sizes
+
+---
+
+## Handoff
+
+When complete:
+- Files modified: main.css, partners.html (×4), contact.html (×4), our-actions.html (×4), about.html (×4)
+- Ready for: TASK_005_AUDIO_PLAYER.md

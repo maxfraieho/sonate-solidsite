@@ -1,5 +1,7 @@
 # TASK 002: Fix Header & Language Switcher
 
+## Skills: `frontend-design`, `verification-before-completion`
+
 ## Priority: HIGH
 
 ## Current Problems
@@ -7,9 +9,34 @@
 2. No active language indicator
 3. Broken styles when switching languages
 
+---
+
+## Explicit Reasoning Protocol
+
+Before EACH modification:
+```
+DOING: [specific action]
+EXPECT: [predicted outcome]
+IF YES: [next step]
+IF NO: [stop, diagnose]
+```
+
+---
+
 ## Required Changes
 
-### 1. Move Language Switcher After Logo
+### Step 1: Locate Current Language Switcher Structure
+
+```
+DOING: Find lang-switcher HTML in index.html
+EXPECT: Element with id="lang-switcher" or class="lang-switcher"
+```
+
+```bash
+grep -n "lang-switcher\|lang-btn" index.html
+```
+
+### Step 2: Move Language Switcher After Logo
 
 In ALL HTML files, restructure the header-left div:
 
@@ -48,9 +75,14 @@ In ALL HTML files, restructure the header-left div:
 </div>
 ```
 
-### 2. Add Active Language Indicator CSS
+### Step 3: Add Active Language Indicator CSS
 
-Add to `/assets/css/main.css` or inline styles:
+```
+DOING: Add CSS for active language indicator to /assets/css/main.css
+EXPECT: File modified, CSS block added at end
+```
+
+Add to `/assets/css/main.css`:
 
 ```css
 /* Active Language Flag - Golden Underline */
@@ -75,9 +107,14 @@ Add to `/assets/css/main.css` or inline styles:
 }
 ```
 
-### 3. Update lang-switcher.js
+### Step 4: Update lang-switcher.js
 
-Modify `/assets/js/lang-switcher.js` to add active class:
+```
+DOING: Modify /assets/js/lang-switcher.js to add active class
+EXPECT: Script detects current language and adds .active class
+```
+
+Modify `/assets/js/lang-switcher.js`:
 
 ```javascript
 document.addEventListener('DOMContentLoaded', function() {
@@ -106,9 +143,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 ```
 
-### 4. Fix Asset Paths (Use Absolute Paths)
+### Step 5: Fix Asset Paths (Use Absolute Paths)
 
-In ALL HTML files in /fr/, /uk/, /de/ folders, ensure asset paths are ABSOLUTE:
+```
+DOING: Ensure all /fr/, /uk/, /de/ HTML files use absolute asset paths
+EXPECT: All href/src attributes start with / not ../
+```
+
+In ALL HTML files in /fr/, /uk/, /de/ folders:
 
 ```html
 <!-- WRONG (relative paths) -->
@@ -120,9 +162,41 @@ In ALL HTML files in /fr/, /uk/, /de/ folders, ensure asset paths are ABSOLUTE:
 <script src="/assets/js/main.js"></script>
 ```
 
+Search and replace:
+```bash
+find ./fr ./uk ./de -name "*.html" -exec sed -i 's|href="\.\./assets/|href="/assets/|g' {} \;
+find ./fr ./uk ./de -name "*.html" -exec sed -i 's|src="\.\./assets/|src="/assets/|g' {} \;
+```
+
+---
+
+## ⛳ Verification Checkpoint
+
+```
+DOING: Open /index.html in browser
+EXPECT: Logo appears first, language flags after, FR flag has gold underline
+
+DOING: Click UK flag
+EXPECT: Navigate to /uk/index.html, UK flag now has gold underline, styles intact
+
+RESULT: [document observations]
+MATCHES: [yes/no]
+THEREFORE: [proceed or report to Q]
+```
+
+---
+
 ## Verification Checklist
 - [ ] Logo appears BEFORE language switcher
 - [ ] Active language has golden underline
 - [ ] Switching languages loads correct page with styles
 - [ ] No broken CSS on any language version
-- [ ] Flags vertically stacked on desktop, horizontal on mobile
+- [ ] Flags display correctly (not broken images)
+
+---
+
+## Handoff
+
+When complete:
+- Files modified: [list HTML files, main.css, lang-switcher.js]
+- Ready for: TASK_003_HERO_LAYOUT.md

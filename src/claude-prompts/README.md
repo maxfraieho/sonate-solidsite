@@ -1,70 +1,137 @@
-# Quick Start Commands for Claude CLI
+# Claude CLI Prompts for violin.pp.ua
+
+## Оптимізовано під CLAUDE.md Protocol
+
+Ці промпти адаптовані під ваш CLAUDE.md з:
+- ✅ Explicit Reasoning Protocol (DOING/EXPECT/RESULT/MATCHES)
+- ✅ Checkpoint-и після критичних операцій
+- ✅ Skills підказки для кожного завдання
+- ✅ Handoff протокол для передачі контексту
+- ✅ Правильний git workflow (окремі `git add`, без `git add .`)
+- ✅ Session management нагадування
+
+---
 
 ## Швидкий старт
 
-### 1. Скопіюйте папку claude-prompts до вашого проєкту:
+### 1. Скопіюйте папку до проєкту:
 ```bash
-# З Lovable проєкту (якщо клонували)
 cp -r src/claude-prompts /path/to/violin.pp.ua/claude-prompts
 ```
 
-### 2. Перейдіть до папки проєкту:
+### 2. Почніть сесію:
 ```bash
 cd /path/to/violin.pp.ua
+/project:session-start violin-localization-fix
 ```
 
 ### 3. Запустіть Claude CLI:
 
-**Весь набір виправлень одразу:**
+**Весь набір виправлень:**
 ```bash
 claude chat --file claude-prompts/CLAUDE_MASTER_PROMPT.md
 ```
 
-**АБО виконуйте поетапно:**
+**АБО поетапно:**
 ```bash
-# Критичні виправлення (спочатку)
+# Phase 1: Critical (виконайте спочатку)
 claude chat --file claude-prompts/TASK_001_FIX_I18N_KEYS.md
 claude chat --file claude-prompts/TASK_002_HEADER_LANG_SWITCHER.md
 claude chat --file claude-prompts/TASK_003_HERO_LAYOUT.md
 
-# Виправлення сторінок
+# Phase 2: Pages
 claude chat --file claude-prompts/TASK_004_PAGE_TOP_PADDING.md
 
-# Компоненти
+# Phase 3: Components
 claude chat --file claude-prompts/TASK_005_AUDIO_PLAYER.md
 claude chat --file claude-prompts/TASK_006_GALLERY_FIX.md
 
-# Різне
+# Phase 4: Cleanup
 claude chat --file claude-prompts/TASK_007_MISC_FIXES.md
 ```
 
-### 4. Після завершення - коміт:
+### 4. Оновлюйте сесію:
 ```bash
-git checkout -b fix/full-localization-and-layout
-git add .
-git commit -m "Fix full localization system, reposition language switcher, correct hero layout, unify mission page"
-git push origin fix/full-localization-and-layout
+/project:session-update Completed Phase 1 - i18n keys fixed
+```
+
+### 5. Завершіть сесію:
+```bash
+/project:session-end
 ```
 
 ---
 
 ## Файли
 
-| Файл | Опис |
-|------|------|
-| `CLAUDE_MASTER_PROMPT.md` | Головний промпт з усіма інструкціями |
-| `TASK_001_FIX_I18N_KEYS.md` | Виправлення ключів локалізації |
-| `TASK_002_HEADER_LANG_SWITCHER.md` | Позиція перемикача мов |
-| `TASK_003_HERO_LAYOUT.md` | Макет hero секції |
-| `TASK_004_PAGE_TOP_PADDING.md` | Відступи на сторінках |
-| `TASK_005_AUDIO_PLAYER.md` | Аудіо плеєр |
-| `TASK_006_GALLERY_FIX.md` | Галерея |
-| `TASK_007_MISC_FIXES.md` | Різні виправлення |
-| `run-fixes.sh` | Bash скрипт для запуску |
+| Файл | Skills | Опис |
+|------|--------|------|
+| `CLAUDE_MASTER_PROMPT.md` | executing-plans, verification | Головний промпт |
+| `TASK_001_FIX_I18N_KEYS.md` | systematic-debugging | Виправлення ключів |
+| `TASK_002_HEADER_LANG_SWITCHER.md` | frontend-design | Позиція перемикача |
+| `TASK_003_HERO_LAYOUT.md` | frontend-design | Макет hero |
+| `TASK_004_PAGE_TOP_PADDING.md` | frontend-design | Відступи сторінок |
+| `TASK_005_AUDIO_PLAYER.md` | frontend-design, debugging | Аудіо плеєр |
+| `TASK_006_GALLERY_FIX.md` | frontend-design, debugging | Галерея |
+| `TASK_007_MISC_FIXES.md` | verification | Різні виправлення |
+| `run-fixes.sh` | — | Bash меню |
 
 ---
 
-## Таблиця ключів i18n (довідка)
+## Git Workflow (КРИТИЧНО)
+
+**НІКОЛИ не використовуйте `git add .`!**
+
+Правильно:
+```bash
+git checkout -b fix/full-localization-and-layout
+
+# Додавайте файли окремо
+git add index.html
+git add fr/index.html
+git add uk/index.html
+git add de/index.html
+git add assets/css/main.css
+git add assets/js/lang-switcher.js
+# ... всі змінені файли окремо
+
+git commit -m "fix: localization and layout improvements"
+git push origin fix/full-localization-and-layout
+```
+
+---
+
+## Reasoning Protocol
+
+Кожен промпт слідує протоколу:
+
+**Перед дією:**
+```
+DOING: [що робимо]
+EXPECT: [очікуваний результат]
+IF YES: [наступний крок]
+IF NO: [зупинка, діагностика]
+```
+
+**Після дії:**
+```
+RESULT: [що сталось]
+MATCHES: [так/ні]
+THEREFORE: [висновок]
+```
+
+**При помилці:**
+```
+FAILED: [що не спрацювало]
+ERROR: [точний текст помилки]
+THEORY: [чому це сталось]
+PROPOSAL: [що хочу спробувати]
+Q, should I proceed? [чекаємо підтвердження]
+```
+
+---
+
+## Таблиця ключів i18n
 
 ```
 НЕПРАВИЛЬНО                  → ПРАВИЛЬНО
@@ -90,3 +157,10 @@ mission.mediation.desc       → mission.items.mediation_desc
 mission.integration.title    → mission.items.integration
 mission.integration.desc     → mission.items.integration_desc
 ```
+
+---
+
+## Підтримка
+
+- Repository: https://github.com/maxfraieho/violin.pp.ua
+- Live: https://violin.pp.ua

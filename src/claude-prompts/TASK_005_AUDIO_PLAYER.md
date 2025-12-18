@@ -1,5 +1,7 @@
 # TASK 005: Fix Audio Player
 
+## Skills: `frontend-design`, `systematic-debugging`, `verification-before-completion`
+
 ## Priority: MEDIUM
 
 ## Problems
@@ -7,11 +9,41 @@
 2. Volume slider not styled with gold color
 3. Inconsistent styling
 
+---
+
+## Explicit Reasoning Protocol
+
+Before modifications:
+```
+DOING: [action]
+EXPECT: [outcome]
+IF YES: [proceed]
+IF NO: [stop, diagnose, report to Q]
+```
+
+---
+
 ## Required Changes
 
-### 1. Replace Text Labels with SVG Icons
+### Step 1: Locate Audio Player
 
-In the audio player HTML section, replace text with Material Symbols icons:
+```
+DOING: Find audio player in index.html
+EXPECT: Section with audio controls, buttons, volume slider
+```
+
+```bash
+grep -n "audio\|player\|volume" index.html
+```
+
+### Step 2: Replace Text Labels with Material Icons
+
+```
+DOING: Replace text-based buttons with Material Symbols icons
+EXPECT: Buttons render as icons, not text
+```
+
+Update HTML structure:
 
 ```html
 <div class="audio-controls flex items-center justify-center gap-4">
@@ -47,7 +79,12 @@ In the audio player HTML section, replace text with Material Symbols icons:
 </div>
 ```
 
-### 2. CSS for Audio Player
+### Step 3: Add CSS for Audio Player
+
+```
+DOING: Add audio player CSS to main.css
+EXPECT: Gold styling, proper button appearance, slider with gold thumb
+```
 
 Add to main.css:
 
@@ -92,7 +129,7 @@ Add to main.css:
   background: rgba(212, 175, 55, 0.25);
 }
 
-/* Hide default text fallbacks */
+/* Hide text fallbacks */
 .audio-btn span.sr-only,
 .audio-btn .text-label {
   display: none;
@@ -136,17 +173,6 @@ Add to main.css:
   box-shadow: 0 2px 6px rgba(212, 175, 55, 0.4);
 }
 
-/* Volume slider track fill (gold) */
-.volume-slider::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, 
-    #D4AF37 0%, 
-    #D4AF37 var(--volume-fill, 80%), 
-    rgba(255, 255, 255, 0.2) var(--volume-fill, 80%), 
-    rgba(255, 255, 255, 0.2) 100%
-  );
-  border-radius: 3px;
-}
-
 /* Progress bar - Gold fill */
 .audio-progress {
   -webkit-appearance: none;
@@ -168,7 +194,12 @@ Add to main.css:
 }
 ```
 
-### 3. JavaScript for Volume Slider Fill
+### Step 4: Update JavaScript for Icon Toggle
+
+```
+DOING: Add JS for play/pause and mute icon toggling
+EXPECT: Icons switch when state changes
+```
 
 Add to audio-player.js or main.js:
 
@@ -213,6 +244,25 @@ function toggleMute(isMuted) {
 }
 ```
 
+---
+
+## ⛳ Verification Checkpoint
+
+```
+DOING: Test audio player in browser
+EXPECT:
+  - All buttons show icons (skip_previous, play_arrow, skip_next, shuffle, volume_up)
+  - Volume slider has gold thumb
+  - Hover effects work (scale, background)
+  - Click play toggles to pause icon
+
+RESULT: [document observations]
+MATCHES: [yes/no]
+THEREFORE: [proceed to TASK_006 or report issues]
+```
+
+---
+
 ## Verification Checklist
 - [ ] All control buttons show icons (not text)
 - [ ] Volume slider has gold fill
@@ -221,3 +271,11 @@ function toggleMute(isMuted) {
 - [ ] Mute button toggles between volume_up and volume_off
 - [ ] Hover states work correctly
 - [ ] Accessible (aria-labels present)
+
+---
+
+## Handoff
+
+When complete:
+- Files modified: index.html, main.css, audio-player.js (or main.js)
+- Ready for: TASK_006_GALLERY_FIX.md
