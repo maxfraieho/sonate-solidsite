@@ -21,11 +21,6 @@ export const HeroSection = () => {
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-16">
         <div className="animate-fade-in-up">
-          <img
-            src="https://violin.pp.ua/assets/img/logo-sonate.png"
-            alt="Logo Sonate Solidaire"
-            className="hidden md:inline-block mb-6 h-16 rounded-full opacity-90 shadow-lg shadow-primary/30"
-          />
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
             {t('hero.title')}
           </h1>
@@ -37,7 +32,7 @@ export const HeroSection = () => {
           </p>
         </div>
 
-        <div className="animate-fade-in-up animation-delay-200 flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="animate-fade-in-up animation-delay-200 flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <a href="#don">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-hover text-lg px-8 py-6 shadow-lg">
               {t('hero.supportCta')}
@@ -49,6 +44,12 @@ export const HeroSection = () => {
             </Button>
           </a>
         </div>
+
+        <img
+          src="https://violin.pp.ua/assets/img/logo-sonate.png"
+          alt="Logo Sonate Solidaire"
+          className="hidden md:inline-block h-16 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
+        />
       </div>
 
       {/* Scroll Indicator */}
