@@ -1,94 +1,137 @@
 #!/bin/bash
-# =============================================
-# VIOLIN.PP.UA - Run All Fix Tasks v4
-# =============================================
+# run-all.sh — Автоматичне виконання всіх завдань для violin.pp.ua
+# Запуск: ./src/claude-prompts/run-all.sh
 
-set -e  # Exit on error
+set -e  # Зупинитись при помилці
 
-echo "🎻 violin.pp.ua - Виконання всіх виправлень v4"
-echo "================================================"
+PROMPTS_DIR="src/claude-prompts"
+LOG_FILE="multilingual-fix.log"
 
-cd ~/violin.pp.ua || { echo "❌ Папка ~/violin.pp.ua не знайдена"; exit 1; }
-
-# Create branch
-git checkout -b fix/localization-v4 2>/dev/null || git checkout fix/localization-v4
-
+echo "╔══════════════════════════════════════════════════════════════╗"
+echo "║  VIOLIN.PP.UA — Повний рефакторинг мультимовної системи     ║"
+echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
-echo "📌 TASK 01: i18n Keys (КРИТИЧНО)"
-echo "---------------------------------"
-claude "Read src/claude-prompts/TASK_01_I18N_KEYS.md and execute all sed commands to fix data-i18n attributes in index.html"
-read -p "✓ i18n ключі виправлено? (Enter для продовження, Ctrl+C для скасування) "
-
-echo ""
-echo "📌 TASK 02: Language Switcher"
-echo "-----------------------------"
-claude "Read src/claude-prompts/TASK_02_LANG_SWITCHER.md and fix lang switcher: change hrefs to ?lang= params, update i18n.js and lang-switcher.js"
-read -p "✓ Перемикач мов працює? (Enter для продовження) "
-
-echo ""
-echo "📌 TASK 03: Material Icons"
-echo "--------------------------"
-claude "Read src/claude-prompts/TASK_03_MATERIAL_ICONS.md and verify/fix Material Icons font loading"
-read -p "✓ Іконки показуються? (Enter для продовження) "
-
-echo ""
-echo "📌 TASK 04: Create gallery.html"
-echo "-------------------------------"
-claude "Read src/claude-prompts/TASK_04_GALLERY_CREATE.md and create gallery.html file with proper header and gallery grid"
-read -p "✓ gallery.html створено? (Enter для продовження) "
-
-echo ""
-echo "📌 TASK 05: Internal Pages Fix"
-echo "------------------------------"
-claude "Read src/claude-prompts/TASK_05_INTERNAL_PAGES.md and fix partners.html and contact.html: add lang-switcher to header, fix page-hero padding"
-read -p "✓ Внутрішні сторінки виправлено? (Enter для продовження) "
-
-echo ""
-echo "✅ Всі завдання виконано!"
+echo "Дата: $(date)"
+echo "Логування в: $LOG_FILE"
 echo ""
 
-# Verification
-echo "🔍 Верифікація..."
+# Функція для виконання завдання
+run_task() {
+    local task_num=$1
+    local task_file=$2
+    local task_name=$3
+    
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "📋 TASK $task_num: $task_name"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    
+    if [ -f "$PROMPTS_DIR/$task_file" ]; then
+        echo "⏳ Виконання..."
+        claude "
+DOING: Execute TASK $task_num - $task_name
+
+Read and execute: $PROMPTS_DIR/$task_file
+
+Use DOING/EXPECT/RESULT protocol.
+Verify changes after completion.
+Report any errors immediately.
+" 2>&1 | tee -a $LOG_FILE
+        
+        echo ""
+        read -p "✅ Task $task_num завершено? (y/n/skip): " confirm
+        if [ "$confirm" = "n" ]; then
+            echo "❌ Task $task_num failed. Зупинка."
+            exit 1
+        elif [ "$confirm" = "skip" ]; then
+            echo "⏭️  Пропуск Task $task_num"
+        fi
+    else
+        echo "⚠️  Файл не знайдено: $PROMPTS_DIR/$task_file"
+        read -p "Продовжити? (y/n): " cont
+        if [ "$cont" != "y" ]; then
+            exit 1
+        fi
+    fi
+    echo ""
+}
+
+# Головне меню
+echo "Оберіть режим виконання:"
+echo "1) Виконати ВСІ завдання послідовно"
+echo "2) Виконати конкретне завдання"
+echo "3) Показати список завдань"
 echo ""
+read -p "Ваш вибір (1/2/3): " choice
 
-echo "Перевірка старих i18n ключів (має бути 0):"
-grep -c "hero.supportCta" index.html 2>/dev/null || echo "0"
-
-echo ""
-echo "Перевірка нових i18n ключів (має бути 1+):"
-grep -c "hero.cta_support" index.html 2>/dev/null || echo "ERROR: не знайдено"
-
-echo ""
-echo "Перевірка lang-switcher посилань:"
-grep -c '?lang=fr' index.html 2>/dev/null || echo "ERROR: не знайдено"
-
-echo ""
-echo "Перевірка gallery.html існує:"
-ls -la gallery.html 2>/dev/null || echo "ERROR: файл не існує"
-
-echo ""
-read -p "Все працює? Комітимо? (Enter для git commit, Ctrl+C для скасування) "
-
-# Git commit
-echo ""
-echo "📦 Git commit..."
-git add index.html
-git add gallery.html 2>/dev/null || true
-git add partners.html contact.html about.html our-actions.html 2>/dev/null || true
-git add assets/js/modules/i18n.js assets/js/modules/lang-switcher.js 2>/dev/null || true
-git add locales/*.json 2>/dev/null || true
-
-git commit -m "fix: i18n keys, lang switcher, icons, gallery page v4
-
-- Fixed 22 data-i18n key mismatches (hero, manifesto, mission)
-- Changed lang switcher to use ?lang= query params
-- Fixed Material Icons font loading
-- Created gallery.html (was missing!)
-- Fixed internal pages header with lang-switcher
-- Added page-hero padding for internal pages"
-
-echo ""
-echo "✅ Commit створено!"
-echo ""
-echo "🚀 Push з командою:"
-echo "   git push origin fix/localization-v4"
+case $choice in
+    1)
+        echo ""
+        echo "🚀 Запуск всіх завдань..."
+        echo ""
+        
+        run_task "01" "TASK_01_REMOVE_LANG_FOLDERS.md" "Видалення папок /fr, /uk, /de"
+        run_task "02" "TASK_02_I18N_ENGINE.md" "Створення i18n движка"
+        run_task "03" "TASK_03_FIX_DATA_I18N.md" "Виправлення data-i18n ключів"
+        run_task "04" "TASK_04_JS_HARDCODED.md" "Винесення тексту з JS"
+        run_task "05" "TASK_05_MATERIAL_ICONS.md" "Виправлення Material Icons"
+        run_task "06" "TASK_06_PAGES_UNIFIED.md" "Уніфікація сторінок"
+        
+        echo "╔══════════════════════════════════════════════════════════════╗"
+        echo "║  ✅ ВСІ ЗАВДАННЯ ВИКОНАНО!                                   ║"
+        echo "╚══════════════════════════════════════════════════════════════╝"
+        echo ""
+        echo "📝 Наступні кроки:"
+        echo "   1. Перевірте сайт локально"
+        echo "   2. git add -A"
+        echo "   3. git commit -m 'fix: complete multilingual system overhaul'"
+        echo "   4. git push origin fix/multilingual-system-v5"
+        ;;
+    2)
+        echo ""
+        echo "Доступні завдання:"
+        echo "  1. TASK_01 - Видалення папок /fr, /uk, /de"
+        echo "  2. TASK_02 - Створення i18n движка"
+        echo "  3. TASK_03 - Виправлення data-i18n ключів"
+        echo "  4. TASK_04 - Винесення тексту з JS"
+        echo "  5. TASK_05 - Виправлення Material Icons"
+        echo "  6. TASK_06 - Уніфікація сторінок"
+        echo ""
+        read -p "Номер завдання (1-6): " task_num
+        
+        case $task_num in
+            1) run_task "01" "TASK_01_REMOVE_LANG_FOLDERS.md" "Видалення папок" ;;
+            2) run_task "02" "TASK_02_I18N_ENGINE.md" "i18n движок" ;;
+            3) run_task "03" "TASK_03_FIX_DATA_I18N.md" "data-i18n ключі" ;;
+            4) run_task "04" "TASK_04_JS_HARDCODED.md" "JS текст" ;;
+            5) run_task "05" "TASK_05_MATERIAL_ICONS.md" "Material Icons" ;;
+            6) run_task "06" "TASK_06_PAGES_UNIFIED.md" "Сторінки" ;;
+            *) echo "Невірний номер" ;;
+        esac
+        ;;
+    3)
+        echo ""
+        echo "📋 СПИСОК ЗАВДАНЬ:"
+        echo ""
+        echo "TASK_01_REMOVE_LANG_FOLDERS.md"
+        echo "  → Видалити застарілі папки /fr, /uk, /de"
+        echo ""
+        echo "TASK_02_I18N_ENGINE.md"
+        echo "  → Створити i18n-bridge.js та lang-switcher.js"
+        echo ""
+        echo "TASK_03_FIX_DATA_I18N.md"
+        echo "  → Виправити 22 невідповідності data-i18n ключів"
+        echo ""
+        echo "TASK_04_JS_HARDCODED.md"
+        echo "  → Винести твердокодований текст з JS в JSON"
+        echo ""
+        echo "TASK_05_MATERIAL_ICONS.md"
+        echo "  → Виправити відображення Material Icons"
+        echo ""
+        echo "TASK_06_PAGES_UNIFIED.md"
+        echo "  → Уніфікувати header, створити gallery.html"
+        ;;
+    *)
+        echo "Невірний вибір"
+        exit 1
+        ;;
+esac
