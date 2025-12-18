@@ -117,13 +117,11 @@ const Contact = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          type: 'contact',
-          name: formData.name,
-          email: formData.email,
-          subject: texts.subjects[formData.subject as keyof typeof texts.subjects]?.[lang] || formData.subject,
-          message: formData.message,
-          language: lang,
-          timestamp: new Date().toISOString()
+          type: 'contact-form',
+          contactName: formData.name,
+          contactEmail: formData.email,
+          subject: formData.subject,
+          message: formData.message
         }),
       });
 
