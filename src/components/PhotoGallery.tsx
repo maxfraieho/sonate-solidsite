@@ -27,18 +27,6 @@ const galleryImages = [
     alt: 'Recording session',
     category: 'studio'
   },
-  {
-    id: 5,
-    src: 'https://violin.pp.ua/assets/img/audio-covers/cover-2.webp',
-    alt: 'Album cover',
-    category: 'studio'
-  },
-  {
-    id: 6,
-    src: 'https://violin.pp.ua/assets/img/audio-covers/cover-3.webp',
-    alt: 'Album artwork',
-    category: 'studio'
-  },
 ];
 
 export const PhotoGallery = () => {
