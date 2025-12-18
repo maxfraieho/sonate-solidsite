@@ -2,88 +2,52 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
+import photo1 from '@/assets/gallery/photo-1.jpg';
+import photo2 from '@/assets/gallery/photo-2.jpg';
+import photo3 from '@/assets/gallery/photo-3.jpg';
+import photo4 from '@/assets/gallery/photo-4.jpg';
+import photo5 from '@/assets/gallery/photo-5.jpg';
+import photo6 from '@/assets/gallery/photo-6.jpg';
+import photo7 from '@/assets/gallery/photo-7.jpg';
+import photo8 from '@/assets/gallery/photo-8.jpg';
+import photo9 from '@/assets/gallery/photo-9.jpg';
+
 const galleryImages = [
-  {
-    id: 1,
-    src: 'https://violin.pp.ua/assets/img/hero-large-blur3.jpg',
-    alt: 'Arsen Kovalenko concert',
-    category: 'concert'
-  },
-  {
-    id: 2,
-    src: 'https://violin.pp.ua/assets/img/chee-yun-s.jpg',
-    alt: 'Portrait',
-    category: 'portrait'
-  },
-  {
-    id: 3,
-    src: 'https://violin.pp.ua/assets/img/hero/hero-desktop.jpg',
-    alt: 'Performance',
-    category: 'concert'
-  },
-  {
-    id: 4,
-    src: 'https://violin.pp.ua/assets/img/audio-covers/cover-1.webp',
-    alt: 'Recording session',
-    category: 'studio'
-  },
+  { id: 1, src: photo1, alt: 'Народний ансамбль' },
+  { id: 2, src: photo2, alt: 'Квартет біля замку' },
+  { id: 3, src: photo3, alt: 'Дует скрипка та акордеон' },
+  { id: 4, src: photo4, alt: 'Сольний виступ' },
+  { id: 5, src: photo5, alt: 'Фольклорний гурт' },
+  { id: 6, src: photo6, alt: 'Різдвяний виступ' },
+  { id: 7, src: photo7, alt: 'Хор у традиційних костюмах' },
+  { id: 8, src: photo8, alt: 'Виступ у ресторані' },
+  { id: 9, src: photo9, alt: 'Тріо біля Луцького замку' },
 ];
 
 export const PhotoGallery = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [filter, setFilter] = useState<string>('all');
-
-  const categories = [
-    { key: 'all', label: { fr: 'Tout', de: 'Alle', uk: 'Усі' } },
-    { key: 'concert', label: { fr: 'Concerts', de: 'Konzerte', uk: 'Концерти' } },
-    { key: 'portrait', label: { fr: 'Portraits', de: 'Porträts', uk: 'Портрети' } },
-    { key: 'studio', label: { fr: 'Studio', de: 'Studio', uk: 'Студія' } },
-  ];
-
-  const filteredImages = filter === 'all' 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === filter);
 
   const openLightbox = (index: number) => setSelectedImage(index);
   const closeLightbox = () => setSelectedImage(null);
   
   const nextImage = () => {
     if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % filteredImages.length);
+      setSelectedImage((selectedImage + 1) % galleryImages.length);
     }
   };
   
   const prevImage = () => {
     if (selectedImage !== null) {
-      setSelectedImage((selectedImage - 1 + filteredImages.length) % filteredImages.length);
+      setSelectedImage((selectedImage - 1 + galleryImages.length) % galleryImages.length);
     }
   };
 
-  const lang = i18n.language as 'fr' | 'de' | 'uk';
-
   return (
     <div>
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-3 mb-8">
-        {categories.map((cat) => (
-          <button
-            key={cat.key}
-            onClick={() => setFilter(cat.key)}
-            className={`px-4 py-2 rounded-full font-medium transition-all ${
-              filter === cat.key
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-surface text-foreground hover:bg-primary/20'
-            }`}
-          >
-            {cat.label[lang] || cat.label.fr}
-          </button>
-        ))}
-      </div>
-
       {/* Gallery Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {filteredImages.map((image, index) => (
+        {galleryImages.map((image, index) => (
           <button
             key={image.id}
             onClick={() => openLightbox(index)}
@@ -93,9 +57,6 @@ export const PhotoGallery = () => {
               src={image.src}
               alt={image.alt}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://violin.pp.ua/assets/img/chee-yun-s.jpg';
-              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
@@ -120,8 +81,8 @@ export const PhotoGallery = () => {
           </button>
           
           <img
-            src={filteredImages[selectedImage].src}
-            alt={filteredImages[selectedImage].alt}
+            src={galleryImages[selectedImage].src}
+            alt={galleryImages[selectedImage].alt}
             className="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
           />
           
@@ -133,7 +94,7 @@ export const PhotoGallery = () => {
           </button>
           
           <div className="absolute bottom-4 text-center text-subtext">
-            {selectedImage + 1} / {filteredImages.length}
+            {selectedImage + 1} / {galleryImages.length}
           </div>
         </div>
       )}
