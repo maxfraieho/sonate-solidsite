@@ -1,156 +1,112 @@
 # TASK 01: Header та Language Switcher
 
 ## Проблема
-Прапорці мов розташовані ЗЛІВА від логотипу. Мають бути ПІСЛЯ логотипу.
+Прапорці мов розташовані ЗЛІВА від логотипу. Користувач хоче їх СПРАВА (після логотипу).
 Немає золотого підкреслення активної мови.
-На внутрішніх сторінках (partners.html) немає прапорців взагалі.
 
-## Поточна структура (НЕПРАВИЛЬНА)
+---
+
+## Поточна структура в index.html (рядки 283-305)
+
 ```html
-<header>
-  <div class="lang-switcher">  <!-- ЗЛІВА, неправильно -->
-    <a href="/fr/"><img src="flag-fr.png"></a>
-    <a href="/uk/"><img src="flag-ua.png"></a>
-    <a href="/de/"><img src="flag-de.png"></a>
+<!-- Header Left: Language Switcher + Logo -->
+<div class="header-left flex items-center gap-3">
+  <!-- Language Switcher (BEFORE logo) -->  ← ПРОБЛЕМА ТУТ
+  <div id="lang-switcher" class="lang-switcher">
+    <a class="lang-btn" href="/fr/index.html">...</a>
+    <a class="lang-btn" href="/uk/index.html">...</a>
+    <a class="lang-btn" href="/de/index.html">...</a>
   </div>
-  <div class="logo">
+
+  <!-- Logo -->
+  <a href="index.html" class="flex items-center gap-3">
     <span class="material-symbols-outlined">music_note</span>
-    <span>Sonate Solidaire</span>
-  </div>
-  <nav>...</nav>
-</header>
+    <div class="flex flex-col">
+      <span>Sonate</span>
+      <span>Solidaire</span>
+    </div>
+  </a>
+</div>
 ```
 
-## Потрібна структура (ПРАВИЛЬНА)
+---
+
+## Потрібна структура (Logo ПЕРЕД lang-switcher)
+
 ```html
-<header>
-  <div class="header-left">
-    <div class="logo">
-      <span class="material-symbols-outlined">music_note</span>
-      <span class="logo-text">Sonate<br>Solidaire</span>
+<!-- Header Left: Logo + Language Switcher -->
+<div class="header-left flex items-center gap-3">
+  <!-- Logo -->
+  <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+    <span class="material-symbols-outlined text-primary text-4xl">music_note</span>
+    <div class="flex flex-col">
+      <span class="font-display font-bold text-xl">Sonate</span>
+      <span class="font-display text-primary text-sm">Solidaire</span>
     </div>
-    <div class="lang-switcher">  <!-- ПІСЛЯ логотипу -->
-      <a href="/fr/" class="lang-flag active">
-        <img src="/assets/img/flag-fr.png" alt="Français">
-      </a>
-      <a href="/uk/" class="lang-flag">
-        <img src="/assets/img/flag-ua.png" alt="Українська">
-      </a>
-      <a href="/de/" class="lang-flag">
-        <img src="/assets/img/flag-de.png" alt="Deutsch">
-      </a>
-    </div>
+  </a>
+
+  <!-- Language Switcher (AFTER logo) -->
+  <div id="lang-switcher" class="lang-switcher">
+    <a class="lang-btn" href="/fr/index.html" data-lang="fr">
+      <img class="flag" src="/assets/img/flags/fr.svg" alt="FR">
+    </a>
+    <a class="lang-btn" href="/uk/index.html" data-lang="uk">
+      <img class="flag" src="/assets/img/flags/uk.svg" alt="UA">
+    </a>
+    <a class="lang-btn" href="/de/index.html" data-lang="de">
+      <img class="flag" src="/assets/img/flags/de.svg" alt="DE">
+    </a>
   </div>
-  <nav>...</nav>
-</header>
+</div>
 ```
 
 ---
 
-## Крок 1: Знайти поточну структуру header
+## Крок 1: Змінити порядок елементів
 
-```
-DOING: Шукаю header структуру в index.html
-EXPECT: Знайду div.lang-switcher перед логотипом
-IF YES: Продовжую до кроку 2
-IF NO: Перевіряю альтернативні селектори
-```
-
-Команда:
-```bash
-grep -n "lang-switcher\|header\|logo" index.html | head -30
-```
+В файлі index.html знайти блок `<div class="header-left">` (~рядок 283) і поміняти місцями:
+1. Спочатку Logo (`<a href="index.html"...>`)
+2. Потім lang-switcher (`<div id="lang-switcher"...>`)
 
 ---
 
-## Крок 2: Перемістити lang-switcher після логотипу
+## Крок 2: Додати CSS для активної мови
 
-```
-DOING: Переміщую lang-switcher після logo в index.html
-EXPECT: Структура: logo → lang-switcher → nav
-IF YES: Продовжую до CSS
-IF NO: Зупинка, перевірка HTML синтаксису
-```
-
----
-
-## Крок 3: Додати CSS для активної мови
-
-Додати до `/assets/css/main.css`:
+Знайти в `<style>` секції (~рядок 161-184) блок `.lang-switcher` і додати:
 
 ```css
-/* === Language Switcher === */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.lang-switcher {
-  display: flex;
-  flex-direction: column;  /* Вертикально на desktop */
-  gap: 0.25rem;
-}
-
-.lang-flag {
-  display: block;
-  width: 24px;
-  height: 16px;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.3s ease;
-}
-
-.lang-flag.active,
-.lang-flag:hover {
-  border-bottom-color: #D4AF37;  /* Золоте підкреслення */
-}
-
-.lang-flag img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-/* Mobile: горизонтально */
-@media (max-width: 768px) {
-  .lang-switcher {
-    flex-direction: row;
-    gap: 0.5rem;
-  }
+/* Active language indicator */
+.lang-btn.active .flag,
+.lang-btn[data-active="true"] .flag {
+  border-bottom: 2px solid #c5a059;
 }
 ```
 
 ---
 
-## Крок 4: Додати JavaScript для визначення активної мови
+## Крок 3: JavaScript для активної мови
 
-Додати/оновити `/assets/js/modules/lang-switcher.js`:
+Створити або оновити `/assets/js/modules/lang-switcher.js`:
 
 ```javascript
 (function() {
   'use strict';
   
-  function detectCurrentLanguage() {
-    const path = window.location.pathname;
-    if (path.startsWith('/uk/')) return 'uk';
-    if (path.startsWith('/de/')) return 'de';
-    return 'fr';  // default
-  }
-  
   function highlightActiveFlag() {
-    const currentLang = detectCurrentLanguage();
-    const flags = document.querySelectorAll('.lang-flag');
+    const path = window.location.pathname;
+    const flags = document.querySelectorAll('.lang-btn');
     
     flags.forEach(flag => {
       flag.classList.remove('active');
-      const href = flag.getAttribute('href');
+      const href = flag.getAttribute('href') || '';
+      const lang = flag.getAttribute('data-lang');
       
-      if (currentLang === 'fr' && (href === '/' || href === '/fr/' || href.endsWith('/index.html'))) {
+      // Визначити активну мову
+      if (path.includes('/uk/') && lang === 'uk') {
         flag.classList.add('active');
-      } else if (currentLang === 'uk' && href.includes('/uk/')) {
+      } else if (path.includes('/de/') && lang === 'de') {
         flag.classList.add('active');
-      } else if (currentLang === 'de' && href.includes('/de/')) {
+      } else if (!path.includes('/uk/') && !path.includes('/de/') && lang === 'fr') {
         flag.classList.add('active');
       }
     });
@@ -162,46 +118,24 @@ IF NO: Зупинка, перевірка HTML синтаксису
 
 ---
 
-## Крок 5: Виправити шляхи до assets (АБСОЛЮТНІ)
-
-У всіх HTML файлах мовних версій (/fr/, /uk/, /de/) замінити:
-
-```html
-<!-- НЕПРАВИЛЬНО -->
-<link href="../assets/css/main.css" rel="stylesheet">
-<script src="../assets/js/main.js"></script>
-
-<!-- ПРАВИЛЬНО -->
-<link href="/assets/css/main.css" rel="stylesheet">
-<script src="/assets/js/main.js"></script>
-```
-
----
-
 ## Файли для модифікації
 
 ```
-/index.html
-/fr/index.html
+/index.html (header-left block, CSS)
 /uk/index.html
 /de/index.html
 /partners.html
-/fr/partners.html
-/uk/partners.html
-/de/partners.html
-/gallery.html
 /contact.html
+/gallery.html
 /about.html
-/assets/css/main.css
 /assets/js/modules/lang-switcher.js
 ```
 
 ---
 
-## Чекліст перевірки
+## Чекліст
 
-- [ ] Прапорці після логотипу на всіх сторінках
-- [ ] Золоте підкреслення активної мови
-- [ ] Перемикання мов працює без зламаних стилів
-- [ ] Вертикально на desktop, горизонтально на mobile
-- [ ] Всі шляхи абсолютні (/assets/...)
+- [ ] Logo зліва, прапорці справа від нього
+- [ ] Активна мова має золоте підкреслення
+- [ ] Всі сторінки мають однаковий header
+- [ ] Прапорці є на partners.html, gallery.html тощо
