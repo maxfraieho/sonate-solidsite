@@ -54,7 +54,7 @@ export const HeroSection = () => {
       {/* Scroll Indicator */}
       <button
         onClick={() => document.getElementById('manifeste')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer group"
+        className="absolute bottom-8 left-1/2 -translate-x-[55%] z-10 animate-bounce cursor-pointer group"
         aria-label="Scroll down"
       >
         <div className="w-8 h-14 border-2 border-primary rounded-full flex justify-center pt-2 group-hover:border-primary-hover transition-colors">
