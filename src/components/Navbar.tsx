@@ -13,6 +13,7 @@ export const Navbar = () => {
     { key: 'mission', href: '#mission' },
     { key: 'actions', href: '#actions' },
     { key: 'founder', href: '#fondateur' },
+    { key: 'portfolio', href: '#portfolio' },
   ];
 
   return (

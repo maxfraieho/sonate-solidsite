@@ -1,0 +1,80 @@
+import { useTranslation } from 'react-i18next';
+import { AudioPlayer } from '@/components/AudioPlayer';
+import { PhotoGallery } from '@/components/PhotoGallery';
+
+export const PortfolioSection = () => {
+  const { t, i18n } = useTranslation();
+  
+  const lang = i18n.language as 'fr' | 'de' | 'uk';
+  
+  const titles = {
+    portfolio: { fr: 'Portfolio Musical', de: 'Musikalisches Portfolio', uk: 'Музичне портфоліо' },
+    description: { 
+      fr: 'Découvrez mes interprétations : du classique virtuose aux arrangements modernes',
+      de: 'Entdecken Sie meine Interpretationen: von virtuoser Klassik bis zu modernen Arrangements',
+      uk: 'Відкрийте мої інтерпретації: від віртуозної класики до сучасних аранжувань'
+    },
+    gallery: { fr: 'Galerie Photos', de: 'Fotogalerie', uk: 'Фотогалерея' },
+    galleryDesc: {
+      fr: 'Moments capturés lors de concerts et sessions d\'enregistrement',
+      de: 'Momente von Konzerten und Aufnahmesessions',
+      uk: 'Моменти з концертів та студійних сесій'
+    },
+    video: { fr: 'Vidéos', de: 'Videos', uk: 'Відео' }
+  };
+
+  return (
+    <section id="portfolio" className="py-20 bg-surface">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Audio Section */}
+        <div className="mb-20">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
+            {titles.portfolio[lang]}
+          </h2>
+          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
+            {titles.description[lang]}
+          </p>
+          <AudioPlayer />
+        </div>
+
+        {/* Photo Gallery */}
+        <div className="mb-20">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
+            {titles.gallery[lang]}
+          </h2>
+          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
+            {titles.galleryDesc[lang]}
+          </p>
+          <PhotoGallery />
+        </div>
+
+        {/* Video Section */}
+        <div>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
+            {titles.video[lang]}
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Concert performance"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Behind the scenes"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
