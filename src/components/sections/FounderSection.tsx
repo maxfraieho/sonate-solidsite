@@ -29,7 +29,7 @@ export const FounderSection = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://watchdog-notifier.maxfraieho.workers.dev/', {
+      const response = await fetch('https://violin-telegram-webhook.maxfraieho.workers.dev/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
