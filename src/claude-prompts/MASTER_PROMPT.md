@@ -68,23 +68,49 @@ THEREFORE: [висновок]
 
 ---
 
-## Порядок виконання
+## КОМАНДА ВИКОНАННЯ (скопіювати в Claude CLI)
 
-### ФАЗА 1: i18n ключі (КРИТИЧНО)
-**Файл:** `TASK_03_I18N_KEYS.md`
-Це головна причина чому тексти не перекладаються!
+```bash
+cd ~/violin.pp.ua && claude "
+Виконай всі завдання з промт-файлів по черзі. 
+Для кожного завдання:
+1. Прочитай файл промту
+2. Виконай всі кроки
+3. Перевір результат
+4. Переходь до наступного
 
-### ФАЗА 2: Header layout  
-**Файл:** `TASK_01_HEADER_LANG_SWITCHER.md`
+ПОРЯДОК ВИКОНАННЯ:
+1. src/claude-prompts/TASK_03_I18N_KEYS.md (КРИТИЧНО - виправити data-i18n ключі)
+2. src/claude-prompts/TASK_01_HEADER_LANG_SWITCHER.md (lang-switcher після logo)
+3. src/claude-prompts/TASK_02_MATERIAL_ICONS.md (іконки)
+4. src/claude-prompts/TASK_04_PAGES_FIX.md (gallery, partners)
+5. src/claude-prompts/TASK_05_CSS_LAYOUT.md (CSS fixes)
 
-### ФАЗА 3: Material Icons
-**Файл:** `TASK_02_MATERIAL_ICONS.md`
+Після кожного завдання роби checkpoint. Якщо щось не працює - зупинись і поясни.
+Використовуй протокол DOING/EXPECT/RESULT з MASTER_PROMPT.md.
+"
+```
 
-### ФАЗА 4: Сторінки
-**Файл:** `TASK_04_PAGES_FIX.md`
+---
 
-### ФАЗА 5: CSS
-**Файл:** `TASK_05_CSS_LAYOUT.md`
+## Альтернатива: По одному
+
+```bash
+# Фаза 1 - i18n ключі (НАЙВАЖЛИВІШЕ)
+claude "Read src/claude-prompts/TASK_03_I18N_KEYS.md and execute all sed commands"
+
+# Фаза 2 - Header
+claude "Read src/claude-prompts/TASK_01_HEADER_LANG_SWITCHER.md and fix header structure"
+
+# Фаза 3 - Icons
+claude "Read src/claude-prompts/TASK_02_MATERIAL_ICONS.md and verify icons"
+
+# Фаза 4 - Pages
+claude "Read src/claude-prompts/TASK_04_PAGES_FIX.md and fix gallery/partners"
+
+# Фаза 5 - CSS
+claude "Read src/claude-prompts/TASK_05_CSS_LAYOUT.md and apply CSS fixes"
+```
 
 ---
 
@@ -97,12 +123,25 @@ THEREFORE: [висновок]
 
 ---
 
-## Git
+## Git (після всіх змін)
 
 ```bash
 git checkout -b fix/full-localization-v3
-# після змін
-git add index.html uk/index.html de/index.html
-git commit -m "fix: i18n keys, header, icons"
+
+# Додавати ІНДИВІДУАЛЬНО
+git add index.html
+git add uk/index.html de/index.html
+git add gallery.html partners.html contact.html
+git add assets/css/*.css
+git add assets/js/modules/*.js
+
+git commit -m "fix: i18n keys, header layout, icons, pages, CSS
+
+- Виправлено 22 data-i18n ключі (hero, manifesto, mission, quote)
+- Lang-switcher переміщено після логотипу
+- Material Icons перевірено
+- Gallery та Partners сторінки виправлено
+- CSS padding для page-hero"
+
 git push origin fix/full-localization-v3
 ```
