@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
         body: ['Inter', 'sans-serif'],
+        emoji: ['"Apple Color Emoji"', '"Segoe UI Emoji"', '"Noto Color Emoji"', '"Android Emoji"', '"EmojiSymbols"', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
