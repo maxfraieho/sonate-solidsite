@@ -1,147 +1,216 @@
-# MASTER PROMPT: violin.pp.ua — Повне виправлення локалізації та верстки
+# MASTER PROMPT: violin.pp.ua — Повне виправлення (v4)
 
-## Активувати навички
-```
-RECOMMENDED SKILLS:
-- frontend-design
-- systematic-debugging  
-- verification-before-completion
-- executing-plans
-```
+## Аудит 2025-12-18
 
-## Протокол явного міркування (ОБОВ'ЯЗКОВО)
+### КРИТИЧНІ ПРОБЛЕМИ
 
-Перед КОЖНОЮ зміною файлу:
-```
-DOING: [що робиш]
-EXPECT: [очікуваний результат]
-IF YES: [наступний крок]
-IF NO: [зупинка, діагностика]
-```
+| # | Проблема | Причина | Файли |
+|---|---|---|---|
+| 1 | **Ключі i18n показуються як текст** | HTML `data-i18n` атрибути НЕ відповідають ключам в JSON | `index.html` |
+| 2 | **Перемикання мов не працює** | Посилання ведуть на `/fr/index.html` яких не існує | `lang-switcher.js`, `i18n.js` |
+| 3 | **Material Icons = текст** | Шрифт не завантажується правильно | `index.html`, CSS |
+| 4 | **gallery.html = копія index** | Файл `gallery.html` НЕ ІСНУЄ в репо (404!) | Потрібно створити |
+| 5 | **Заголовок partners обрізано** | Недостатній padding-top | `partners.html` |
+| 6 | **Немає прапорів на внутр. стор.** | Header відрізняється від index.html | `partners.html`, `contact.html` |
 
-Після КОЖНОЇ дії:
+---
+
+## ПРОБЛЕМА #1: i18n ключі (КРИТИЧНО!)
+
+### Повна таблиця невідповідностей
+
 ```
-RESULT: [що сталося]
-MATCHES: [так/ні]
-THEREFORE: [висновок]
+HTML data-i18n              →  JSON ключ
+─────────────────────────────────────────────────────────
+hero.supportCta             →  hero.cta_support
+hero.founderCta             →  hero.cta_founder
+manifesto.v.title           →  manifesto.values.v_title
+manifesto.v.desc            →  manifesto.values.v_desc
+manifesto.i.title           →  manifesto.values.i_title
+manifesto.i.desc            →  manifesto.values.i_desc
+manifesto.o.title           →  manifesto.values.o_title
+manifesto.o.desc            →  manifesto.values.o_desc
+manifesto.l.title           →  manifesto.values.l_title
+manifesto.l.desc            →  manifesto.values.l_desc
+manifesto.i2.title          →  manifesto.values.i2_title
+manifesto.i2.desc           →  manifesto.values.i2_desc
+manifesto.n.title           →  manifesto.values.n_title
+manifesto.n.desc            →  manifesto.values.n_desc
+quote.arsen                 →  manifesto.quote
+mission.cohesion.title      →  mission.items.cohesion
+mission.cohesion.desc       →  mission.items.cohesion_desc
+mission.mediation.title     →  mission.items.mediation
+mission.mediation.desc      →  mission.items.mediation_desc
+mission.integration.title   →  mission.items.integration
+mission.integration.desc    →  mission.items.integration_desc
 ```
 
 ---
 
-## Аналіз коду GitHub (перевірено 2025-01-18)
+## ПРОБЛЕМА #2: Перемикання мов
 
-### Структура проекту
-- Гілка: `master` (не main!)
-- Material Symbols: ✅ підключений (рядок 77)
-- i18n.js: ✅ працює з вкладеними ключами
-- JSON локалізації: ✅ структура правильна
-
-### ПРОБЛЕМА #1: Header (index.html рядки 283-305)
-**Поточний стан:**
+### Поточний стан
 ```html
-<div class="header-left">
-  <div id="lang-switcher">...</div>  <!-- ЗЛІВА -->
-  <a href="index.html">Logo</a>       <!-- СПРАВА -->
-</div>
+<!-- Посилання ведуть на неіснуючі папки -->
+<a href="/fr/index.html" data-lang="fr">
+<a href="/uk/index.html" data-lang="uk">
+<a href="/de/index.html" data-lang="de">
 ```
-**Потрібно:** Logo зліва, lang-switcher справа
 
-### ПРОБЛЕМА #2: data-i18n ключі НЕ відповідають JSON
-| HTML (data-i18n) | JSON (ключ) | Рядок |
-|---|---|---|
-| `hero.supportCta` | `hero.cta_support` | ~400 |
-| `hero.founderCta` | `hero.cta_founder` | ~404 |
-| `manifesto.v.title` | `manifesto.values.v_title` | ~438 |
-| `manifesto.v.desc` | `manifesto.values.v_desc` | ~439 |
-| `quote.arsen` | `manifesto.quote` | ~510 |
-| `mission.cohesion.title` | `mission.items.cohesion` | ~539 |
+### Рішення (варіант A - query params)
+```html
+<a href="?lang=fr" data-lang="fr">
+<a href="?lang=uk" data-lang="uk">
+<a href="?lang=de" data-lang="de">
+```
 
-### ПРОБЛЕМА #3: Material Icons показуються як текст
-Шрифт підключений правильно, але на сайті показується текст.
-Можлива причина: CSS блокує або шрифт не завантажився.
-
-### ПРОБЛЕМА #4: Gallery показує index.html
-Файл gallery.html може містити копію index.html.
-
-### ПРОБЛЕМА #5: Partners заголовок обрізаний
-Потрібен padding-top для .page-hero секції.
+### Оновити i18n.js
+```javascript
+function detectLanguage() {
+  // 1. Check URL query param first
+  const urlParams = new URLSearchParams(window.location.search);
+  const langParam = urlParams.get('lang');
+  if (langParam && SUPPORTED_LANGUAGES.includes(langParam)) {
+    return langParam;
+  }
+  
+  // 2. Check localStorage
+  const cached = localStorage.getItem(LOCALE_CACHE_KEY);
+  if (cached && SUPPORTED_LANGUAGES.includes(cached)) {
+    return cached;
+  }
+  
+  // 3. Default to French
+  return 'fr';
+}
+```
 
 ---
 
-## КОМАНДА ВИКОНАННЯ (скопіювати в Claude CLI)
+## ПРОБЛЕМА #3: Material Icons
+
+### Симптом
+На скріншоті видно: `music_note`, `keyboard_arrow_down` як текст
+
+### Перевірка підключення (index.html рядок ~77)
+```html
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=..." rel="stylesheet" />
+```
+
+### CSS (має бути в head або main.css)
+```css
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+```
+
+### Діагностика в браузері
+```javascript
+// DevTools Console:
+document.fonts.check('24px "Material Symbols Outlined"')
+// Має повернути true
+```
+
+---
+
+## ПРОБЛЕМА #4: gallery.html НЕ ІСНУЄ!
+
+**Факт:** `https://raw.githubusercontent.com/maxfraieho/violin.pp.ua/master/gallery.html` повертає **404**
+
+Тому Cloudflare показує index.html як fallback.
+
+### Рішення
+Створити окремий файл `gallery.html` з галереєю зображень.
+
+---
+
+## ПРОБЛЕМА #5-6: Внутрішні сторінки
+
+### partners.html
+- Заголовок обрізаний зверху (padding є в CSS, але можливо перезаписується)
+- Немає lang-switcher в header
+
+### Потрібно
+Скопіювати повний header з index.html включно з lang-switcher.
+
+---
+
+## ПОРЯДОК ВИКОНАННЯ
+
+```
+TASK_01_I18N_KEYS.md      ← НАЙКРИТИЧНІШЕ (виправити data-i18n атрибути)
+TASK_02_LANG_SWITCHER.md  ← Виправити перемикання мов
+TASK_03_MATERIAL_ICONS.md ← Виправити іконки
+TASK_04_GALLERY_CREATE.md ← Створити gallery.html
+TASK_05_INTERNAL_PAGES.md ← Виправити partners, contact
+```
+
+---
+
+## КОМАНДА ЗАПУСКУ
 
 ```bash
 cd ~/violin.pp.ua && claude "
-Виконай всі завдання з промт-файлів по черзі. 
-Для кожного завдання:
-1. Прочитай файл промту
-2. Виконай всі кроки
-3. Перевір результат
-4. Переходь до наступного
+Read and execute ALL tasks from src/claude-prompts/ in this order:
+1. TASK_01_I18N_KEYS.md
+2. TASK_02_LANG_SWITCHER.md
+3. TASK_03_MATERIAL_ICONS.md
+4. TASK_04_GALLERY_CREATE.md
+5. TASK_05_INTERNAL_PAGES.md
 
-ПОРЯДОК ВИКОНАННЯ:
-1. src/claude-prompts/TASK_03_I18N_KEYS.md (КРИТИЧНО - виправити data-i18n ключі)
-2. src/claude-prompts/TASK_01_HEADER_LANG_SWITCHER.md (lang-switcher після logo)
-3. src/claude-prompts/TASK_02_MATERIAL_ICONS.md (іконки)
-4. src/claude-prompts/TASK_04_PAGES_FIX.md (gallery, partners)
-5. src/claude-prompts/TASK_05_CSS_LAYOUT.md (CSS fixes)
-
-Після кожного завдання роби checkpoint. Якщо щось не працює - зупинись і поясни.
-Використовуй протокол DOING/EXPECT/RESULT з MASTER_PROMPT.md.
+Use DOING/EXPECT/RESULT protocol.
+Stop if any task fails.
 "
 ```
 
 ---
 
-## Альтернатива: По одному
+## ВЕРИФІКАЦІЯ ПІСЛЯ ВИКОНАННЯ
 
 ```bash
-# Фаза 1 - i18n ключі (НАЙВАЖЛИВІШЕ)
-claude "Read src/claude-prompts/TASK_03_I18N_KEYS.md and execute all sed commands"
+# 1. Перевірити що немає старих ключів
+grep -E "hero\.(supportCta|founderCta)" index.html
+# Має бути порожньо
 
-# Фаза 2 - Header
-claude "Read src/claude-prompts/TASK_01_HEADER_LANG_SWITCHER.md and fix header structure"
+# 2. Перевірити що є нові ключі  
+grep -E "hero\.(cta_support|cta_founder)" index.html
+# Має знайти 2 збіги
 
-# Фаза 3 - Icons
-claude "Read src/claude-prompts/TASK_02_MATERIAL_ICONS.md and verify icons"
+# 3. Перевірити gallery.html існує
+ls -la gallery.html
 
-# Фаза 4 - Pages
-claude "Read src/claude-prompts/TASK_04_PAGES_FIX.md and fix gallery/partners"
-
-# Фаза 5 - CSS
-claude "Read src/claude-prompts/TASK_05_CSS_LAYOUT.md and apply CSS fixes"
+# 4. Перевірити lang-switcher посилання
+grep -E 'href="\?lang=' index.html
 ```
 
 ---
 
-## Правила
-
-1. Використовувати sed для масових замін
-2. АБСОЛЮТНІ шляхи: `/assets/css/main.css`
-3. Checkpoint кожні 3 файли
-4. Якщо щось не працює — ЗУПИНИТИСЬ
-
----
-
-## Git (після всіх змін)
+## GIT
 
 ```bash
-git checkout -b fix/full-localization-v3
+git checkout -b fix/localization-v4
+git add index.html gallery.html partners.html contact.html
+git add assets/js/modules/i18n.js assets/js/modules/lang-switcher.js
+git commit -m "fix: i18n keys, lang switcher, icons, gallery page
 
-# Додавати ІНДИВІДУАЛЬНО
-git add index.html
-git add uk/index.html de/index.html
-git add gallery.html partners.html contact.html
-git add assets/css/*.css
-git add assets/js/modules/*.js
+- Fixed 22 data-i18n key mismatches (hero, manifesto, mission)
+- Changed lang switcher to use ?lang= query params
+- Fixed Material Icons font loading
+- Created gallery.html (was missing!)
+- Fixed internal pages header with lang-switcher"
 
-git commit -m "fix: i18n keys, header layout, icons, pages, CSS
-
-- Виправлено 22 data-i18n ключі (hero, manifesto, mission, quote)
-- Lang-switcher переміщено після логотипу
-- Material Icons перевірено
-- Gallery та Partners сторінки виправлено
-- CSS padding для page-hero"
-
-git push origin fix/full-localization-v3
+git push origin fix/localization-v4
 ```
