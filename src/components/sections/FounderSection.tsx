@@ -121,8 +121,8 @@ export const FounderSection = () => {
 
                 <div className="flex gap-4 justify-center flex-wrap">
                   <a
-                    href="https://violin.pp.ua/assets/cv/CV_Arsen_Kovalenko_FR.pdf"
-                    download
+                    href="/cv/CV_Arsen_Kovalenko_FR.pdf"
+                    download="CV_Arsen_Kovalenko_FR.pdf"
                     className="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1"
                   >
                     <Download className="h-6 w-6" />
@@ -133,8 +133,8 @@ export const FounderSection = () => {
                   </a>
 
                   <a
-                    href="https://violin.pp.ua/assets/cv/CV_Arsen_Kovalenko_UA.pdf"
-                    download
+                    href="/cv/CV_Arsen_Kovalenko_UA.pdf"
+                    download="CV_Arsen_Kovalenko_UA.pdf"
                     className="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1"
                   >
                     <Download className="h-6 w-6" />
