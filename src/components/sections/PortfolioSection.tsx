@@ -53,11 +53,13 @@ export const PortfolioSection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
             {titles.video[lang]}
           </h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          
+          {/* Main Videos */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
             <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Concert performance"
+                src="https://www.youtube.com/embed/3jnDrzAo820"
+                title="Concert Arsen Kovalenko"
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -65,8 +67,40 @@ export const PortfolioSection = () => {
             </div>
             <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Behind the scenes"
+                src="https://www.youtube.com/embed/5-wAIreCeNk"
+                title="Performance violon"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+
+          {/* Shorts */}
+          <h3 className="text-2xl font-display font-bold text-primary text-center mb-8">Shorts</h3>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
+              <iframe
+                src="https://www.youtube.com/embed/uMiQg_sq_-w"
+                title="Short 1"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
+              <iframe
+                src="https://www.youtube.com/embed/T15hZVOKaSc"
+                title="Short 2"
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
+              <iframe
+                src="https://www.youtube.com/embed/uMiQg_sq_-w"
+                title="Short 3"
                 className="w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
