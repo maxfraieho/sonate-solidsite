@@ -3,12 +3,62 @@ import { useTranslation } from 'react-i18next';
 import { User, Badge, ChevronDown, ChevronUp, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { toast } from 'sonner';
 
 export const FounderSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as 'fr' | 'de' | 'uk';
   const [bioExpanded, setBioExpanded] = useState(false);
   const [activeBioLang, setActiveBioLang] = useState<'uk' | 'fr'>('uk');
+  const [musicianForm, setMusicianForm] = useState({
+    name: '',
+    email: '',
+    instrument: '',
+    level: 'beginner',
+    message: '',
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const handleMusicianSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!musicianForm.consent) {
+      toast.error(lang === 'uk' ? 'Будь ласка, погодьтесь з обробкою даних' : 'Veuillez accepter le traitement des données');
+      return;
+    }
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://watchdog-notifier.maxfraieho.workers.dev/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'musician',
+          name: musicianForm.name,
+          email: musicianForm.email,
+          instrument: musicianForm.instrument,
+          level: musicianForm.level,
+          message: musicianForm.message,
+          language: lang,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
+        toast.success(lang === 'uk' ? 'Заявку успішно надіслано!' : 'Candidature envoyée avec succès!');
+        setMusicianForm({ name: '', email: '', instrument: '', level: 'beginner', message: '', consent: false });
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error(lang === 'uk' ? 'Помилка надсилання. Спробуйте ще раз.' : 'Erreur d\'envoi. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <section className="py-20 bg-background" id="fondateur">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,13 +207,15 @@ export const FounderSection = () => {
                 {t('musician_form.description')}
               </p>
 
-              <form className="max-w-3xl mx-auto space-y-6">
+              <form onSubmit={handleMusicianSubmit} className="max-w-3xl mx-auto space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-subtext mb-2">{t('musician_form.full_name')}</label>
                     <input
                       type="text"
                       required
+                      value={musicianForm.name}
+                      onChange={(e) => setMusicianForm({ ...musicianForm, name: e.target.value })}
                       className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                     />
                   </div>
@@ -172,6 +224,8 @@ export const FounderSection = () => {
                     <input
                       type="email"
                       required
+                      value={musicianForm.email}
+                      onChange={(e) => setMusicianForm({ ...musicianForm, email: e.target.value })}
                       className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                     />
                   </div>
@@ -180,7 +234,11 @@ export const FounderSection = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-subtext mb-2">{t('musician_form.instrument')}</label>
-                    <select className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                    <select 
+                      value={musicianForm.instrument}
+                      onChange={(e) => setMusicianForm({ ...musicianForm, instrument: e.target.value })}
+                      className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    >
                       <option value="">{t('musician_form.instrument_placeholder')}</option>
                       <option value="violin">{t('musician_form.violin')}</option>
                       <option value="viola">{t('musician_form.viola')}</option>
@@ -194,7 +252,11 @@ export const FounderSection = () => {
                   </div>
                   <div>
                     <label className="block text-subtext mb-2">{t('musician_form.level')}</label>
-                    <select className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all">
+                    <select 
+                      value={musicianForm.level}
+                      onChange={(e) => setMusicianForm({ ...musicianForm, level: e.target.value })}
+                      className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    >
                       <option value="beginner">{t('musician_form.beginner')}</option>
                       <option value="intermediate">{t('musician_form.intermediate')}</option>
                       <option value="advanced">{t('musician_form.advanced')}</option>
@@ -207,6 +269,8 @@ export const FounderSection = () => {
                   <label className="block text-subtext mb-2">{t('musician_form.message')}</label>
                   <textarea
                     rows={4}
+                    value={musicianForm.message}
+                    onChange={(e) => setMusicianForm({ ...musicianForm, message: e.target.value })}
                     placeholder={t('musician_form.message_placeholder')}
                     className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none"
                   />
@@ -215,17 +279,19 @@ export const FounderSection = () => {
                 <div className="flex items-center">
                   <input
                     type="checkbox"
-                    required
+                    id="musician-consent"
+                    checked={musicianForm.consent}
+                    onChange={(e) => setMusicianForm({ ...musicianForm, consent: e.target.checked })}
                     className="w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary focus:ring-2"
                   />
-                  <label className="ml-2 text-sm text-subtext">
+                  <label htmlFor="musician-consent" className="ml-2 text-sm text-subtext">
                     {t('musician_form.consent')}
                   </label>
                 </div>
 
                 <div className="text-center">
-                  <Button type="submit" size="lg" className="bg-primary text-primary-foreground hover:bg-primary-hover">
-                    {t('musician_form.submit')}
+                  <Button type="submit" size="lg" disabled={isSubmitting} className="bg-primary text-primary-foreground hover:bg-primary-hover">
+                    {isSubmitting ? '...' : t('musician_form.submit')}
                   </Button>
                 </div>
               </form>
