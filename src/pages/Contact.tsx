@@ -122,11 +122,7 @@ const Contact = () => {
       
       {/* Hero */}
       <section className="relative h-96 md:h-[50vh] flex items-center justify-center overflow-hidden pt-16">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://violin.pp.ua/assets/img/contact-hero-desktop.jpg)' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-surface via-background/80 to-background" />
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
             {texts.title[lang]}
