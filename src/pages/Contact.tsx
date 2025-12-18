@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapPin, Mail, Phone, Send, Youtube } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
@@ -7,10 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const Contact = () => {
   const { i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstanceRef = useRef<L.Map | null>(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +24,45 @@ const Contact = () => {
     consent: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Initialize Leaflet map
+  useEffect(() => {
+    if (!mapRef.current || mapInstanceRef.current) return;
+
+    const map = L.map(mapRef.current).setView([46.4192, 6.2728], 15);
+    mapInstanceRef.current = map;
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Custom marker
+    const customIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `<div style="background-color: hsl(var(--primary)); width: 25px; height: 25px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
+      iconSize: [25, 25],
+      iconAnchor: [12, 24],
+      popupAnchor: [0, -24]
+    });
+
+    const marker = L.marker([46.4192, 6.2728], { icon: customIcon }).addTo(map);
+    
+    marker.bindPopup(`
+      <div style="text-align: center; font-family: Inter, sans-serif;">
+        <strong style="color: hsl(var(--primary)); font-size: 16px;">Sonate Solidaire</strong><br>
+        <span style="color: #666;">Avenue du Mont-Blanc 29</span><br>
+        <span style="color: #666;">1196 Gland, Vaud</span><br>
+        <span style="color: #666;">Suisse 🇨🇭</span>
+      </div>
+    `).openPopup();
+
+    return () => {
+      if (mapInstanceRef.current) {
+        mapInstanceRef.current.remove();
+        mapInstanceRef.current = null;
+      }
+    };
+  }, []);
 
   const texts = {
     title: { fr: 'Contact', de: 'Kontakt', uk: 'Контакти' },
@@ -160,6 +203,11 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Leaflet Map */}
+              <div className="mt-12 rounded-2xl border border-primary/30 shadow-xl overflow-hidden">
+                <div ref={mapRef} className="h-80 w-full" />
               </div>
             </div>
 
