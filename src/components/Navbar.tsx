@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Menu, X, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { Button } from '@/components/ui/button';
 
@@ -9,11 +10,12 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { key: 'home', href: '#home' },
-    { key: 'mission', href: '#mission' },
-    { key: 'actions', href: '#actions' },
-    { key: 'founder', href: '#fondateur' },
-    { key: 'portfolio', href: '#portfolio' },
+    { key: 'home', href: '/#home' },
+    { key: 'mission', href: '/#mission' },
+    { key: 'actions', href: '/#actions' },
+    { key: 'founder', href: '/#fondateur' },
+    { key: 'portfolio', href: '/#portfolio' },
+    { key: 'contact', href: '/contact', isRoute: true },
   ];
 
   return (
@@ -21,27 +23,37 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl font-display font-bold text-primary">Sonate Solidaire</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
-              >
-                {t(`nav.${item.key}`)}
-              </a>
+              item.isRoute ? (
+                <Link
+                  key={item.key}
+                  to={item.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {t(`nav.${item.key}`)}
+                </Link>
+              ) : (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium"
+                >
+                  {t(`nav.${item.key}`)}
+                </a>
+              )
             ))}
           </div>
 
           {/* Right side */}
           <div className="flex items-center gap-4">
             <LanguageSwitcher />
-            <a href="#don">
+            <a href="/#soutenir">
               <Button className="bg-primary text-primary-foreground hover:bg-primary-hover gap-2">
                 <Heart className="h-4 w-4" />
                 <span className="hidden sm:inline">{t('nav.donate')}</span>
@@ -62,14 +74,25 @@ export const Navbar = () => {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border">
             {navItems.map((item) => (
-              <a
-                key={item.key}
-                href={item.href}
-                className="block py-2 text-foreground hover:text-primary transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                {t(`nav.${item.key}`)}
-              </a>
+              item.isRoute ? (
+                <Link
+                  key={item.key}
+                  to={item.href}
+                  className="block py-2 text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t(`nav.${item.key}`)}
+                </Link>
+              ) : (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  className="block py-2 text-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {t(`nav.${item.key}`)}
+                </a>
+              )
             ))}
           </div>
         )}
