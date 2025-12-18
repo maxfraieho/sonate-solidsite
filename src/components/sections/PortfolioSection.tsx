@@ -8,7 +8,7 @@ export const PortfolioSection = () => {
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   
   const titles = {
-    portfolio: { fr: 'Portfolio Musical', de: 'Musikalisches Portfolio', uk: 'Музичне портфоліо' },
+    music: { fr: 'Musique', de: 'Musik', uk: 'Музика' },
     description: { 
       fr: 'Découvrez mes interprétations : du classique virtuose aux arrangements modernes',
       de: 'Entdecken Sie meine Interpretationen: von virtuoser Klassik bis zu modernen Arrangements',
@@ -20,7 +20,12 @@ export const PortfolioSection = () => {
       de: 'Momente von Konzerten und Aufnahmesessions',
       uk: 'Моменти з концертів та студійних сесій'
     },
-    video: { fr: 'Vidéos', de: 'Videos', uk: 'Відео' }
+    video: { fr: 'Vidéos Performances', de: 'Video-Performances', uk: 'Відео виступи' },
+    videoDesc: {
+      fr: 'Retrouvez mes meilleures performances en vidéo',
+      de: 'Entdecken Sie meine besten Videoauftritte',
+      uk: 'Дивіться мої найкращі виступи на відео'
+    }
   };
 
   return (
@@ -29,7 +34,7 @@ export const PortfolioSection = () => {
         {/* Audio Section */}
         <div className="mb-20">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
-            {titles.portfolio[lang]}
+            {titles.music[lang]}
           </h2>
           <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
             {titles.description[lang]}
@@ -53,6 +58,9 @@ export const PortfolioSection = () => {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
             {titles.video[lang]}
           </h2>
+          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
+            {titles.videoDesc[lang]}
+          </p>
           
           {/* Main Videos */}
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
