@@ -47,7 +47,7 @@ export const HeroSection = () => {
         <img
           src="https://violin.pp.ua/assets/img/logo-sonate.png"
           alt="Logo Sonate Solidaire"
-          className="hidden md:inline-block h-32 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
+          className="hidden md:inline-block h-48 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
         />
       </div>
 
