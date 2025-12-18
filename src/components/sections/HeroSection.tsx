@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const HeroSection = () => {
@@ -48,17 +47,19 @@ export const HeroSection = () => {
         <img
           src="https://violin.pp.ua/assets/img/logo-sonate.png"
           alt="Logo Sonate Solidaire"
-          className="hidden md:inline-block h-16 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
+          className="hidden md:inline-block h-32 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
         />
       </div>
 
       {/* Scroll Indicator */}
       <button
         onClick={() => document.getElementById('manifeste')?.scrollIntoView({ behavior: 'smooth' })}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer hover:text-primary-hover transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer group"
         aria-label="Scroll down"
       >
-        <ChevronDown className="h-10 w-10 text-primary" />
+        <div className="w-8 h-14 border-2 border-primary rounded-full flex justify-center pt-2 group-hover:border-primary-hover transition-colors">
+          <div className="w-1.5 h-3 bg-primary rounded-full animate-pulse group-hover:bg-primary-hover" />
+        </div>
       </button>
     </section>
   );
