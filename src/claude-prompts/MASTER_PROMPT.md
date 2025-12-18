@@ -1,216 +1,169 @@
-# MASTER PROMPT: violin.pp.ua — Повне виправлення (v4)
+# MASTER PROMPT: violin.pp.ua — Повний рефакторинг мультимовної системи
 
-## Аудит 2025-12-18
+## Дата аудиту: 2025-12-18
 
-### КРИТИЧНІ ПРОБЛЕМИ
+---
+
+## 🔴 КРИТИЧНА ДІАГНОСТИКА
+
+### Три конфліктуючі системи мультимовності
+
+Проєкт одночасно використовує три несумісні підходи:
+
+| Система | Опис | Статус |
+|---------|------|--------|
+| **A. Папки /fr, /uk, /de** | Дубльовані статичні HTML копії | ❌ Застарілі, не синхронізовані |
+| **B. Query params ?lang=** | Динамічна зміна мови | ❌ Не імплементовано |
+| **C. JSON словники /locales** | Правильний i18n підхід | ❌ Не підключено |
+
+**Результат:** Жоден спосіб не працює, i18n ключі показуються як текст.
+
+---
+
+## 🔴 10 КРИТИЧНИХ ПРОБЛЕМ
 
 | # | Проблема | Причина | Файли |
-|---|---|---|---|
-| 1 | **Ключі i18n показуються як текст** | HTML `data-i18n` атрибути НЕ відповідають ключам в JSON | `index.html` |
-| 2 | **Перемикання мов не працює** | Посилання ведуть на `/fr/index.html` яких не існує | `lang-switcher.js`, `i18n.js` |
-| 3 | **Material Icons = текст** | Шрифт не завантажується правильно | `index.html`, CSS |
-| 4 | **gallery.html = копія index** | Файл `gallery.html` НЕ ІСНУЄ в репо (404!) | Потрібно створити |
-| 5 | **Заголовок partners обрізано** | Недостатній padding-top | `partners.html` |
-| 6 | **Немає прапорів на внутр. стор.** | Header відрізняється від index.html | `partners.html`, `contact.html` |
+|---|----------|---------|-------|
+| 1 | **Три мовні системи конфліктують** | Папки + ?lang= + JSON не синхронізовані | /fr, /uk, /de, /locales |
+| 2 | **i18n-bridge.js не підключений** | `<script>` не додано в HTML | index.html |
+| 3 | **data-i18n ключі не відповідають JSON** | hero.supportCta vs hero.cta_support | index.html, fr.json |
+| 4 | **lang-switcher.js не працює** | Не імпортований, не взаємодіє з DOM | assets/js |
+| 5 | **Material Icons = текст** | music_note, keyboard_arrow_down як текст | index.html, CSS |
+| 6 | **Твердокодований FR текст в JS** | Алерти, кнопки, повідомлення | main.js, contact form |
+| 7 | **Перемикання мов зламане** | Посилання /fr/index.html не існують | lang-switcher.js |
+| 8 | **Внутрішні сторінки без i18n** | partners.html, contact.html не мають перекладів | *.html |
+| 9 | **gallery.html не існує** | 404 при переході | - |
+| 10 | **Header різний на сторінках** | Немає lang-switcher на внутрішніх | partners.html |
 
 ---
 
-## ПРОБЛЕМА #1: i18n ключі (КРИТИЧНО!)
-
-### Повна таблиця невідповідностей
+## 📋 ПОРЯДОК ВИКОНАННЯ ЗАВДАНЬ
 
 ```
-HTML data-i18n              →  JSON ключ
-─────────────────────────────────────────────────────────
-hero.supportCta             →  hero.cta_support
-hero.founderCta             →  hero.cta_founder
-manifesto.v.title           →  manifesto.values.v_title
-manifesto.v.desc            →  manifesto.values.v_desc
-manifesto.i.title           →  manifesto.values.i_title
-manifesto.i.desc            →  manifesto.values.i_desc
-manifesto.o.title           →  manifesto.values.o_title
-manifesto.o.desc            →  manifesto.values.o_desc
-manifesto.l.title           →  manifesto.values.l_title
-manifesto.l.desc            →  manifesto.values.l_desc
-manifesto.i2.title          →  manifesto.values.i2_title
-manifesto.i2.desc           →  manifesto.values.i2_desc
-manifesto.n.title           →  manifesto.values.n_title
-manifesto.n.desc            →  manifesto.values.n_desc
-quote.arsen                 →  manifesto.quote
-mission.cohesion.title      →  mission.items.cohesion
-mission.cohesion.desc       →  mission.items.cohesion_desc
-mission.mediation.title     →  mission.items.mediation
-mission.mediation.desc      →  mission.items.mediation_desc
-mission.integration.title   →  mission.items.integration
-mission.integration.desc    →  mission.items.integration_desc
+TASK_01 → Видалити папки /fr, /uk, /de (застарілі копії)
+TASK_02 → Створити повний i18n движок (i18n-bridge.js, lang-switcher.js)
+TASK_03 → Виправити data-i18n ключі в HTML (22 невідповідності)
+TASK_04 → Винести твердокодований текст з JS в JSON
+TASK_05 → Виправити Material Icons
+TASK_06 → Уніфікувати header + створити gallery.html
 ```
 
 ---
 
-## ПРОБЛЕМА #2: Перемикання мов
+## 🚀 КОМАНДА ЗАПУСКУ
 
-### Поточний стан
-```html
-<!-- Посилання ведуть на неіснуючі папки -->
-<a href="/fr/index.html" data-lang="fr">
-<a href="/uk/index.html" data-lang="uk">
-<a href="/de/index.html" data-lang="de">
-```
-
-### Рішення (варіант A - query params)
-```html
-<a href="?lang=fr" data-lang="fr">
-<a href="?lang=uk" data-lang="uk">
-<a href="?lang=de" data-lang="de">
-```
-
-### Оновити i18n.js
-```javascript
-function detectLanguage() {
-  // 1. Check URL query param first
-  const urlParams = new URLSearchParams(window.location.search);
-  const langParam = urlParams.get('lang');
-  if (langParam && SUPPORTED_LANGUAGES.includes(langParam)) {
-    return langParam;
-  }
-  
-  // 2. Check localStorage
-  const cached = localStorage.getItem(LOCALE_CACHE_KEY);
-  if (cached && SUPPORTED_LANGUAGES.includes(cached)) {
-    return cached;
-  }
-  
-  // 3. Default to French
-  return 'fr';
-}
-```
-
----
-
-## ПРОБЛЕМА #3: Material Icons
-
-### Симптом
-На скріншоті видно: `music_note`, `keyboard_arrow_down` як текст
-
-### Перевірка підключення (index.html рядок ~77)
-```html
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=..." rel="stylesheet" />
-```
-
-### CSS (має бути в head або main.css)
-```css
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-}
-```
-
-### Діагностика в браузері
-```javascript
-// DevTools Console:
-document.fonts.check('24px "Material Symbols Outlined"')
-// Має повернути true
-```
-
----
-
-## ПРОБЛЕМА #4: gallery.html НЕ ІСНУЄ!
-
-**Факт:** `https://raw.githubusercontent.com/maxfraieho/violin.pp.ua/master/gallery.html` повертає **404**
-
-Тому Cloudflare показує index.html як fallback.
-
-### Рішення
-Створити окремий файл `gallery.html` з галереєю зображень.
-
----
-
-## ПРОБЛЕМА #5-6: Внутрішні сторінки
-
-### partners.html
-- Заголовок обрізаний зверху (padding є в CSS, але можливо перезаписується)
-- Немає lang-switcher в header
-
-### Потрібно
-Скопіювати повний header з index.html включно з lang-switcher.
-
----
-
-## ПОРЯДОК ВИКОНАННЯ
-
-```
-TASK_01_I18N_KEYS.md      ← НАЙКРИТИЧНІШЕ (виправити data-i18n атрибути)
-TASK_02_LANG_SWITCHER.md  ← Виправити перемикання мов
-TASK_03_MATERIAL_ICONS.md ← Виправити іконки
-TASK_04_GALLERY_CREATE.md ← Створити gallery.html
-TASK_05_INTERNAL_PAGES.md ← Виправити partners, contact
-```
-
----
-
-## КОМАНДА ЗАПУСКУ
+### Варіант A: Один промт для всіх завдань
 
 ```bash
-cd ~/violin.pp.ua && claude "
-Read and execute ALL tasks from src/claude-prompts/ in this order:
-1. TASK_01_I18N_KEYS.md
-2. TASK_02_LANG_SWITCHER.md
-3. TASK_03_MATERIAL_ICONS.md
-4. TASK_04_GALLERY_CREATE.md
-5. TASK_05_INTERNAL_PAGES.md
+cd ~/violin.pp.ua
+claude "
+DOING: Complete multilingual system repair for violin.pp.ua
 
-Use DOING/EXPECT/RESULT protocol.
-Stop if any task fails.
+Read and execute ALL tasks from src/claude-prompts/ in this order:
+1. TASK_01_REMOVE_LANG_FOLDERS.md
+2. TASK_02_I18N_ENGINE.md  
+3. TASK_03_FIX_DATA_I18N.md
+4. TASK_04_JS_HARDCODED.md
+5. TASK_05_MATERIAL_ICONS.md
+6. TASK_06_PAGES_UNIFIED.md
+
+Use DOING/EXPECT/RESULT protocol for each task.
+After each task, verify changes before proceeding.
+Stop immediately if any task fails.
 "
 ```
 
----
-
-## ВЕРИФІКАЦІЯ ПІСЛЯ ВИКОНАННЯ
+### Варіант B: Shell скрипт
 
 ```bash
-# 1. Перевірити що немає старих ключів
-grep -E "hero\.(supportCta|founderCta)" index.html
-# Має бути порожньо
+chmod +x src/claude-prompts/run-all.sh
+./src/claude-prompts/run-all.sh
+```
 
-# 2. Перевірити що є нові ключі  
-grep -E "hero\.(cta_support|cta_founder)" index.html
-# Має знайти 2 збіги
+### Варіант C: По одному завданню
 
-# 3. Перевірити gallery.html існує
+```bash
+claude "Read and execute src/claude-prompts/TASK_01_REMOVE_LANG_FOLDERS.md"
+# Перевірити → якщо OK →
+claude "Read and execute src/claude-prompts/TASK_02_I18N_ENGINE.md"
+# і т.д.
+```
+
+---
+
+## ✅ ВЕРИФІКАЦІЯ ПІСЛЯ ВИКОНАННЯ
+
+```bash
+# 1. Папки /fr, /uk, /de видалені
+ls -la fr/ uk/ de/ 2>&1 | grep -c "No such file"
+# Очікується: 3
+
+# 2. i18n-bridge.js підключений
+grep -c "i18n-bridge.js" index.html
+# Очікується: 1
+
+# 3. Нові data-i18n ключі
+grep -c "hero.cta_support" index.html
+# Очікується: 1
+
+# 4. Перемикання мов працює (query params)
+grep -c 'href="?lang=' index.html
+# Очікується: 3
+
+# 5. Material Icons підключені правильно
+grep -c "Material Symbols Outlined" index.html
+# Очікується: 1
+
+# 6. gallery.html створений
 ls -la gallery.html
-
-# 4. Перевірити lang-switcher посилання
-grep -E 'href="\?lang=' index.html
+# Очікується: файл існує
 ```
 
 ---
 
-## GIT
+## 📁 GIT WORKFLOW
 
 ```bash
-git checkout -b fix/localization-v4
-git add index.html gallery.html partners.html contact.html
-git add assets/js/modules/i18n.js assets/js/modules/lang-switcher.js
-git commit -m "fix: i18n keys, lang switcher, icons, gallery page
+git checkout -b fix/multilingual-system-v5
+git add -A
+git commit -m "fix: complete multilingual system overhaul
 
-- Fixed 22 data-i18n key mismatches (hero, manifesto, mission)
-- Changed lang switcher to use ?lang= query params
+BREAKING CHANGES:
+- Removed /fr, /uk, /de static folders (use ?lang= instead)
+- Implemented dynamic i18n with JSON translations
+- Fixed 22 data-i18n key mismatches
+- Created unified header with lang-switcher
 - Fixed Material Icons font loading
-- Created gallery.html (was missing!)
-- Fixed internal pages header with lang-switcher"
+- Created gallery.html page
+- Extracted hardcoded FR text from JS to JSON"
 
-git push origin fix/localization-v4
+git push origin fix/multilingual-system-v5
 ```
+
+---
+
+## 📚 АРХІТЕКТУРА ПІСЛЯ РЕФАКТОРИНГУ
+
+```
+violin.pp.ua/
+├── index.html          ← data-i18n атрибути
+├── about.html          ← data-i18n атрибути
+├── contact.html        ← data-i18n атрибути
+├── partners.html       ← data-i18n атрибути
+├── gallery.html        ← НОВИЙ файл
+├── our-actions.html    ← data-i18n атрибути
+├── locales/
+│   ├── fr.json         ← Французький (за замовчуванням)
+│   ├── uk.json         ← Українська
+│   └── de.json         ← Німецька
+└── assets/js/
+    ├── i18n-bridge.js  ← Завантаження та застосування перекладів
+    └── lang-switcher.js ← Перемикання мов
+```
+
+**Принцип роботи:**
+1. Користувач відкриває сторінку
+2. i18n-bridge.js визначає мову (?lang= → localStorage → 'fr')
+3. Завантажує /locales/{lang}.json
+4. Застосовує переклади до всіх [data-i18n] елементів
+5. lang-switcher.js підсвічує активний прапор
