@@ -1,328 +1,364 @@
-# TASK 06: Додати data-i18n атрибути до всіх сторінок /de/ та /uk/
+# TASK 06: Виправити data-i18n ключі щоб відповідали JSON структурі
 
 ## 🔴 КРИТИЧНА ПРОБЛЕМА
 
-**Статус**: i18n-engine.js працює правильно, але не має що перекладати
+**Статус**: HTML файли МАЮТЬ data-i18n атрибути, але ключі НЕ ЗБІГАЮТЬСЯ з JSON структурою!
 
-**Причина**: HTML файли в `/de/` та `/uk/` є копіями французького HTML без `data-i18n` атрибутів
-
-**Наслідок**:
-- `/de/about.html` показує французький текст "À Propos de Sonate Solidaire"
-- `/uk/index.html` показує французький текст "L'Intégration par la Musique"
-- i18n-engine.js завантажує JSON переклади (de.json, uk.json) але не може їх застосувати
+**Приклади невідповідностей (HTML → JSON):**
+```
+actions.concerts.title → actions.charity_concerts
+actions.concerts.desc → actions.charity_concerts_desc
+actions.humanitarian.title → actions.humanitarian
+actions.humanitarian.desc → actions.humanitarian_desc
+actions.integration.title → actions.community
+actions.integration.desc → actions.community_desc
+```
 
 ## 📋 REASONING PROTOCOL
 
 ```
-DOING: Adding data-i18n attributes to all text elements
-EXPECT: Every translatable text has data-i18n="key.path"
-IF YES: i18n-engine.js will replace text with translations from JSON
-IF NO: Text stays in French (current state)
-RESULT: /de/about.html shows German text instead of French
-MATCHES: User sees German on /de/, Ukrainian on /uk/
-THEREFORE: i18n system is fully functional
+DOING: Fixing data-i18n key mismatches between HTML and JSON
+EXPECT: All data-i18n="key.path" in HTML match keys in de.json/uk.json
+IF YES: i18n-engine.js will find and apply translations
+IF NO: Translations not applied (current state - French shows)
+RESULT: /de/about.html shows German text, /uk/index.html shows Ukrainian
+MATCHES: User requirement for working multilingual site
+THEREFORE: Key alignment is the critical fix
 ```
 
 ## 🎯 МЕТА
 
-Додати `data-i18n` атрибути до всіх текстових елементів у файлах `/de/` та `/uk/` щоб i18n-engine.js міг застосувати переклади з JSON файлів.
+Виправити всі `data-i18n` ключі в HTML файлах щоб вони точно відповідали ключам у JSON файлах.
 
 ## 📁 ФАЙЛИ ДЛЯ ОБРОБКИ
 
-### Папка /de/:
-- `de/index.html`
-- `de/about.html`
-- `de/contact.html`
-- `de/partners.html`
-- `de/our-actions.html`
-
-### Папка /uk/:
-- `uk/index.html`
-- `uk/about.html`
-- `uk/contact.html`
-- `uk/partners.html`
-- `uk/our-actions.html`
-
-## 📝 ПРИКЛАД ПЕРЕТВОРЕННЯ
-
-### ПЕРЕД (поточний стан):
-
-```html
-<!-- de/about.html -->
-<h1 class="text-4xl font-bold">À Propos de Sonate Solidaire</h1>
-<p class="text-lg">Notre mission est d'intégrer les musiciens...</p>
-<button class="btn-primary">Contactez-nous</button>
+```
+de/index.html
+de/about.html
+de/contact.html
+de/partners.html
+de/our-actions.html
+uk/index.html
+uk/about.html
+uk/contact.html
+uk/partners.html
+uk/our-actions.html
 ```
 
-### ПІСЛЯ (з data-i18n):
+## 🔑 ПОВНИЙ MAPPING КЛЮЧІВ (HTML → JSON)
 
-```html
-<!-- de/about.html -->
-<h1 class="text-4xl font-bold" data-i18n="about.title">À Propos de Sonate Solidaire</h1>
-<p class="text-lg" data-i18n="about.mission">Notre mission est d'intégrer les musiciens...</p>
-<button class="btn-primary" data-i18n="about.contact_button">Contactez-nous</button>
+### Секція Actions (Дії):
+```
+actions.concerts.title    → actions.charity_concerts
+actions.concerts.desc     → actions.charity_concerts_desc
+actions.humanitarian.title → actions.humanitarian
+actions.humanitarian.desc → actions.humanitarian_desc
+actions.integration.title → actions.community
+actions.integration.desc  → actions.community_desc
 ```
 
-## 🔑 КЛЮЧІ ПЕРЕКЛАДІВ (JSON структура)
+### Секція Founder (Засновник):
+```
+founder.bio_preview       → founder.fr_bio_preview
+founder.bio_emphasis      → founder.fr_bio_emphasis
+founder.education_title   → founder.fr_education_title
+founder.education_school1 → founder.fr_education_school1
+founder.education_university → founder.fr_education_university
+founder.repertoire_title  → founder.fr_repertoire_title
+founder.repertoire_classical → founder.fr_repertoire_classical
+founder.repertoire_contemporary → founder.fr_repertoire_contemporary
+founder.repertoire_folk   → founder.fr_repertoire_folk
+founder.repertoire_pop    → founder.fr_repertoire_pop
+founder.style_desc        → founder.fr_style_desc
+```
 
-Переклади вже існують у `/locales/de.json` та `/locales/uk.json`:
+## 🔧 BASH СКРИПТ ДЛЯ ВИПРАВЛЕННЯ
 
+Створіть файл `fix-i18n-keys.sh`:
+
+```bash
+#!/bin/bash
+# ===========================================
+# FIX I18N KEY MISMATCHES
+# Aligns HTML data-i18n keys with JSON keys
+# ===========================================
+
+echo "🔧 Fixing data-i18n key mismatches..."
+
+# Directories to process
+DIRS=("de" "uk")
+
+for DIR in "${DIRS[@]}"; do
+  echo "Processing /$DIR/ directory..."
+  
+  for FILE in $DIR/*.html; do
+    if [ -f "$FILE" ]; then
+      echo "  Fixing: $FILE"
+      
+      # Actions section key fixes
+      sed -i '' 's/data-i18n="actions\.concerts\.title"/data-i18n="actions.charity_concerts"/g' "$FILE"
+      sed -i '' 's/data-i18n="actions\.concerts\.desc"/data-i18n="actions.charity_concerts_desc"/g' "$FILE"
+      sed -i '' 's/data-i18n="actions\.humanitarian\.title"/data-i18n="actions.humanitarian"/g' "$FILE"
+      sed -i '' 's/data-i18n="actions\.humanitarian\.desc"/data-i18n="actions.humanitarian_desc"/g' "$FILE"
+      sed -i '' 's/data-i18n="actions\.integration\.title"/data-i18n="actions.community"/g' "$FILE"
+      sed -i '' 's/data-i18n="actions\.integration\.desc"/data-i18n="actions.community_desc"/g' "$FILE"
+      
+      # Founder section key fixes
+      sed -i '' 's/data-i18n="founder\.bio_preview"/data-i18n="founder.fr_bio_preview"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.bio_emphasis"/data-i18n="founder.fr_bio_emphasis"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.education_title"/data-i18n="founder.fr_education_title"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.education_school1"/data-i18n="founder.fr_education_school1"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.education_university"/data-i18n="founder.fr_education_university"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.repertoire_title"/data-i18n="founder.fr_repertoire_title"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.repertoire_classical"/data-i18n="founder.fr_repertoire_classical"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.repertoire_contemporary"/data-i18n="founder.fr_repertoire_contemporary"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.repertoire_folk"/data-i18n="founder.fr_repertoire_folk"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.repertoire_pop"/data-i18n="founder.fr_repertoire_pop"/g' "$FILE"
+      sed -i '' 's/data-i18n="founder\.style_desc"/data-i18n="founder.fr_style_desc"/g' "$FILE"
+      
+    fi
+  done
+done
+
+echo ""
+echo "✅ Key fixes applied!"
+echo ""
+echo "Verifying fixes..."
+echo ""
+
+# Verification
+echo "=== Checking for OLD keys (should be 0) ==="
+grep -r 'data-i18n="actions\.concerts\.' de/ uk/ 2>/dev/null | wc -l | xargs echo "actions.concerts.* count:"
+grep -r 'data-i18n="actions\.integration\.' de/ uk/ 2>/dev/null | wc -l | xargs echo "actions.integration.* count:"
+
+echo ""
+echo "=== Checking for NEW keys (should be > 0) ==="
+grep -r 'data-i18n="actions\.charity_concerts' de/ uk/ 2>/dev/null | wc -l | xargs echo "actions.charity_concerts count:"
+grep -r 'data-i18n="actions\.community' de/ uk/ 2>/dev/null | wc -l | xargs echo "actions.community count:"
+```
+
+## 🐧 LINUX-СУМІСНА ВЕРСІЯ
+
+Якщо ви на Linux (не macOS), використовуйте цю версію `sed`:
+
+```bash
+#!/bin/bash
+# Linux version - sed without ''
+
+DIRS=("de" "uk")
+
+for DIR in "${DIRS[@]}"; do
+  for FILE in $DIR/*.html; do
+    if [ -f "$FILE" ]; then
+      echo "Fixing: $FILE"
+      
+      # Actions section
+      sed -i 's/data-i18n="actions\.concerts\.title"/data-i18n="actions.charity_concerts"/g' "$FILE"
+      sed -i 's/data-i18n="actions\.concerts\.desc"/data-i18n="actions.charity_concerts_desc"/g' "$FILE"
+      sed -i 's/data-i18n="actions\.humanitarian\.title"/data-i18n="actions.humanitarian"/g' "$FILE"
+      sed -i 's/data-i18n="actions\.humanitarian\.desc"/data-i18n="actions.humanitarian_desc"/g' "$FILE"
+      sed -i 's/data-i18n="actions\.integration\.title"/data-i18n="actions.community"/g' "$FILE"
+      sed -i 's/data-i18n="actions\.integration\.desc"/data-i18n="actions.community_desc"/g' "$FILE"
+      
+      # Founder section
+      sed -i 's/data-i18n="founder\.bio_preview"/data-i18n="founder.fr_bio_preview"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.bio_emphasis"/data-i18n="founder.fr_bio_emphasis"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.education_title"/data-i18n="founder.fr_education_title"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.education_school1"/data-i18n="founder.fr_education_school1"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.education_university"/data-i18n="founder.fr_education_university"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.repertoire_title"/data-i18n="founder.fr_repertoire_title"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.repertoire_classical"/data-i18n="founder.fr_repertoire_classical"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.repertoire_contemporary"/data-i18n="founder.fr_repertoire_contemporary"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.repertoire_folk"/data-i18n="founder.fr_repertoire_folk"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.repertoire_pop"/data-i18n="founder.fr_repertoire_pop"/g' "$FILE"
+      sed -i 's/data-i18n="founder\.style_desc"/data-i18n="founder.fr_style_desc"/g' "$FILE"
+    fi
+  done
+done
+
+echo "✅ Done!"
+```
+
+## 📊 ДЕТАЛЬНИЙ АНАЛІЗ JSON СТРУКТУРИ
+
+### de.json ключі (актуальні):
 ```json
 {
   "nav": {
-    "home": "Startseite",
-    "founder": "Gründer",
-    "manifesto": "Manifest",
-    "mission": "Mission",
-    "portfolio": "Portfolio",
-    "gallery": "Galerie",
-    "contact": "Kontakt",
-    "partners": "Partner",
-    "support": "Unterstützen"
+    "home": "...", "founder": "...", "manifesto": "...",
+    "mission": "...", "portfolio": "...", "gallery": "...",
+    "contact": "...", "partners": "...", "support": "..."
   },
   "hero": {
-    "title": "Sonate Solidaire",
-    "tagline": "Sonate Solidaire • Harmonie zwischen der Schweiz und der Ukraine",
-    "description": "Integration durch Musik: Eine Brücke zwischen der Schweiz und der Ukraine",
-    "cta_primary": "Unsere Mission entdecken",
-    "cta_secondary": "Unterstützen"
+    "title": "...", "tagline": "...", "description": "...",
+    "cta_support": "...", "cta_founder": "...", "scroll_label": "..."
   },
-  "about": {
-    "title": "Über Sonate Solidaire",
-    "mission": "Unsere Mission ist es...",
-    "description": "...",
-    "values_title": "Unsere Werte"
+  "manifesto": {
+    "title": "...", "intro": "...", "quote": "...",
+    "values": {
+      "v_title": "...", "v_desc": "...",
+      "i_title": "...", "i_desc": "...",
+      "o_title": "...", "o_desc": "...",
+      "l_title": "...", "l_desc": "...",
+      "i2_title": "...", "i2_desc": "...",
+      "n_title": "...", "n_desc": "..."
+    }
   },
-  // ... більше ключів
+  "mission": {
+    "title": "...", "subtitle": "...", "intro": "...",
+    "items": {
+      "cohesion": "...", "cohesion_desc": "...",
+      "mediation": "...", "mediation_desc": "...",
+      "integration": "...", "integration_desc": "..."
+    }
+  },
+  "actions": {
+    "title": "...",
+    "charity_concerts": "...",
+    "charity_concerts_desc": "...",
+    "humanitarian": "...",
+    "humanitarian_desc": "...",
+    "community": "...",
+    "community_desc": "..."
+  },
+  "founder": {
+    "title": "...", "biography_tab": "...", "musician_tab": "...",
+    "name": "...", "role": "...",
+    "ukraine_badge": "...", "switzerland_badge": "...",
+    "fr_bio_preview": "...",
+    "fr_bio_emphasis": "...",
+    "fr_education_title": "...",
+    "fr_education_school1": "...",
+    "fr_education_university": "...",
+    "fr_repertoire_title": "...",
+    "fr_repertoire_classical": "...",
+    "fr_repertoire_contemporary": "...",
+    "fr_repertoire_folk": "...",
+    "fr_repertoire_pop": "...",
+    "fr_style_desc": "...",
+    "bio_expand": "...", "bio_collapse": "...",
+    "cv_download_title": "...", "cv_download_desc": "...",
+    "cv_french": "...", "cv_french_subtitle": "...",
+    "cv_ukrainian": "...", "cv_ukrainian_subtitle": "..."
+  },
+  "musician_form": { ... },
+  "portfolio": { ... },
+  "videos": { ... },
+  "gallery": { ... },
+  "support": { ... },
+  "footer": { ... }
 }
-```
-
-## 📊 ЕЛЕМЕНТИ ДЛЯ ОБРОБКИ
-
-### 1. Навігація (nav):
-```html
-<a href="/de/index.html" data-i18n="nav.home">Accueil</a>
-<a href="/de/about.html" data-i18n="nav.about">À Propos</a>
-<a href="/de/contact.html" data-i18n="nav.contact">Contact</a>
-<a href="/de/partners.html" data-i18n="nav.partners">Partenaires</a>
-```
-
-### 2. Заголовки (h1-h6):
-```html
-<h1 data-i18n="hero.title">Sonate Solidaire</h1>
-<h2 data-i18n="about.values_title">Nos Valeurs</h2>
-<h3 data-i18n="mission.approach">Notre Approche</h3>
-```
-
-### 3. Параграфи та текст:
-```html
-<p data-i18n="about.description">Description texte...</p>
-<span data-i18n="footer.copyright">© 2025 Sonate Solidaire</span>
-```
-
-### 4. Кнопки та посилання:
-```html
-<button data-i18n="hero.cta_primary">Découvrir notre mission</button>
-<a href="#" data-i18n="hero.cta_secondary">Soutenir</a>
-```
-
-### 5. Форми:
-```html
-<label data-i18n="contact.form.name">Nom complet</label>
-<input type="text" data-i18n-placeholder="contact.form.name_placeholder">
-<button type="submit" data-i18n="contact.form.submit">Envoyer</button>
-```
-
-### 6. Footer:
-```html
-<p data-i18n="footer.description">Sonate Solidaire - Association à but non lucratif</p>
-<p data-i18n="footer.developed_with">Développé avec ❤️ en Suisse</p>
-```
-
-## 🔧 ПІДХІД ДО РЕАЛІЗАЦІЇ
-
-### Варіант A: Ручна обробка (рекомендовано)
-1. Відкрити кожен файл (`de/*.html`, `uk/*.html`)
-2. Знайти всі текстові елементи
-3. Перевірити чи існує ключ у JSON (de.json, uk.json)
-4. Додати `data-i18n="key.path"` до кожного елемента
-5. Зберегти файл
-
-### Варіант B: Автоматична обробка (складно)
-- Використати скрипт для пошуку тексту
-- Автоматично згенерувати data-i18n атрибути
-- **Проблема**: важко автоматично визначити правильні ключі JSON
-
-### Варіант C: Копіювання з /fr/index.html (якщо там є)
-- Якщо `/fr/index.html` вже має data-i18n атрибути
-- Скопіювати структуру на /de/ та /uk/
-- Перевірити відповідність ключів
-
-## 📝 CHECKLIST (для кожного файлу)
-
-```markdown
-### de/index.html
-- [ ] Navigation links (8 елементів)
-- [ ] Hero section (title, tagline, description, 2 CTAs)
-- [ ] Manifesto section (6 VIOLIN cards)
-- [ ] Mission section (title, description)
-- [ ] Portfolio section (title, track names)
-- [ ] Gallery section (title)
-- [ ] Contact section (form labels, placeholders, button)
-- [ ] Footer (description, links, copyright)
-
-### de/about.html
-- [ ] Page title
-- [ ] Mission statement
-- [ ] Values section (4-6 values)
-- [ ] Team section (if exists)
-- [ ] CTA buttons
-
-### de/contact.html
-- [ ] Page title
-- [ ] Contact info (address, phone, email)
-- [ ] Form fields (name, email, message, submit)
-- [ ] Map section (if text labels exist)
-
-### de/partners.html
-- [ ] Page title
-- [ ] Partner descriptions
-- [ ] Partnership benefits
-- [ ] CTA to become partner
-
-### de/our-actions.html
-- [ ] Page title
-- [ ] Actions list (titles, descriptions)
-- [ ] Impact metrics
-- [ ] CTA buttons
 ```
 
 ## ✅ КРИТЕРІЇ УСПІХУ
 
-1. [ ] Всі видимі тексти в `/de/` мають `data-i18n` атрибути
-2. [ ] Всі видимі тексти в `/uk/` мають `data-i18n` атрибути
-3. [ ] Ключі в data-i18n відповідають ключам у JSON файлах
-4. [ ] `/de/about.html` показує німецький текст замість французького
-5. [ ] `/uk/index.html` показує український текст замість французького
-6. [ ] Консоль браузера показує `[i18n] Loaded de.json` при відкритті /de/
-7. [ ] Консоль браузера показує `[i18n] Applied translations for: de`
+1. [ ] Всі `data-i18n` ключі в `/de/` відповідають ключам у `de.json`
+2. [ ] Всі `data-i18n` ключі в `/uk/` відповідають ключам у `uk.json`
+3. [ ] `/de/index.html` показує німецький текст
+4. [ ] `/uk/index.html` показує український текст
+5. [ ] Консоль браузера: `[i18n] Applied translations for: de`
 
 ## 🔍 ВЕРИФІКАЦІЯ
 
-### Крок 1: Локальна перевірка
 ```bash
-# Перевірити кількість data-i18n атрибутів
-echo "de/index.html:"
-grep -c 'data-i18n=' de/index.html
+# Перевірити що старі ключі видалені
+grep -r 'actions\.concerts\.' de/ uk/ | wc -l  # Має бути 0
+grep -r 'actions\.integration\.' de/ uk/ | wc -l  # Має бути 0
 
-echo "uk/index.html:"
-grep -c 'data-i18n=' uk/index.html
+# Перевірити що нові ключі є
+grep -r 'actions\.charity_concerts' de/ uk/ | wc -l  # Має бути > 0
+grep -r 'actions\.community' de/ uk/ | wc -l  # Має бути > 0
 
-# Має бути > 50 на кожній сторінці
-```
-
-### Крок 2: Браузер тест
-```bash
-# Відкрити в браузері
-open https://violin.pp.ua/de/about.html
-
-# Перевірити консоль:
-# [i18n] Loaded de.json (X keys)
-# [i18n] Applied translations for: de
-
-# Перевірити текст на сторінці:
-# Має бути німецький, не французький
-```
-
-### Крок 3: Порівняння тексту
-```bash
-# Витягти перший заголовок
-echo "FR version:"
-curl -s https://violin.pp.ua/fr/about.html | grep -o '<h1[^>]*>.*</h1>' | head -1
-
-echo "DE version:"
-curl -s https://violin.pp.ua/de/about.html | grep -o '<h1[^>]*>.*</h1>' | head -1
-
-# Тексти мають бути різні (німецький vs французький)
+# Підрахувати загальну кількість data-i18n
+grep -c 'data-i18n=' de/index.html  # Має бути ~50+
+grep -c 'data-i18n=' uk/index.html  # Має бути ~50+
 ```
 
 ## 📝 GIT COMMIT
 
 ```bash
 git add de/ uk/
-git commit -m "feat(i18n): add data-i18n attributes to all /de/ and /uk/ pages
+git commit -m "fix(i18n): align data-i18n keys with JSON structure
 
 CRITICAL FIX:
-- Added data-i18n attributes to all translatable text elements
-- Covers: navigation, headings, paragraphs, buttons, forms, footer
-- Total: ~50-80 attributes per page across 10 HTML files
-- Enables i18n-engine.js to apply translations from JSON files
+- Fixed actions.concerts.* → actions.charity_concerts*
+- Fixed actions.integration.* → actions.community*
+- Fixed founder.bio_* → founder.fr_bio_*
+- Fixed founder.education_* → founder.fr_education_*
+- Fixed founder.repertoire_* → founder.fr_repertoire_*
 
-This completes the i18n implementation:
-- i18n-engine.js loads de.json and uk.json ✅
-- HTML elements have data-i18n attributes ✅
-- Translations are applied automatically ✅
+Now HTML data-i18n keys match JSON translation keys.
+Result: /de/ shows German, /uk/ shows Ukrainian"
 
-Result:
-- /de/about.html now shows German text instead of French
-- /uk/index.html now shows Ukrainian text instead of French
-- Language switching works correctly on all pages"
+git push origin master
 ```
 
-## 🚨 ВАЖЛИВІ ПРИМІТКИ
+## 🚀 ВИКОНАННЯ
 
-1. **Не змінювати вміст тексту** - тільки додати атрибути:
-   ```html
-   <!-- ✅ ПРАВИЛЬНО -->
-   <h1 data-i18n="hero.title">Sonate Solidaire</h1>
+```bash
+cd ~/violin.pp.ua
 
-   <!-- ❌ НЕПРАВИЛЬНО -->
-   <h1 data-i18n="hero.title">Solidarität Sonate</h1>
-   ```
+# 1. Створити скрипт
+cat > fix-i18n-keys.sh << 'EOF'
+#!/bin/bash
+# Paste the Linux version script here
+EOF
 
-2. **Перевірити відповідність ключів у JSON**:
-   - Кожен ключ в `data-i18n="key.path"` має існувати в de.json та uk.json
-   - Якщо ключа немає - додати його в JSON або використати інший ключ
+# 2. Зробити виконуваним
+chmod +x fix-i18n-keys.sh
 
-3. **Порядок виконання**:
-   - Спочатку `/de/` файли
-   - Потім `/uk/` файли (скопіювати той самий pattern)
-   - Тестувати після кожного файлу
+# 3. Запустити
+./fix-i18n-keys.sh
 
-4. **Placeholder атрибути**:
-   ```html
-   <input type="text"
-          data-i18n-placeholder="contact.form.name_placeholder"
-          placeholder="Votre nom complet">
-   ```
+# 4. Перевірити
+grep -c 'data-i18n="actions.charity_concerts"' de/index.html
 
-5. **ARIA та title атрибути**:
-   ```html
-   <button data-i18n-title="nav.home_tooltip"
-           data-i18n="nav.home"
-           title="Retour à l'accueil">
-     Accueil
-   </button>
-   ```
-
-## 📊 ОЧІКУВАНІ МЕТРИКИ
-
-- **Файлів для обробки**: 10 (5 /de/ + 5 /uk/)
-- **Атрибутів на файл**: ~50-80
-- **Загальна кількість атрибутів**: ~500-800
-- **Час виконання (ручна обробка)**: 2-4 години
-- **Час виконання (з готовим рішенням від Q)**: 30-60 хвилин
+# 5. Коміт
+git add de/ uk/
+git commit -m "fix(i18n): align data-i18n keys with JSON"
+git push
+```
 
 ---
 
-## 🎯 READY FOR IMPLEMENTATION
+## 🎯 ГОТОВЕ РІШЕННЯ
 
-**Очікую від Q готове рішення для імплементації.**
+**Скопіюйте цей скрипт і запустіть на сервері:**
 
-Можливі варіанти:
-1. Список конкретних ключів для кожного файлу
-2. Скрипт автоматизації
-3. Шаблони для копіювання
-4. Покрокові інструкції
+```bash
+#!/bin/bash
+cd ~/violin.pp.ua
 
-**Після отримання рішення - виконаю імплементацію коду.**
+for DIR in de uk; do
+  for FILE in $DIR/*.html; do
+    [ -f "$FILE" ] || continue
+    echo "Fixing: $FILE"
+    
+    # Actions fixes
+    sed -i 's/data-i18n="actions\.concerts\.title"/data-i18n="actions.charity_concerts"/g' "$FILE"
+    sed -i 's/data-i18n="actions\.concerts\.desc"/data-i18n="actions.charity_concerts_desc"/g' "$FILE"
+    sed -i 's/data-i18n="actions\.humanitarian\.title"/data-i18n="actions.humanitarian"/g' "$FILE"
+    sed -i 's/data-i18n="actions\.humanitarian\.desc"/data-i18n="actions.humanitarian_desc"/g' "$FILE"
+    sed -i 's/data-i18n="actions\.integration\.title"/data-i18n="actions.community"/g' "$FILE"
+    sed -i 's/data-i18n="actions\.integration\.desc"/data-i18n="actions.community_desc"/g' "$FILE"
+    
+    # Founder fixes
+    sed -i 's/data-i18n="founder\.bio_preview"/data-i18n="founder.fr_bio_preview"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.bio_emphasis"/data-i18n="founder.fr_bio_emphasis"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.education_title"/data-i18n="founder.fr_education_title"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.education_school1"/data-i18n="founder.fr_education_school1"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.education_university"/data-i18n="founder.fr_education_university"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.repertoire_title"/data-i18n="founder.fr_repertoire_title"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.repertoire_classical"/data-i18n="founder.fr_repertoire_classical"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.repertoire_contemporary"/data-i18n="founder.fr_repertoire_contemporary"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.repertoire_folk"/data-i18n="founder.fr_repertoire_folk"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.repertoire_pop"/data-i18n="founder.fr_repertoire_pop"/g' "$FILE"
+    sed -i 's/data-i18n="founder\.style_desc"/data-i18n="founder.fr_style_desc"/g' "$FILE"
+  done
+done
+
+echo "✅ All keys fixed!"
+git add de/ uk/
+git commit -m "fix(i18n): align data-i18n keys with JSON structure"
+git push origin master
+```
