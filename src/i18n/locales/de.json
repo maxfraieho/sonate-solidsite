@@ -1,0 +1,143 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "mission": "Mission",
+    "actions": "Aktionen",
+    "founder": "Gründer",
+    "contact": "Kontakt",
+    "donate": "Spenden"
+  },
+  "hero": {
+    "title": "Integration durch Musik",
+    "tagline": "Sonate Solidaire • Schweiz-Ukraine Brücken bauen",
+    "description": "Ein gemeinnütziger Verein für soziale Inklusion, kulturelle Vermittlung und humanitäre Hilfe durch musikalische Praxis.",
+    "supportCta": "Unterstützen Sie uns",
+    "founderCta": "Den Gründer entdecken"
+  },
+  "manifesto": {
+    "title": "V.I.O.L.I.N. — Unser Manifest",
+    "intro": "Jeder Buchstabe unseres Namens trägt ein Engagement für unsere Werte. V.I.O.L.I.N. ist nicht nur ein Akronym — es ist unsere Mission.",
+    "v": {
+      "title": "Werte",
+      "desc": "Humanismus, Solidarität und künstlerische Exzellenz leiten jede unserer Aktionen."
+    },
+    "i": {
+      "title": "Integration",
+      "desc": "Die Eingliederung ukrainischer Flüchtlinge durch Musik und Kultur erleichtern."
+    },
+    "o": {
+      "title": "Opus",
+      "desc": "Kulturelle Brücken durch Konzerte und künstlerische Veranstaltungen schaffen."
+    },
+    "l": {
+      "title": "Verbindung",
+      "desc": "Dauerhafte Verbindungen zwischen der Schweizer und ukrainischen Gemeinschaft knüpfen."
+    },
+    "i2": {
+      "title": "Initiative",
+      "desc": "Innovation in humanitärer Arbeit durch konkrete musikalische Projekte."
+    },
+    "n": {
+      "title": "Nuance",
+      "desc": "Respekt für die Vielfalt der Wege und künstlerischen Ausdrucksformen."
+    }
+  },
+  "quote": {
+    "arsen": "« Musik überwindet Grenzen — sie spricht direkt zum Herzen, ohne Übersetzung. »"
+  },
+  "mission": {
+    "title": "Unsere Mission",
+    "subtitle": "Mehr als Musik, eine soziale Verbindung",
+    "intro": "Sonate Solidaire verwandelt Virtuosität in soziales Engagement. Gegründet vom Geiger Arsen Kovalenko, arbeitet unser Verein für:",
+    "cohesion": {
+      "title": "Sozialer Zusammenhalt",
+      "desc": "Gemeinschaften durch verbindende musikalische Veranstaltungen zusammenbringen."
+    },
+    "mediation": {
+      "title": "Kulturvermittlung",
+      "desc": "Klassische Musik für alle Zuhörer zugänglich machen."
+    },
+    "integration": {
+      "title": "Flüchtlingsintegration",
+      "desc": "Ukrainische Familien in ihrem neuen Leben in der Schweiz begleiten."
+    }
+  },
+  "actions": {
+    "title": "Unsere Aktionen",
+    "concerts": {
+      "title": "Wohltätigkeitskonzerte",
+      "desc": "Musikalische Veranstaltungen zugunsten humanitärer Anliegen."
+    },
+    "humanitarian": {
+      "title": "Humanitäre Hilfe",
+      "desc": "Direkte Unterstützung für Flüchtlinge und bedürftige Familien."
+    },
+    "integration": {
+      "title": "Integrationsprogramme",
+      "desc": "Kulturelle und musikalische Workshops zur Erleichterung der Integration."
+    }
+  },
+  "founder": {
+    "title": "Der Gründer",
+    "biography_tab": "Biographie",
+    "musician_tab": "Musiker werden",
+    "name": "Arsen Kovalenko",
+    "role": "Virtuoser Geiger • Gründer von Sonate Solidaire",
+    "ukraine_badge": "Ukraine 🇺🇦",
+    "switzerland_badge": "Schweiz 🇨🇭",
+    "fr_bio_preview": "Der ukrainische Geiger, der seit 2022 in der Schweiz lebt, verkörpert Resilienz durch Musik. Als Flüchtling mit S-Status hat er seinen Exilweg in eine künstlerische und humanitäre Mission verwandelt.",
+    "fr_bio_emphasis": "Als Gründer des Vereins Sonate Solidaire arbeitet er für den universellen Zugang zu klassischer und moderner Musik.",
+    "fr_education_title": "Ausbildung und akademischer Werdegang",
+    "fr_education_school1": "Sein musikalischer Weg begann an der Musikschule Nr. 3 in Luzk, wo er die Grundlagen der Geigentechnik entwickelte. Anerkannt für sein frühes Talent, setzte Arsen seine Ausbildung am Wolhynischen Kunst- und Kulturkolleg fort.",
+    "fr_education_university": "2020 trat Arsen in die Staatliche Geisteswissenschaftliche Universität Riwne ein, wo er einen Bachelor in Musikkunst erwarb.",
+    "fr_repertoire_title": "Repertoire und Stil",
+    "fr_repertoire_classical": "Klassische Musik: Bach, Mozart, Beethoven, Brahms, Tschaikowski",
+    "fr_repertoire_contemporary": "Zeitgenössische Musik: Moderne und experimentelle Kompositionen",
+    "fr_repertoire_folk": "Volksmusik: Traditionelle ukrainische und slawische Melodien",
+    "fr_repertoire_pop": "Unterhaltungsmusik: Populäre Arrangements und Filmmusik",
+    "bio_expand": "Mehr lesen",
+    "bio_collapse": "Weniger",
+    "cv_download_title": "Lebenslauf",
+    "cv_download_desc": "Laden Sie den professionellen Lebenslauf von Arsen Kovalenko herunter",
+    "cv_french": "CV Französisch",
+    "cv_french_subtitle": "Französische Version",
+    "cv_ukrainian": "CV Ukrainisch",
+    "cv_ukrainian_subtitle": "Ukrainische Version"
+  },
+  "musician_form": {
+    "title": "Treten Sie Sonate Solidaire bei",
+    "description": "Sie sind professioneller Musiker oder begeisterter Amateur? Treten Sie unserem Talentnetzwerk für Wohltätigkeitskonzerte und außergewöhnliche Veranstaltungen bei.",
+    "full_name": "Vollständiger Name",
+    "email": "E-Mail",
+    "instrument": "Hauptinstrument",
+    "instrument_placeholder": "Wählen...",
+    "violin": "Geige",
+    "viola": "Bratsche",
+    "cello": "Cello",
+    "bass": "Kontrabass",
+    "piano": "Klavier",
+    "flute": "Flöte",
+    "clarinet": "Klarinette",
+    "other": "Andere",
+    "level": "Niveau",
+    "beginner": "Anfänger",
+    "intermediate": "Mittelstufe",
+    "advanced": "Fortgeschritten",
+    "professional": "Professionell",
+    "message": "Nachricht / Motivation",
+    "message_placeholder": "Erzählen Sie uns von Ihrem musikalischen Werdegang und Ihrer Motivation...",
+    "consent": "Ich stimme der Verarbeitung meiner Daten zu, um auf meine Anfrage zu antworten.",
+    "submit": "Bewerbung senden"
+  },
+  "portfolio": {
+    "title": "Musikalisches Portfolio",
+    "description": "Entdecken Sie meine Interpretationen: von virtuoser Klassik bis zu modernen Arrangements",
+    "select_track": "Wählen Sie einen Track",
+    "artist": "Arsen Kovalenko"
+  },
+  "footer": {
+    "copyright": "© 2024 Sonate Solidaire. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen"
+  }
+}

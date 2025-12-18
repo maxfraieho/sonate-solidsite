@@ -1,0 +1,143 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "mission": "Mission",
+    "actions": "Actions",
+    "founder": "Fondateur",
+    "contact": "Contact",
+    "donate": "Faire un don"
+  },
+  "hero": {
+    "title": "L'Intégration par la Musique",
+    "tagline": "Sonate Solidaire • Harmoniser les liens Suisse-Ukraine",
+    "description": "Une association à but non lucratif dédiée à l'inclusion sociale, la médiation culturelle et l'aide humanitaire à travers la pratique musicale.",
+    "supportCta": "Nous soutenir",
+    "founderCta": "Découvrir le fondateur"
+  },
+  "manifesto": {
+    "title": "V.I.O.L.I.N. — Notre manifeste",
+    "intro": "Chaque lettre de notre nom porte un engagement envers nos valeurs. V.I.O.L.I.N. n'est pas qu'un acronyme — c'est notre mission.",
+    "v": {
+      "title": "Valeurs",
+      "desc": "Humanisme, solidarité et excellence artistique guident chacune de nos actions."
+    },
+    "i": {
+      "title": "Intégration",
+      "desc": "Faciliter l'inclusion des réfugiés ukrainiens par la musique et la culture."
+    },
+    "o": {
+      "title": "Œuvre",
+      "desc": "Créer des ponts culturels à travers des concerts et événements artistiques."
+    },
+    "l": {
+      "title": "Lien",
+      "desc": "Tisser des connexions durables entre les communautés suisse et ukrainienne."
+    },
+    "i2": {
+      "title": "Initiative",
+      "desc": "Innover dans l'action humanitaire par des projets musicaux concrets."
+    },
+    "n": {
+      "title": "Nuance",
+      "desc": "Respecter la diversité des parcours et des expressions artistiques."
+    }
+  },
+  "quote": {
+    "arsen": "« La musique transcende les frontières — elle parle directement au cœur, sans besoin de traduction. »"
+  },
+  "mission": {
+    "title": "Notre Mission",
+    "subtitle": "Plus qu'une musique, un lien social",
+    "intro": "Sonate Solidaire transforme la virtuosité en action sociale. Fondée par le violoniste Arsen Kovalenko, notre association œuvre pour :",
+    "cohesion": {
+      "title": "Cohésion sociale",
+      "desc": "Rassembler les communautés autour d'événements musicaux fédérateurs."
+    },
+    "mediation": {
+      "title": "Médiation culturelle",
+      "desc": "Rendre la musique classique accessible à tous les publics."
+    },
+    "integration": {
+      "title": "Intégration des réfugiés",
+      "desc": "Accompagner les familles ukrainiennes dans leur nouvelle vie en Suisse."
+    }
+  },
+  "actions": {
+    "title": "Nos Actions",
+    "concerts": {
+      "title": "Concerts caritatifs",
+      "desc": "Événements musicaux au profit de causes humanitaires."
+    },
+    "humanitarian": {
+      "title": "Aide humanitaire",
+      "desc": "Soutien direct aux réfugiés et familles dans le besoin."
+    },
+    "integration": {
+      "title": "Programmes d'intégration",
+      "desc": "Ateliers culturels et musicaux pour faciliter l'insertion."
+    }
+  },
+  "founder": {
+    "title": "Le Fondateur",
+    "biography_tab": "Biographie",
+    "musician_tab": "Devenir Musicien",
+    "name": "Arsen Kovalenko",
+    "role": "Violoniste Virtuose • Fondateur de Sonate Solidaire",
+    "ukraine_badge": "Ukraine 🇺🇦",
+    "switzerland_badge": "Suisse 🇨🇭",
+    "fr_bio_preview": "Violoniste ukrainien établi en Suisse depuis 2022, Arsen Kovalenko incarne la résilience à travers la musique. Réfugié avec le statut S, il a transformé son parcours d'exil en une mission artistique et humanitaire.",
+    "fr_bio_emphasis": "Fondateur de l'association Sonate Solidaire, il œuvre pour l'accès universel à la musique classique et moderne.",
+    "fr_education_title": "Formation et parcours académique",
+    "fr_education_school1": "Son parcours musical débute à l'École de musique n°3 de Loutsk, où il développe les fondamentaux de la technique violonistique. Reconnu pour son talent précoce, Arsen poursuit ses études au Collège des arts et de la culture de Volhynie, où il obtient une double qualification d'artiste d'orchestre et d'ensemble, ainsi que de pédagogue musical.",
+    "fr_education_university": "En 2020, Arsen intègre l'Université humanitaire d'État de Rivne, où il obtient un baccalauréat en arts musicaux. Durant ses années universitaires, il s'investit activement dans la vie musicale locale, participant à divers ensembles de chambre et orchestres.",
+    "fr_repertoire_title": "Répertoire et style",
+    "fr_repertoire_classical": "Musique classique : Bach, Mozart, Beethoven, Brahms, Tchaïkovski",
+    "fr_repertoire_contemporary": "Musique contemporaine : Compositions modernes et expérimentales",
+    "fr_repertoire_folk": "Musique folklorique : Mélodies traditionnelles ukrainiennes et slaves",
+    "fr_repertoire_pop": "Musique de variété : Arrangements populaires et musique de film",
+    "bio_expand": "Lire la suite",
+    "bio_collapse": "Réduire",
+    "cv_download_title": "Curriculum Vitae",
+    "cv_download_desc": "Téléchargez le CV professionnel d'Arsen Kovalenko",
+    "cv_french": "CV Français",
+    "cv_french_subtitle": "Version française",
+    "cv_ukrainian": "CV Українською",
+    "cv_ukrainian_subtitle": "Українська версія"
+  },
+  "musician_form": {
+    "title": "Rejoignez Sonate Solidaire",
+    "description": "Vous êtes musicien professionnel ou amateur passionné ? Rejoignez notre réseau de talents pour des concerts solidaires et des événements exceptionnels.",
+    "full_name": "Nom complet",
+    "email": "Email",
+    "instrument": "Instrument principal",
+    "instrument_placeholder": "Choisir...",
+    "violin": "Violon",
+    "viola": "Alto",
+    "cello": "Violoncelle",
+    "bass": "Contrebasse",
+    "piano": "Piano",
+    "flute": "Flûte",
+    "clarinet": "Clarinette",
+    "other": "Autre",
+    "level": "Niveau",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "professional": "Professionnel",
+    "message": "Message / Motivation",
+    "message_placeholder": "Parlez-nous de votre parcours musical et de votre motivation...",
+    "consent": "J'accepte que mes données soient traitées pour répondre à ma demande.",
+    "submit": "Envoyer ma candidature"
+  },
+  "portfolio": {
+    "title": "Portfolio Musical",
+    "description": "Découvrez mes interprétations : du classique virtuose aux arrangements modernes",
+    "select_track": "Choisissez une piste",
+    "artist": "Arsen Kovalenko"
+  },
+  "footer": {
+    "copyright": "© 2024 Sonate Solidaire. Tous droits réservés.",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}
