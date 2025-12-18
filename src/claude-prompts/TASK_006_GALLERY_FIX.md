@@ -1,5 +1,7 @@
 # TASK 006: Fix Gallery Rendering
 
+## Skills: `frontend-design`, `systematic-debugging`, `verification-before-completion`
+
 ## Priority: MEDIUM
 
 ## Problems
@@ -7,9 +9,41 @@
 2. Captions may not update when language changes
 3. Layout shift causes poor UX
 
+---
+
+## Explicit Reasoning Protocol
+
+Before modifications:
+```
+DOING: [action]
+EXPECT: [outcome]
+IF YES: [proceed]
+IF NO: [stop, diagnose, report to Q]
+```
+
+---
+
 ## Required Changes
 
-### 1. Add Min-Height to Prevent Layout Shift
+### Step 1: Locate Gallery Section
+
+```
+DOING: Find gallery section in index.html
+EXPECT: Section with id="galerie" or class containing "gallery"
+```
+
+```bash
+grep -n "gallery\|galerie" index.html
+```
+
+### Step 2: Add CSS to Prevent Layout Shift
+
+```
+DOING: Add gallery CSS to main.css
+EXPECT: Fixed aspect ratios, loading placeholders, smooth transitions
+```
+
+Add to main.css:
 
 ```css
 /* Gallery Container - Prevent layout shift */
@@ -77,7 +111,7 @@
   transform: translateY(0);
 }
 
-/* Loading placeholder */
+/* Loading placeholder shimmer */
 .gallery-item::before {
   content: '';
   position: absolute;
@@ -102,11 +136,17 @@
 }
 ```
 
-### 2. Initialize Gallery After Images Load
+### Step 3: Update JavaScript for Image Loading
+
+```
+DOING: Add gallery initialization JS
+EXPECT: Images fade in when loaded, placeholders removed
+```
+
+Add to gallery.js or main.js:
 
 ```javascript
-// gallery.js - Initialize after images are loaded
-
+// Gallery initialization
 document.addEventListener('DOMContentLoaded', function() {
   initGallery();
 });
@@ -160,7 +200,7 @@ function updateGalleryCaptions() {
 }
 ```
 
-### 3. Gallery HTML Structure
+### Step 4: Verify HTML Structure
 
 Ensure gallery items follow this structure:
 
@@ -192,33 +232,26 @@ Ensure gallery items follow this structure:
 </section>
 ```
 
-### 4. Lazy Loading with Intersection Observer
+---
 
-For better performance:
+## ⛳ Verification Checkpoint
 
-```javascript
-// Lazy load gallery images
-function lazyLoadGallery() {
-  const images = document.querySelectorAll('.gallery-item img[loading="lazy"]');
-  
-  if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src || img.src;
-          observer.unobserve(img);
-        }
-      });
-    }, {
-      rootMargin: '50px 0px',
-      threshold: 0.1
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
-  }
-}
 ```
+DOING: Test gallery in browser (reload with cache cleared)
+EXPECT:
+  - Gallery has minimum height (no collapse on load)
+  - Loading shimmer shows while images load
+  - Images fade in smoothly when loaded
+  - No layout shift during loading
+  - Captions appear on hover
+  - Responsive grid works at all sizes
+
+RESULT: [document observations]
+MATCHES: [yes/no]
+THEREFORE: [proceed to TASK_007 or report issues]
+```
+
+---
 
 ## Verification Checklist
 - [ ] Gallery has minimum height (no collapse)
@@ -229,3 +262,11 @@ function lazyLoadGallery() {
 - [ ] Captions update when language changes
 - [ ] Hover effects work smoothly
 - [ ] Works on all screen sizes
+
+---
+
+## Handoff
+
+When complete:
+- Files modified: index.html, main.css, gallery.js/main.js
+- Ready for: TASK_007_MISC_FIXES.md

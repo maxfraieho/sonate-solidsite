@@ -1,5 +1,7 @@
 # TASK 003: Fix Hero Section Layout
 
+## Skills: `frontend-design`, `verification-before-completion`
+
 ## Priority: HIGH
 
 ## Current Problems
@@ -7,9 +9,34 @@
 2. Hero text is too low
 3. Spacing between elements is incorrect
 
+---
+
+## Explicit Reasoning Protocol
+
+Before modifications:
+```
+DOING: [action]
+EXPECT: [outcome]
+IF YES: [proceed]
+IF NO: [stop, report to Q]
+```
+
+---
+
 ## Required Changes
 
-### 1. Restructure Hero Content Order
+### Step 1: Analyze Current Hero Structure
+
+```
+DOING: Find hero section structure in index.html
+EXPECT: Section with class containing "hero" and nested content
+```
+
+```bash
+grep -n "hero\|Hero" index.html | head -20
+```
+
+### Step 2: Restructure Hero Content Order
 
 The hero section should have this order:
 1. Logo (small, above headline)
@@ -64,7 +91,12 @@ The hero section should have this order:
 </div>
 ```
 
-### 2. CSS Fixes for Hero
+### Step 3: CSS Fixes for Hero
+
+```
+DOING: Add/update hero CSS in /assets/css/main.css
+EXPECT: Styles control positioning, logo size, content spacing
+```
 
 Add/update in styles:
 
@@ -122,17 +154,43 @@ Add/update in styles:
 }
 ```
 
-### 3. Remove Conflicting !important Rules
+### Step 4: Remove Conflicting !important Rules
 
-In existing CSS, remove or modify:
+```
+DOING: Search for !important rules on .sonata-logo
+EXPECT: Find and remove any !important that conflicts
+```
 
+```bash
+grep -n "sonata-logo" assets/css/*.css
+```
+
+Remove or modify conflicting rules:
 ```css
-/* REMOVE these overrides if present */
+/* REMOVE these if present */
 .sonata-logo {
   max-width: 120px !important; /* Remove !important */
   width: 120px !important;     /* Remove !important */
 }
 ```
+
+---
+
+## ⛳ Verification Checkpoint
+
+```
+DOING: Open /index.html in browser at various widths
+EXPECT: 
+  - Desktop: Logo above headline, proper spacing, CTA buttons visible
+  - Tablet: Elements scale appropriately
+  - Mobile: Logo smaller, content fits screen
+
+RESULT: [document observations]
+MATCHES: [yes/no]
+THEREFORE: [proceed or report to Q]
+```
+
+---
 
 ## Verification Checklist
 - [ ] Logo appears above headline (small, centered)
@@ -140,4 +198,33 @@ In existing CSS, remove or modify:
 - [ ] Proper spacing between all elements
 - [ ] CTA buttons are below description
 - [ ] Layout works on mobile, tablet, desktop
-- [ ] Scroll indicator at bottom of hero section
+- [ ] Scroll indicator at bottom of hero section (if exists)
+
+---
+
+## Handoff
+
+When complete:
+- Files modified: index.html (all versions), main.css
+- Ready for: TASK_004_PAGE_TOP_PADDING.md
+
+---
+
+## Phase 1 Complete Checkpoint
+
+After TASK_001, TASK_002, TASK_003:
+
+```
+⛳ PHASE 1 VERIFICATION
+
+DOING: Test all three language versions
+EXPECT: 
+  - /index.html: i18n working, lang switcher correct, hero layout proper
+  - /fr/index.html: Same checks pass
+  - /uk/index.html: Same checks pass
+  - /de/index.html: Same checks pass
+
+RESULT: [document for each]
+MATCHES: [yes/no for each]
+THEREFORE: [proceed to Phase 2 or list issues for Q]
+```

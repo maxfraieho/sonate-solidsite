@@ -2,26 +2,12 @@
 
 # =====================================================
 # violin.pp.ua - Claude CLI Fix Script
-# =====================================================
-# 
-# USAGE:
-# 1. Copy the claude-prompts folder to your project:
-#    cp -r claude-prompts /path/to/violin.pp.ua/
-#
-# 2. Navigate to project directory:
-#    cd /path/to/violin.pp.ua
-#
-# 3. Run Claude CLI with master prompt:
-#    claude --file claude-prompts/CLAUDE_MASTER_PROMPT.md
-#
-# OR run individual tasks:
-#    claude --file claude-prompts/TASK_001_FIX_I18N_KEYS.md
-#    claude --file claude-prompts/TASK_002_HEADER_LANG_SWITCHER.md
-#    etc.
+# Оптимізовано під CLAUDE.md Protocol
 # =====================================================
 
 echo "🎻 violin.pp.ua Fix Script"
 echo "=========================="
+echo ""
 
 # Check if in correct directory
 if [ ! -f "index.html" ]; then
@@ -38,52 +24,92 @@ fi
 echo "✅ Project directory confirmed"
 echo ""
 
-# Menu
-echo "Select task to run:"
-echo "1) Run ALL fixes (CLAUDE_MASTER_PROMPT.md)"
-echo "2) Fix i18n keys only (TASK_001)"
-echo "3) Fix header/lang switcher (TASK_002)"
-echo "4) Fix hero layout (TASK_003)"
-echo "5) Fix page top padding (TASK_004)"
-echo "6) Fix audio player (TASK_005)"
-echo "7) Fix gallery (TASK_006)"
-echo "8) Miscellaneous fixes (TASK_007)"
-echo "9) Exit"
+# Session management reminder
+echo "💡 Рекомендація: почніть сесію перед роботою"
+echo "   /project:session-start violin-fix"
 echo ""
+
+# Menu
+echo "Оберіть завдання:"
+echo ""
+echo "  [1] 🚀 Всі виправлення (CLAUDE_MASTER_PROMPT.md)"
+echo ""
+echo "  Phase 1 - Critical:"
+echo "  [2] 🔧 Fix i18n keys (TASK_001)"
+echo "  [3] 🔧 Fix header/lang switcher (TASK_002)"
+echo "  [4] 🔧 Fix hero layout (TASK_003)"
+echo ""
+echo "  Phase 2 - Pages:"
+echo "  [5] 🔧 Fix page top padding (TASK_004)"
+echo ""
+echo "  Phase 3 - Components:"
+echo "  [6] 🔧 Fix audio player (TASK_005)"
+echo "  [7] 🔧 Fix gallery (TASK_006)"
+echo ""
+echo "  Phase 4 - Cleanup:"
+echo "  [8] 🔧 Miscellaneous fixes (TASK_007)"
+echo ""
+echo "  [9] 👋 Exit"
+echo ""
+
 read -p "Enter choice [1-9]: " choice
 
 case $choice in
     1)
+        echo ""
         echo "🚀 Running ALL fixes..."
-        claude --file claude-prompts/CLAUDE_MASTER_PROMPT.md
+        echo "Skills: executing-plans, frontend-design, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/CLAUDE_MASTER_PROMPT.md
         ;;
     2)
+        echo ""
         echo "🔧 Fixing i18n keys..."
-        claude --file claude-prompts/TASK_001_FIX_I18N_KEYS.md
+        echo "Skills: systematic-debugging, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/TASK_001_FIX_I18N_KEYS.md
         ;;
     3)
+        echo ""
         echo "🔧 Fixing header/lang switcher..."
-        claude --file claude-prompts/TASK_002_HEADER_LANG_SWITCHER.md
+        echo "Skills: frontend-design, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/TASK_002_HEADER_LANG_SWITCHER.md
         ;;
     4)
+        echo ""
         echo "🔧 Fixing hero layout..."
-        claude --file claude-prompts/TASK_003_HERO_LAYOUT.md
+        echo "Skills: frontend-design, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/TASK_003_HERO_LAYOUT.md
         ;;
     5)
+        echo ""
         echo "🔧 Fixing page top padding..."
-        claude --file claude-prompts/TASK_004_PAGE_TOP_PADDING.md
+        echo "Skills: frontend-design, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/TASK_004_PAGE_TOP_PADDING.md
         ;;
     6)
+        echo ""
         echo "🔧 Fixing audio player..."
-        claude --file claude-prompts/TASK_005_AUDIO_PLAYER.md
+        echo "Skills: frontend-design, systematic-debugging"
+        echo ""
+        claude chat --file claude-prompts/TASK_005_AUDIO_PLAYER.md
         ;;
     7)
+        echo ""
         echo "🔧 Fixing gallery..."
-        claude --file claude-prompts/TASK_006_GALLERY_FIX.md
+        echo "Skills: frontend-design, systematic-debugging"
+        echo ""
+        claude chat --file claude-prompts/TASK_006_GALLERY_FIX.md
         ;;
     8)
+        echo ""
         echo "🔧 Running misc fixes..."
-        claude --file claude-prompts/TASK_007_MISC_FIXES.md
+        echo "Skills: frontend-design, verification-before-completion"
+        echo ""
+        claude chat --file claude-prompts/TASK_007_MISC_FIXES.md
         ;;
     9)
         echo "👋 Bye!"
@@ -97,7 +123,18 @@ esac
 
 echo ""
 echo "✅ Task completed!"
-echo "📝 Don't forget to commit changes:"
-echo "   git add ."
-echo "   git commit -m 'Fix: localization and layout improvements'"
-echo "   git push"
+echo ""
+echo "📝 Git workflow (ВАЖЛИВО: не використовуйте 'git add .'):"
+echo ""
+echo "   # Додавайте файли окремо:"
+echo "   git add index.html"
+echo "   git add fr/index.html uk/index.html de/index.html"
+echo "   git add assets/css/main.css"
+echo "   git add assets/js/lang-switcher.js"
+echo "   # ... інші змінені файли"
+echo ""
+echo "   git commit -m 'fix: localization and layout improvements'"
+echo "   git push origin fix/full-localization-and-layout"
+echo ""
+echo "💡 Не забудьте завершити сесію:"
+echo "   /project:session-end"
