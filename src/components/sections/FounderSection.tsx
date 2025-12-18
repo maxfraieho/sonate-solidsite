@@ -35,14 +35,12 @@ export const FounderSection = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          type: 'musician',
-          name: musicianForm.name,
-          email: musicianForm.email,
+          type: 'musician-join',
+          contactName: musicianForm.name,
+          contactEmail: musicianForm.email,
           instrument: musicianForm.instrument,
           level: musicianForm.level,
-          message: musicianForm.message,
-          language: lang,
-          timestamp: new Date().toISOString()
+          message: musicianForm.message
         }),
       });
 
