@@ -109,11 +109,36 @@ const Contact = () => {
       return;
     }
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success(texts.success[lang]);
-    setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
-    setIsSubmitting(false);
+    
+    try {
+      const response = await fetch('https://watchdog-notifier.maxfraieho.workers.dev/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'contact',
+          name: formData.name,
+          email: formData.email,
+          subject: texts.subjects[formData.subject as keyof typeof texts.subjects]?.[lang] || formData.subject,
+          message: formData.message,
+          language: lang,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      if (response.ok) {
+        toast.success(texts.success[lang]);
+        setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error(lang === 'uk' ? 'Помилка надсилання. Спробуйте ще раз.' : 'Erreur d\'envoi. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
