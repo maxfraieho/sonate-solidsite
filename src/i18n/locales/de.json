@@ -12,7 +12,7 @@
   "hero": {
     "title": "Integration durch Musik",
     "tagline": "Sonate Solidaire • Schweiz-Ukraine Brücken bauen",
-    "description": "Ein gemeinnütziger Verein für soziale Inklusion, kulturelle Vermittlung und humanitäre Hilfe durch musikalische Praxis.",
+    "description": "Ein gemeinnütziger Verein für soziale Inklusion, kulturelle Vermittlung und solidarisches Engagement durch musikalische Praxis.",
     "supportCta": "Unterstützen Sie uns",
     "founderCta": "Den Gründer entdecken"
   },
@@ -25,7 +25,7 @@
     },
     "i": {
       "title": "Integration",
-      "desc": "Die Eingliederung ukrainischer Flüchtlinge durch Musik und Kultur erleichtern."
+      "desc": "Die Eingliederung ukrainischer Personen durch Musik und Kultur erleichtern."
     },
     "o": {
       "title": "Opus",
@@ -37,7 +37,7 @@
     },
     "i2": {
       "title": "Initiative",
-      "desc": "Innovation in humanitärer Arbeit durch konkrete musikalische Projekte."
+      "desc": "Innovation im solidarischen Engagement durch konkrete musikalische Projekte."
     },
     "n": {
       "title": "Nuance",
@@ -60,19 +60,19 @@
       "desc": "Klassische Musik für alle Zuhörer zugänglich machen."
     },
     "integration": {
-      "title": "Flüchtlingsintegration",
+      "title": "Kulturelle Integration",
       "desc": "Den kulturellen Austausch zwischen ukrainischen Familien und lokalen Gemeinschaften fördern."
     }
   },
   "actions": {
     "title": "Unsere Aktionen",
     "concerts": {
-      "title": "Wohltätigkeitskonzerte",
-      "desc": "Musikalische Veranstaltungen zugunsten humanitärer Anliegen."
+      "title": "Solidaritätskonzerte",
+      "desc": "Musikalische Veranstaltungen zugunsten kultureller und sozialer Anliegen."
     },
     "humanitarian": {
-      "title": "Humanitäre Hilfe",
-      "desc": "Direkte Unterstützung für Flüchtlinge und bedürftige Familien."
+      "title": "Solidarisches Engagement",
+      "desc": "Unterstützung der ukrainischen Gemeinschaft durch kulturelle Vermittlung."
     },
     "integration": {
       "title": "Integrationsprogramme",

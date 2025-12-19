@@ -12,7 +12,7 @@
   "hero": {
     "title": "L'Intégration par la Musique",
     "tagline": "Sonate Solidaire • Harmoniser les liens Suisse-Ukraine",
-    "description": "Une association à but non lucratif dédiée à l'inclusion sociale, la médiation culturelle et l'aide humanitaire à travers la pratique musicale.",
+    "description": "Une association à but non lucratif dédiée à l'inclusion sociale, la médiation culturelle et l'action solidaire à travers la pratique musicale.",
     "supportCta": "Nous soutenir",
     "founderCta": "Découvrir le fondateur"
   },
@@ -25,7 +25,7 @@
     },
     "i": {
       "title": "Intégration",
-      "desc": "Faciliter l'inclusion des réfugiés ukrainiens par la musique et la culture."
+      "desc": "Faciliter l'inclusion des personnes ukrainiennes par la musique et la culture."
     },
     "o": {
       "title": "Œuvre",
@@ -37,7 +37,7 @@
     },
     "i2": {
       "title": "Initiative",
-      "desc": "Innover dans l'action humanitaire par des projets musicaux concrets."
+      "desc": "Innover dans l'action solidaire par des projets musicaux concrets."
     },
     "n": {
       "title": "Nuance",
@@ -60,19 +60,19 @@
       "desc": "Rendre la musique classique accessible à tous les publics."
     },
     "integration": {
-      "title": "Intégration des réfugiés",
+      "title": "Intégration culturelle",
       "desc": "Favoriser les échanges culturels entre familles ukrainiennes et communautés locales."
     }
   },
   "actions": {
     "title": "Nos Actions",
     "concerts": {
-      "title": "Concerts caritatifs",
-      "desc": "Événements musicaux au profit de causes humanitaires."
+      "title": "Concerts solidaires",
+      "desc": "Événements musicaux au profit de causes culturelles et sociales."
     },
     "humanitarian": {
-      "title": "Aide humanitaire",
-      "desc": "Soutien direct aux réfugiés et familles dans le besoin."
+      "title": "Action solidaire",
+      "desc": "Soutien à la communauté ukrainienne par la médiation culturelle."
     },
     "integration": {
       "title": "Programmes d'intégration",
