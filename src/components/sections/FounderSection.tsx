@@ -128,6 +128,7 @@ export const FounderSection = () => {
               <div className="text-subtext leading-relaxed space-y-4">
                 <p>{t('founder.fr_bio_preview')}</p>
                 <p className="font-semibold text-primary">{t('founder.fr_bio_emphasis')}</p>
+                <p>{t('founder.fr_style_desc')}</p>
               </div>
 
               {/* Expanded Bio */}
