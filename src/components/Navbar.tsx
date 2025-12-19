@@ -11,8 +11,7 @@ export const Navbar = () => {
 
   const navItems = [
     { key: 'home', href: '/#home' },
-    { key: 'mission', href: '/#mission' },
-    { key: 'integration', href: '/integration', isRoute: true },
+    { key: 'mission', href: '/integration', isRoute: true },
     { key: 'actions', href: '/#actions' },
     { key: 'founder', href: '/#fondateur' },
     { key: 'portfolio', href: '/#portfolio' },
