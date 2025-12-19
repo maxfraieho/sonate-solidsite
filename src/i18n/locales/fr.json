@@ -6,6 +6,7 @@
     "founder": "Fondateur",
     "portfolio": "Portfolio",
     "transparence": "Transparence",
+    "integration": "Parcours",
     "contact": "Contact",
     "donate": "Faire un don"
   },
@@ -155,5 +156,26 @@
     "activity2": "l'intégration sociale et le dialogue interculturel",
     "activity3": "la création de liens durables entre communautés",
     "legal": "L'association agit dans le respect du cadre légal suisse, en cohérence avec le statut S et les recommandations des institutions cantonales."
+  },
+  "integrationPath": {
+    "title": "Parcours d'intégration culturelle",
+    "intro": "Cette page présente l'approche de Sonate Solidaire en matière d'intégration par la culture. Il s'agit d'un cadre conceptuel, et non de récits personnels.",
+    "step1": {
+      "title": "Musique",
+      "desc": "La musique comme langage universel, accessible et non conflictuel."
+    },
+    "step2": {
+      "title": "Rencontre",
+      "desc": "Création d'espaces de rencontre respectueux entre personnes et cultures."
+    },
+    "step3": {
+      "title": "Dialogue",
+      "desc": "Dialogue interculturel favorisé par une pratique artistique partagée."
+    },
+    "step4": {
+      "title": "Intégration",
+      "desc": "Renforcement du lien social et participation à la vie culturelle locale."
+    },
+    "disclaimer": "Ce parcours n'a aucune vocation thérapeutique ou sociale. Il s'inscrit exclusivement dans un cadre culturel et associatif."
   }
 }

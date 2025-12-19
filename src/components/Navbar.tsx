@@ -16,6 +16,7 @@ export const Navbar = () => {
     { key: 'founder', href: '/#fondateur' },
     { key: 'portfolio', href: '/#portfolio' },
     { key: 'transparence', href: '/#framework' },
+    { key: 'integration', href: '/integration', isRoute: true },
     { key: 'contact', href: '/contact', isRoute: true },
   ];
 
