@@ -1,11 +1,7 @@
 import { useTranslation } from 'react-i18next';
-import { Users, Languages, Home } from 'lucide-react';
-
-const missionItems = [
-  { key: 'cohesion', icon: Users },
-  { key: 'mediation', icon: Languages },
-  { key: 'integration', icon: Home },
-];
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 export const MissionSection = () => {
   const { t } = useTranslation();
@@ -26,36 +22,16 @@ export const MissionSection = () => {
             />
           </div>
           <div>
-            <h3 className="text-3xl font-display font-bold text-primary mb-6">
-              {t('mission.subtitle')}
-            </h3>
-            <p className="text-lg text-subtext mb-8">
+            <p className="text-lg text-subtext whitespace-pre-line leading-relaxed mb-8">
               {t('mission.intro')}
             </p>
 
-            <div className="space-y-6">
-              {missionItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.key}
-                    className="flex items-start gap-4 hover:opacity-80 transition-opacity duration-300 group cursor-pointer"
-                  >
-                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
-                      <Icon className="h-10 w-10 text-primary group-hover:scale-110 transition-transform" />
-                    </div>
-                    <div>
-                      <h5 className="text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {t(`mission.${item.key}.title`)}
-                      </h5>
-                      <p className="text-subtext">
-                        {t(`mission.${item.key}.desc`)}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <Button asChild size="lg" className="group">
+              <Link to="/integration">
+                {t('mission.cta')}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>

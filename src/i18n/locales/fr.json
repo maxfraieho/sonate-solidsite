@@ -48,21 +48,9 @@
     "arsen": "« La musique transcende les frontières — elle parle directement au cœur, sans besoin de traduction. »"
   },
   "mission": {
-    "title": "Notre Mission",
-    "subtitle": "Plus qu'une musique, un lien social",
-    "intro": "Sonate Solidaire transforme la virtuosité en action sociale. Fondée par le violoniste Arsen Kovalenko, notre association œuvre pour :",
-    "cohesion": {
-      "title": "Cohésion sociale",
-      "desc": "Rassembler les communautés autour d'événements musicaux fédérateurs."
-    },
-    "mediation": {
-      "title": "Médiation culturelle",
-      "desc": "Rendre la musique classique accessible à tous les publics."
-    },
-    "integration": {
-      "title": "Intégration culturelle",
-      "desc": "Favoriser les échanges culturels entre familles ukrainiennes et communautés locales."
-    }
+    "title": "Quand la musique devient action",
+    "intro": "Sonate Solidaire, ce n'est pas seulement jouer.\nC'est la musique comme action partagée, qui unit les gens ici et maintenant.\n\nNous travaillons là où l'art devient une manière de se rencontrer,\net l'écoute — une forme d'interaction.\n\nL'intégration culturelle, la cohésion sociale et la médiation\nne sont pas présentées comme un programme — elles naissent dans la pratique.",
+    "cta": "Notre mission"
   },
   "actions": {
     "title": "Nos Actions",
