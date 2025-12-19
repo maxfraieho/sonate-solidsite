@@ -99,7 +99,12 @@ const Contact = () => {
       de: 'Wir antworten normalerweise innerhalb von 24-48 Stunden.',
       uk: 'Зазвичай ми відповідаємо протягом 24-48 годин.'
     },
-    success: { fr: 'Message envoyé avec succès!', de: 'Nachricht erfolgreich gesendet!', uk: 'Повідомлення успішно надіслано!' }
+    success: { fr: 'Message envoyé avec succès!', de: 'Nachricht erfolgreich gesendet!', uk: 'Повідомлення успішно надіслано!' },
+    privacyNote: {
+      fr: 'Les messages sont traités de manière confidentielle et exclusivement pour répondre à votre demande.',
+      de: 'Nachrichten werden vertraulich behandelt und ausschliesslich zur Beantwortung Ihrer Anfrage verwendet.',
+      uk: 'Повідомлення обробляються конфіденційно та виключно для відповіді на ваш запит.'
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -303,6 +308,10 @@ const Contact = () => {
                     <Send className="mr-2 h-5 w-5" />
                     {isSubmitting ? '...' : texts.send[lang]}
                   </Button>
+
+                  <p className="text-xs text-subtext/60 text-center mt-4">
+                    {texts.privacyNote[lang]}
+                  </p>
                 </form>
               </div>
             </div>
