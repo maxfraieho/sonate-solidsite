@@ -36,13 +36,15 @@ export const Footer = () => {
     }
   };
 
-  const links = {
-    founder: { fr: 'Fondateur', de: 'Gründer', uk: 'Засновник' },
-    manifesto: { fr: 'Manifesto', de: 'Manifest', uk: 'Маніфест' },
-    mission: { fr: 'Mission', de: 'Mission', uk: 'Місія' },
-    portfolio: { fr: 'Portfolio', de: 'Portfolio', uk: 'Портфоліо' },
-    gallery: { fr: 'Galerie', de: 'Galerie', uk: 'Галерея' }
-  };
+  const navItems = [
+    { key: 'home', href: '/' },
+    { key: 'mission', href: '/#mission' },
+    { key: 'integration', href: '/integration' },
+    { key: 'actions', href: '/#actions' },
+    { key: 'portfolio', href: '/#portfolio' },
+    { key: 'transparence', href: '/#framework' },
+    { key: 'contact', href: '/contact' },
+  ];
 
   return (
     <footer className="bg-surface border-t border-primary/20 py-12 px-4">
@@ -75,26 +77,13 @@ export const Footer = () => {
           <div>
             <h3 className="font-display text-lg font-bold mb-4">{content.quickLinks[lang]}</h3>
             <ul className="space-y-2 text-subtext">
-              <li>
-                <a href="#fondateur" className="hover:text-primary transition-colors">
-                  {links.founder[lang]}
-                </a>
-              </li>
-              <li>
-                <a href="#manifesto" className="hover:text-primary transition-colors">
-                  {links.manifesto[lang]}
-                </a>
-              </li>
-              <li>
-                <a href="#mission" className="hover:text-primary transition-colors">
-                  {links.mission[lang]}
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:text-primary transition-colors">
-                  {links.portfolio[lang]}
-                </a>
-              </li>
+              {navItems.map((item) => (
+                <li key={item.key}>
+                  <a href={item.href} className="hover:text-primary transition-colors">
+                    {t(`nav.${item.key}`)}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
