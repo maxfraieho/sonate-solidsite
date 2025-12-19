@@ -159,22 +159,22 @@
   },
   "integrationPath": {
     "title": "Kultureller Integrationsweg",
-    "intro": "Diese Seite stellt den Ansatz von Sonate Solidaire zur kulturellen Integration vor. Es handelt sich um einen konzeptionellen Rahmen, nicht um persönliche Erzählungen.",
+    "intro": "Kulturelle Integration ist weder ein einmaliges Ereignis noch ein Programm mit Anweisungen. Es ist ein schrittweiser Prozess, der durch Teilnahme, gemeinsame Aktivitäten und regelmässige Interaktion entsteht.\n\nDer Ansatz von Sonate Solidaire beschreibt die Logik dieses Prozesses in aufeinanderfolgenden Schritten. Jeder basiert auf kultureller Praxis, nicht auf persönlichen Geschichten oder Bewertungen.\n\nIm Folgenden wird die Grundstruktur dieses Weges dargestellt.",
     "step1": {
       "title": "Musik",
-      "desc": "Musik als universelle, zugängliche und konfliktfreie Sprache."
+      "desc": "Musik als neutrales kulturelles Umfeld."
     },
     "step2": {
       "title": "Begegnung",
-      "desc": "Schaffung respektvoller Begegnungsräume zwischen Menschen und Kulturen."
+      "desc": "Schaffung eines Raums für gemeinsame Teilnahme."
     },
     "step3": {
       "title": "Dialog",
-      "desc": "Interkultureller Dialog durch gemeinsame künstlerische Praxis."
+      "desc": "Interaktion und interkultureller Austausch."
     },
     "step4": {
       "title": "Integration",
-      "desc": "Stärkung des sozialen Zusammenhalts und Teilnahme am lokalen Kulturleben."
+      "desc": "Einbindung in das lokale Kulturleben."
     },
     "disclaimer": "Dieser Weg hat keine therapeutische oder soziale Zielsetzung. Er findet ausschließlich in einem kulturellen und gemeinnützigen Rahmen statt."
   }

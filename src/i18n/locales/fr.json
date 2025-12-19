@@ -159,22 +159,22 @@
   },
   "integrationPath": {
     "title": "Parcours d'intégration culturelle",
-    "intro": "Cette page présente l'approche de Sonate Solidaire en matière d'intégration par la culture. Il s'agit d'un cadre conceptuel, et non de récits personnels.",
+    "intro": "L'intégration culturelle n'est pas un événement ponctuel ni un programme avec des instructions. C'est un processus progressif qui se construit à travers la participation, l'activité partagée et l'interaction régulière.\n\nL'approche de Sonate Solidaire décrit la logique de ce processus sous forme d'étapes successives. Chacune repose sur une pratique culturelle, et non sur des récits personnels ou des évaluations.\n\nVoici la structure de base de ce parcours.",
     "step1": {
       "title": "Musique",
-      "desc": "La musique comme langage universel, accessible et non conflictuel."
+      "desc": "La musique comme environnement culturel neutre."
     },
     "step2": {
       "title": "Rencontre",
-      "desc": "Création d'espaces de rencontre respectueux entre personnes et cultures."
+      "desc": "Création d'un espace de participation commune."
     },
     "step3": {
       "title": "Dialogue",
-      "desc": "Dialogue interculturel favorisé par une pratique artistique partagée."
+      "desc": "Interaction et échange interculturel."
     },
     "step4": {
       "title": "Intégration",
-      "desc": "Renforcement du lien social et participation à la vie culturelle locale."
+      "desc": "Engagement dans la vie culturelle locale."
     },
     "disclaimer": "Ce parcours n'a aucune vocation thérapeutique ou sociale. Il s'inscrit exclusivement dans un cadre culturel et associatif."
   }
