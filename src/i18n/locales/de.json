@@ -135,14 +135,10 @@
     "terms": "Nutzungsbedingungen"
   },
   "framework": {
-    "title": "Vereins- und Ethikrahmen",
-    "intro": "Sonate Solidaire ist eine kulturelle und gemeinnützige Initiative. Sie ersetzt in keiner Weise soziale, medizinische oder therapeutische Dienste.",
-    "disclaimer": "Das Projekt arbeitet strikt gemeinnützig und verfolgt kulturelle Vermittlung und soziale Integration.",
-    "activitiesIntro": "Unsere Aktivitäten konzentrieren sich ausschließlich auf:",
-    "activity1": "kulturelle Vermittlung durch Musik",
-    "activity2": "soziale Integration und interkulturellen Dialog",
-    "activity3": "die Schaffung dauerhafter Verbindungen zwischen Gemeinschaften",
-    "legal": "Der Verein handelt im Einklang mit dem schweizerischen Rechtsrahmen, in Übereinstimmung mit dem S-Status und den Empfehlungen der kantonalen Institutionen."
+    "title": "Wie wir arbeiten",
+    "line1": "Sonate Solidaire ist eine kulturelle Initiative, kein sozialer oder therapeutischer Dienst.",
+    "line2": "Wir arbeiten in einem gemeinnützigen Rahmen, in dem Musik zum Instrument der Begegnung, des Dialogs und der Integration wird.",
+    "line3": "Der Verein handelt im Einklang mit dem schweizerischen Recht und den Empfehlungen der kantonalen Institutionen."
   },
   "integrationPath": {
     "title": "Gemeinsam Harmonie schaffen",

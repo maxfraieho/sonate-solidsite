@@ -135,14 +135,10 @@
     "terms": "Conditions d'utilisation"
   },
   "framework": {
-    "title": "Cadre associatif et éthique",
-    "intro": "Sonate Solidaire est une initiative culturelle et associative. Elle ne se substitue en aucun cas à des services sociaux, médicaux ou thérapeutiques.",
-    "disclaimer": "Le projet agit dans un cadre strictement non lucratif, orienté vers la médiation culturelle et l'intégration sociale.",
-    "activitiesIntro": "Nos activités visent exclusivement :",
-    "activity1": "la médiation culturelle par la musique",
-    "activity2": "l'intégration sociale et le dialogue interculturel",
-    "activity3": "la création de liens durables entre communautés",
-    "legal": "L'association agit dans le respect du cadre légal suisse, en cohérence avec le statut S et les recommandations des institutions cantonales."
+    "title": "Comment nous travaillons",
+    "line1": "Sonate Solidaire est une initiative culturelle, et non un service social ou thérapeutique.",
+    "line2": "Nous agissons dans un cadre non lucratif, où la musique devient un instrument de rencontre, de dialogue et d'intégration.",
+    "line3": "L'association agit dans le respect du cadre légal suisse et des recommandations des institutions cantonales."
   },
   "integrationPath": {
     "title": "Créons l'harmonie ensemble",
