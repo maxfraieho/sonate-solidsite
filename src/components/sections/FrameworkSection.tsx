@@ -4,7 +4,7 @@ export const FrameworkSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-background">
+    <section id="framework" className="py-20 bg-background">
       <div className="container mx-auto px-4 max-w-4xl">
         <h2 className="text-3xl md:text-4xl font-serif text-primary mb-8 text-center">
           {t('framework.title')}
