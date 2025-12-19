@@ -5,12 +5,8 @@ export const FrameworkSection = () => {
 
   return (
     <section id="framework" className="py-20 bg-surface">
-      <div className="container mx-auto px-4 max-w-3xl text-center">
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-10">
-          {t('framework.title')}
-        </h2>
-        
-        <div className="space-y-6 text-subtext text-lg leading-relaxed">
+      <div className="container mx-auto px-4 max-w-3xl text-right">
+        <div className="space-y-4 text-subtext text-lg leading-relaxed">
           <p>{t('framework.line1')}</p>
           <p>{t('framework.line2')}</p>
           <p className="text-foreground/60 text-base">{t('framework.line3')}</p>
