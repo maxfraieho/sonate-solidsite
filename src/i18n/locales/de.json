@@ -48,21 +48,9 @@
     "arsen": "« Musik überwindet Grenzen — sie spricht direkt zum Herzen, ohne Übersetzung. »"
   },
   "mission": {
-    "title": "Unsere Mission",
-    "subtitle": "Mehr als Musik, eine soziale Verbindung",
-    "intro": "Sonate Solidaire verwandelt Virtuosität in soziales Engagement. Gegründet vom Geiger Arsen Kovalenko, arbeitet unser Verein für:",
-    "cohesion": {
-      "title": "Sozialer Zusammenhalt",
-      "desc": "Gemeinschaften durch verbindende musikalische Veranstaltungen zusammenbringen."
-    },
-    "mediation": {
-      "title": "Kulturvermittlung",
-      "desc": "Klassische Musik für alle Zuhörer zugänglich machen."
-    },
-    "integration": {
-      "title": "Kulturelle Integration",
-      "desc": "Den kulturellen Austausch zwischen ukrainischen Familien und lokalen Gemeinschaften fördern."
-    }
+    "title": "Wenn Musik zur Tat wird",
+    "intro": "Sonate Solidaire ist nicht nur Aufführung.\nEs ist Musik als gemeinsame Handlung, die Menschen hier und jetzt verbindet.\n\nWir arbeiten dort, wo Kunst zur Begegnung wird,\nund Zuhören — zu einer Form der Interaktion.\n\nKulturelle Integration, sozialer Zusammenhalt und Vermittlung\nwerden nicht als Programm präsentiert — sie entstehen in der Praxis.",
+    "cta": "Unsere Mission"
   },
   "actions": {
     "title": "Unsere Aktionen",
