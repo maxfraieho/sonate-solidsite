@@ -6,6 +6,7 @@
     "founder": "Gründer",
     "portfolio": "Portfolio",
     "transparence": "Transparenz",
+    "integration": "Weg",
     "contact": "Kontakt",
     "donate": "Spenden"
   },
@@ -155,5 +156,26 @@
     "activity2": "soziale Integration und interkulturellen Dialog",
     "activity3": "die Schaffung dauerhafter Verbindungen zwischen Gemeinschaften",
     "legal": "Der Verein handelt im Einklang mit dem schweizerischen Rechtsrahmen, in Übereinstimmung mit dem S-Status und den Empfehlungen der kantonalen Institutionen."
+  },
+  "integrationPath": {
+    "title": "Kultureller Integrationsweg",
+    "intro": "Diese Seite stellt den Ansatz von Sonate Solidaire zur kulturellen Integration vor. Es handelt sich um einen konzeptionellen Rahmen, nicht um persönliche Erzählungen.",
+    "step1": {
+      "title": "Musik",
+      "desc": "Musik als universelle, zugängliche und konfliktfreie Sprache."
+    },
+    "step2": {
+      "title": "Begegnung",
+      "desc": "Schaffung respektvoller Begegnungsräume zwischen Menschen und Kulturen."
+    },
+    "step3": {
+      "title": "Dialog",
+      "desc": "Interkultureller Dialog durch gemeinsame künstlerische Praxis."
+    },
+    "step4": {
+      "title": "Integration",
+      "desc": "Stärkung des sozialen Zusammenhalts und Teilnahme am lokalen Kulturleben."
+    },
+    "disclaimer": "Dieser Weg hat keine therapeutische oder soziale Zielsetzung. Er findet ausschließlich in einem kulturellen und gemeinnützigen Rahmen statt."
   }
 }
