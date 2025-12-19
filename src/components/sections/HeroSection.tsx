@@ -37,9 +37,9 @@ export const HeroSection = () => {
               {t('hero.supportCta')}
             </Button>
           </a>
-          <a href="#fondateur">
-            <Button size="lg" variant="outline" className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-background text-lg px-8 py-6">
-              {t('hero.founderCta')}
+          <a href="/integration">
+            <Button size="lg" variant="outline" className="border-2 border-foreground/60 text-foreground/90 hover:bg-foreground/10 hover:border-foreground text-lg px-8 py-6">
+              {t('hero.integrationCta')}
             </Button>
           </a>
         </div>
