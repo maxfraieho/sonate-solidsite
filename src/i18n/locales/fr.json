@@ -45,7 +45,8 @@
     }
   },
   "quote": {
-    "arsen": "« La musique transcende les frontières — elle parle directement au cœur, sans besoin de traduction. »"
+    "arsen": "« La musique transcende les frontières — elle parle directement au cœur, sans besoin de traduction. »",
+    "description": "La musique est un langage universel. Elle n'exige pas d'explications, ne cherche pas de sous-entendus et ne touche pas aux blessures. Nous écoutons et créons simplement ensemble. C'est un espace de dialogue apaisé, où l'interaction compte plus que les mots, et où le rythme partagé offre un sentiment de stabilité sans questions superflues."
   },
   "mission": {
     "title": "Quand la musique devient action",

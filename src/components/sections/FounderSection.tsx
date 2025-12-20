@@ -297,18 +297,6 @@ export const FounderSection = () => {
             </div>
           </TabsContent>
         </Tabs>
-
-        {/* Artistic Approach Block */}
-        <div className="mt-16 text-center max-w-2xl mx-auto">
-          <div className="border-t border-border/30 pt-10">
-            <h4 className="font-display text-xl font-semibold text-primary mb-4">
-              {t('founder.artistic_approach_title')}
-            </h4>
-            <p className="text-subtext leading-relaxed text-sm">
-              {t('founder.artistic_approach_text')}
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
