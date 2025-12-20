@@ -149,20 +149,20 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero */}
-      <section className="relative h-96 md:h-[50vh] flex items-center justify-center overflow-hidden pt-16">
+      <section className="relative h-56 md:h-72 flex items-center justify-center overflow-hidden pt-16">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-background/80 to-background" />
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-2 text-foreground drop-shadow-2xl">
             {texts.title[lang]}
           </h1>
-          <p className="text-lg md:text-xl text-subtext max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-subtext max-w-3xl mx-auto">
             {texts.subtitle[lang]}
           </p>
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-16 bg-background">
+      <section className="py-8 md:py-12 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Info */}
