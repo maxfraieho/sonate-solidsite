@@ -38,10 +38,6 @@ export const ActionsSection = () => {
             );
           })}
         </div>
-
-        <p className="text-sm text-subtext/70 text-center mt-12 max-w-2xl mx-auto">
-          {t('actions.disclaimer')}
-        </p>
       </div>
     </section>
   );

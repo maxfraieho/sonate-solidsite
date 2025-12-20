@@ -49,7 +49,11 @@
   },
   "mission": {
     "title": "Quand la musique devient action",
-    "intro": "Sonate Solidaire, ce n'est pas seulement jouer.\nC'est la musique comme action partagée, qui unit les gens ici et maintenant.\n\nNous travaillons là où l'art devient une manière de se rencontrer,\net l'écoute — une forme d'interaction.\n\nL'intégration culturelle, la cohésion sociale et la médiation\nne sont pas présentées comme un programme — elles naissent dans la pratique.",
+    "line1": "Sonate Solidaire, ce n'est pas seulement jouer. C'est la musique comme action partagée, qui unit les gens ici et maintenant.",
+    "line2": "C'est une initiative culturelle, et non un service social ou thérapeutique.",
+    "line3": "Nous agissons dans un cadre non lucratif, où la musique devient un instrument de rencontre, de dialogue et d'intégration.",
+    "line4": "L'association agit dans le respect du cadre légal suisse et des recommandations des institutions cantonales.",
+    "line5": "Toutes les actions sont menées à titre associatif, sans but lucratif et dans un cadre transparent.",
     "cta": "Notre mission"
   },
   "actions": {

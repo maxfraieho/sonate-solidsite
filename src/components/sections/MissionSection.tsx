@@ -22,9 +22,13 @@ export const MissionSection = () => {
             />
           </div>
           <div>
-            <p className="text-lg text-subtext whitespace-pre-line leading-relaxed mb-8">
-              {t('mission.intro')}
-            </p>
+            <div className="text-lg text-subtext leading-relaxed mb-8 text-left space-y-4">
+              <p>{t('mission.line1')}</p>
+              <p>{t('mission.line2')}</p>
+              <p>{t('mission.line3')}</p>
+              <p>{t('mission.line4')}</p>
+              <p>{t('mission.line5')}</p>
+            </div>
 
             <Button asChild size="lg" className="group">
               <Link to="/integration">
