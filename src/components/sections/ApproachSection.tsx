@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Heart, Brain, Users, Shield, Music } from 'lucide-react';
+import { Heart, Brain, Users, Music } from 'lucide-react';
 
 export const ApproachSection = () => {
   const { t } = useTranslation();
@@ -75,30 +75,8 @@ export const ApproachSection = () => {
           </div>
         </div>
 
-        {/* Roles */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Parent Role */}
-          <div className="group relative bg-gradient-to-br from-surface to-surface/50 rounded-2xl p-8 border border-border/30 hover:border-primary/30 transition-all duration-300">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-transparent to-primary/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Shield className="w-7 h-7 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm text-primary font-medium">{t('approach.parentRole')}</p>
-                  <h3 className="font-display text-xl font-bold text-foreground">
-                    {t('approach.parentRoleTitle')}
-                  </h3>
-                </div>
-              </div>
-              <p className="text-subtext leading-relaxed">
-                {t('approach.parentRoleDesc')}
-              </p>
-            </div>
-          </div>
-
-          {/* Musician Role */}
+        {/* Musician Role - Single centered card */}
+        <div className="max-w-2xl mx-auto">
           <div className="group relative bg-gradient-to-br from-surface to-surface/50 rounded-2xl p-8 border border-border/30 hover:border-primary/30 transition-all duration-300">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-transparent to-primary/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative">
