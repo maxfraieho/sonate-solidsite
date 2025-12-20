@@ -3,7 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { ManifestoSection } from '@/components/sections/ManifestoSection';
 import { QuoteSection } from '@/components/sections/QuoteSection';
 import { MissionSection } from '@/components/sections/MissionSection';
-import { FrameworkSection } from '@/components/sections/FrameworkSection';
+
 import { ActionsSection } from '@/components/sections/ActionsSection';
 import { FounderSection } from '@/components/sections/FounderSection';
 import { PortfolioSection } from '@/components/sections/PortfolioSection';
@@ -18,7 +18,6 @@ const Index = () => {
       <ManifestoSection />
       <QuoteSection />
       <MissionSection />
-      <FrameworkSection />
       <ActionsSection />
       <FounderSection />
       <PortfolioSection />

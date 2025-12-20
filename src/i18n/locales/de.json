@@ -49,7 +49,11 @@
   },
   "mission": {
     "title": "Wenn Musik zur Tat wird",
-    "intro": "Sonate Solidaire ist nicht nur Aufführung.\nEs ist Musik als gemeinsame Handlung, die Menschen hier und jetzt verbindet.\n\nWir arbeiten dort, wo Kunst zur Begegnung wird,\nund Zuhören — zu einer Form der Interaktion.\n\nKulturelle Integration, sozialer Zusammenhalt und Vermittlung\nwerden nicht als Programm präsentiert — sie entstehen in der Praxis.",
+    "line1": "Sonate Solidaire ist nicht nur Aufführung. Es ist Musik als gemeinsame Handlung, die Menschen hier und jetzt verbindet.",
+    "line2": "Es ist eine kulturelle Initiative, kein sozialer oder therapeutischer Dienst.",
+    "line3": "Wir arbeiten in einem gemeinnützigen Rahmen, in dem Musik zum Instrument der Begegnung, des Dialogs und der Integration wird.",
+    "line4": "Der Verein handelt im Einklang mit dem schweizerischen Recht und den Empfehlungen der kantonalen Institutionen.",
+    "line5": "Alle Aktivitäten werden gemeinnützig, ohne Gewinnabsicht und in einem transparenten Rahmen durchgeführt.",
     "cta": "Unsere Mission"
   },
   "actions": {
