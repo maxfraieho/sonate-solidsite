@@ -40,12 +40,6 @@ export const MissionSection = () => {
                 {t('mission.line1')}
               </p>
               <p className="relative pl-6 border-l-2 border-primary/30 hover:border-primary transition-colors duration-300">
-                {t('mission.line2')}
-              </p>
-              <p className="relative pl-6 border-l-2 border-primary/30 hover:border-primary transition-colors duration-300">
-                {t('mission.line3')}
-              </p>
-              <p className="relative pl-6 border-l-2 border-primary/30 hover:border-primary transition-colors duration-300">
                 {t('mission.line4')}
               </p>
               <p className="relative pl-6 border-l-2 border-primary/30 hover:border-primary transition-colors duration-300">
