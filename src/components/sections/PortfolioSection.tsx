@@ -8,11 +8,10 @@ export const PortfolioSection = () => {
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   
   const titles = {
-    music: { fr: 'Musique', de: 'Musik', uk: 'Музика' },
     description: { 
-      fr: 'Découvrez mes interprétations : du classique virtuose aux arrangements modernes',
-      de: 'Entdecken Sie meine Interpretationen: von virtuoser Klassik bis zu modernen Arrangements',
-      uk: 'Відкрийте мої інтерпретації: від віртуозної класики до сучасних аранжувань'
+      fr: 'Écoutez, s\'il vous plaît, mes interprétations : du classique virtuose aux arrangements modernes',
+      de: 'Hören Sie sich bitte meine Interpretationen an: von virtuoser Klassik bis zu modernen Arrangements',
+      uk: 'Прослухайте, будь ласка, мої інтерпретації: від віртуозної класики до сучасних аранжувань'
     },
     gallery: { fr: 'Galerie Photos', de: 'Fotogalerie', uk: 'Фотогалерея' },
     galleryDesc: {
@@ -33,11 +32,16 @@ export const PortfolioSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Audio Section */}
         <div className="mb-20">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
-            {titles.music[lang]}
-          </h2>
-          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
-            {titles.description[lang]}
+          {/* Decorative line */}
+          <div className="flex items-center justify-center mb-8">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <div className="mx-4 w-2 h-2 rounded-full bg-primary" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          </div>
+          
+          <p className="text-center text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+            <span className="text-primary font-semibold italic">{titles.description[lang].split(':')[0]}:</span>
+            <span className="text-subtext">{titles.description[lang].split(':')[1]}</span>
           </p>
           <AudioPlayer />
         </div>
