@@ -53,12 +53,14 @@ export const MissionSection = () => {
               </p>
             </div>
 
-            <Button asChild size="lg" className="group bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300">
-              <Link to="/integration">
-                {t('mission.cta')}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <div className="flex justify-center lg:justify-start">
+              <Button asChild size="lg" className="group bg-primary text-primary-foreground hover:bg-primary-hover shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all duration-300">
+                <Link to="/integration">
+                  {t('mission.cta')}
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
