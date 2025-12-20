@@ -19,12 +19,7 @@ export const PortfolioSection = () => {
       de: 'Momente von Konzerten und Aufnahmesessions',
       uk: 'Моменти з концертів та студійних сесій'
     },
-    video: { fr: 'Vidéos Performances', de: 'Video-Performances', uk: 'Відео виступи' },
-    videoDesc: {
-      fr: 'Retrouvez mes meilleures performances en vidéo',
-      de: 'Entdecken Sie meine besten Videoauftritte',
-      uk: 'Дивіться мої найкращі виступи на відео'
-    }
+    video: { fr: 'Vidéos', de: 'Videos', uk: 'Відео' }
   };
 
   return (
@@ -76,12 +71,9 @@ export const PortfolioSection = () => {
               <div className="mx-4 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50" />
               <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
             </div>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary">
               {titles.video[lang]}
             </h2>
-            <p className="text-subtext text-lg max-w-2xl mx-auto">
-              {titles.videoDesc[lang]}
-            </p>
           </div>
           
           {/* Main Videos */}
