@@ -9,9 +9,9 @@ export const PortfolioSection = () => {
   
   const titles = {
     description: { 
-      fr: 'Écoutez, s\'il vous plaît, mes interprétations : du classique virtuose aux arrangements modernes',
-      de: 'Hören Sie sich bitte meine Interpretationen an: von virtuoser Klassik bis zu modernen Arrangements',
-      uk: 'Прослухайте, будь ласка, мої інтерпретації: від віртуозної класики до сучасних аранжувань'
+      fr: 'Écoutez, s\'il vous plaît, ses interprétations : du classique virtuose aux arrangements modernes',
+      de: 'Hören Sie sich bitte seine Interpretationen an: von virtuoser Klassik bis zu modernen Arrangements',
+      uk: 'Прослухайте, будь ласка, його інтерпретації: від віртуозної класики до сучасних аранжувань'
     },
     gallery: { fr: 'Galerie Photos', de: 'Fotogalerie', uk: 'Фотогалерея' },
     galleryDesc: {
@@ -28,99 +28,139 @@ export const PortfolioSection = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 bg-surface">
+    <section id="portfolio" className="py-20 bg-surface relative">
+      {/* Top decorative line */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Audio Section */}
-        <div className="mb-20">
+        <div className="mb-24">
           {/* Decorative line */}
-          <div className="flex items-center justify-center mb-8">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
-            <div className="mx-4 w-2 h-2 rounded-full bg-primary" />
-            <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          <div className="flex items-center justify-center mb-10">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent to-primary" />
+            <div className="mx-4 text-primary text-xl">♫</div>
+            <div className="h-px w-20 bg-gradient-to-l from-transparent to-primary" />
           </div>
           
-          <p className="text-center text-lg md:text-xl mb-12 max-w-2xl mx-auto">
-            <span className="text-primary font-semibold italic">{titles.description[lang].split(':')[0]}:</span>
+          <p className="text-center text-lg md:text-xl mb-14 max-w-2xl mx-auto leading-relaxed">
+            <span className="text-primary font-display font-semibold italic text-xl md:text-2xl">{titles.description[lang].split(':')[0]}:</span>
+            <br />
             <span className="text-subtext">{titles.description[lang].split(':')[1]}</span>
           </p>
           <AudioPlayer />
         </div>
 
         {/* Photo Gallery */}
-        <div className="mb-20">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
-            {titles.gallery[lang]}
-          </h2>
-          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
-            {titles.galleryDesc[lang]}
-          </p>
+        <div className="mb-24">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+              <div className="mx-4 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+              {titles.gallery[lang]}
+            </h2>
+            <p className="text-subtext text-lg max-w-2xl mx-auto">
+              {titles.galleryDesc[lang]}
+            </p>
+          </div>
           <PhotoGallery />
         </div>
 
         {/* Video Section */}
         <div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-center text-primary mb-4">
-            {titles.video[lang]}
-          </h2>
-          <p className="text-center text-subtext text-lg mb-12 max-w-2xl mx-auto">
-            {titles.videoDesc[lang]}
-          </p>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+              <div className="mx-4 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
+              {titles.video[lang]}
+            </h2>
+            <p className="text-subtext text-lg max-w-2xl mx-auto">
+              {titles.videoDesc[lang]}
+            </p>
+          </div>
           
           {/* Main Videos */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
-            <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
-              <iframe
-                src="https://www.youtube.com/embed/3jnDrzAo820"
-                title="Concert Arsen Kovalenko"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            <div className="group relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+                <iframe
+                  src="https://www.youtube.com/embed/3jnDrzAo820"
+                  title="Concert Arsen Kovalenko"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
-            <div className="aspect-video rounded-xl overflow-hidden bg-background border border-primary/30">
-              <iframe
-                src="https://www.youtube.com/embed/5-wAIreCeNk"
-                title="Performance violon"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="group relative">
+              <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+                <iframe
+                  src="https://www.youtube.com/embed/5-wAIreCeNk"
+                  title="Performance violon"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
 
           {/* Shorts */}
-          <h3 className="text-2xl font-display font-bold text-primary text-center mb-8">Shorts</h3>
+          <div className="flex items-center justify-center mb-10">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/50" />
+            <h3 className="mx-6 text-2xl font-display font-bold text-primary">Shorts</h3>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
+          </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
-              <iframe
-                src="https://www.youtube.com/embed/uMiQg_sq_-w"
-                title="Short 1"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+                <iframe
+                  src="https://www.youtube.com/embed/uMiQg_sq_-w"
+                  title="Short 1"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
-            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
-              <iframe
-                src="https://www.youtube.com/embed/T15hZVOKaSc"
-                title="Short 2"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+                <iframe
+                  src="https://www.youtube.com/embed/T15hZVOKaSc"
+                  title="Short 2"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
-            <div className="aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30">
-              <iframe
-                src="https://www.youtube.com/embed/uMiQg_sq_-w"
-                title="Short 3"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+                <iframe
+                  src="https://www.youtube.com/embed/uMiQg_sq_-w"
+                  title="Short 3"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Bottom decorative line */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
     </section>
   );
 };
