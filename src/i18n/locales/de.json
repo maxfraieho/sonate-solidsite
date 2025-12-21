@@ -203,5 +203,29 @@
       "desc": "Einbindung in das lokale Kulturleben."
     },
     "disclaimer": "Dieser Weg hat keine therapeutische oder soziale Zielsetzung. Er findet ausschließlich in einem kulturellen und gemeinnützigen Rahmen statt."
+  },
+  "support": {
+    "title": "Unterstützen",
+    "subtitle": "Sonate Solidaire",
+    "description": "Begleiten Sie uns bei der Gründung eines engagierten Kulturvereins",
+    "statusTitle": "Verein in Gründung",
+    "statusDisclaimer": "Die offiziellen Spendenkanäle werden nach Eröffnung des Bankkontos veröffentlicht. In der Zwischenzeit können Sie uns auf andere Weise unterstützen.",
+    "step1": "Gründung",
+    "step1Desc": "Statuten & Protokoll",
+    "step2": "Registrierung",
+    "step2Desc": "Formelle Eintragung",
+    "step3": "Bankkonto",
+    "step3Desc": "IBAN & TWINT",
+    "step4": "Start",
+    "step4Desc": "Erste Konzerte",
+    "testimonialCard": "Unterstützungsbotschaft hinterlassen",
+    "testimonialDesc": "Teilen Sie Ihre moralische Unterstützung oder Ermutigung",
+    "concertCard": "Konzert / Veranstaltung organisieren",
+    "concertDesc": "Schlagen Sie eine Zusammenarbeit oder einen Konzertort vor",
+    "partnerCard": "Partner / Freiwilliger werden",
+    "partnerDesc": "Treten Sie unserem Partner- und Freiwilligennetzwerk bei",
+    "donateButton": "Spenden",
+    "comingSoon": "Demnächst verfügbar",
+    "contactUs": "Kontaktieren Sie uns"
   }
 }
