@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const GA_MEASUREMENT_ID = 'G-LY0ZLRZZHL';
+const GA_MEASUREMENT_ID = 'G-RNGPDPX4M3';
 
 declare global {
   interface Window {
@@ -19,38 +19,34 @@ const loadGtag = (): Promise<void> => {
       return;
     }
 
-    // Initialize dataLayer
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function gtag() {
-      window.dataLayer.push(arguments);
-    };
-
-    // Set default consent to denied
-    window.gtag('consent', 'default', {
-      analytics_storage: 'granted',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-    });
-
-    // Configure GA4 with privacy settings
-    window.gtag('js', new Date());
-    window.gtag('config', GA_MEASUREMENT_ID, {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false,
-      send_page_view: false, // We'll send manually for SPA
-    });
-
-    // Load gtag.js script
+    // Load gtag.js script FIRST
     const script = document.createElement('script');
     script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
     script.async = true;
+    
     script.onload = () => {
+      // Initialize dataLayer and gtag function AFTER script loads
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments);
+      };
+
+      // Initialize GA4
+      window.gtag('js', new Date());
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        anonymize_ip: true,
+        send_page_view: false, // We'll send manually for SPA
+      });
+
       isGtagLoaded = true;
       resolve();
     };
-    script.onerror = reject;
+    
+    script.onerror = () => {
+      reject(new Error('Failed to load Google Analytics script'));
+    };
+    
     document.head.appendChild(script);
   });
 };
