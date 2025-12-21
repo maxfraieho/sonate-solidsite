@@ -8,21 +8,27 @@ import { FounderSection } from '@/components/sections/FounderSection';
 import { PortfolioSection } from '@/components/sections/PortfolioSection';
 import { SupportSection } from '@/components/sections/SupportSection';
 import { Footer } from '@/components/sections/Footer';
+import SEO from '@/components/SEO';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <HeroSection />
-      <QuoteSection />
-      <MissionSection />
-      <ApproachSection />
-      <ActionsSection />
-      <FounderSection />
-      <PortfolioSection />
-      <SupportSection />
-      <Footer />
-    </div>
+    <>
+      <SEO path="/" />
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main>
+          <HeroSection />
+          <QuoteSection />
+          <MissionSection />
+          <ApproachSection />
+          <ActionsSection />
+          <FounderSection />
+          <PortfolioSection />
+          <SupportSection />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 

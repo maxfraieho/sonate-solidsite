@@ -73,7 +73,7 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <nav aria-label="Footer navigation">
             <h3 className="font-display text-lg font-bold mb-4">{content.quickLinks[lang]}</h3>
             <ul className="space-y-2 text-subtext">
               {navItems.map((item) => (
@@ -84,7 +84,7 @@ export const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Contact & Social */}
           <div>

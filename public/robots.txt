@@ -12,3 +12,9 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://violin.pp.ua/sitemap.xml
+
+# Host
+Host: https://violin.pp.ua
