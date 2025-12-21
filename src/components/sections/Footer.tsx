@@ -42,6 +42,12 @@ export const Footer = () => {
     uk: 'Політика конфіденційності'
   };
 
+  const supportLabel = {
+    fr: 'Soutien & Témoignages',
+    de: 'Unterstützung & Zeugnisse',
+    uk: 'Підтримка та свідчення'
+  };
+
   const navItems = [
     { key: 'home', href: '/' },
     { key: 'mission', href: '/integration' },
@@ -49,6 +55,7 @@ export const Footer = () => {
     { key: 'founder', href: '/#fondateur' },
     { key: 'portfolio', href: '/#portfolio' },
     { key: 'contact', href: '/contact' },
+    { label: supportLabel[lang], href: '/support' },
   ];
 
   return (
@@ -82,10 +89,10 @@ export const Footer = () => {
           <nav aria-label="Footer navigation">
             <h3 className="font-display text-lg font-bold mb-4">{content.quickLinks[lang]}</h3>
             <ul className="space-y-2 text-subtext">
-              {navItems.map((item) => (
-                <li key={item.key}>
+              {navItems.map((item, idx) => (
+                <li key={item.key || idx}>
                   <a href={item.href} className="hover:text-primary transition-colors">
-                    {t(`nav.${item.key}`)}
+                    {item.label || t(`nav.${item.key}`)}
                   </a>
                 </li>
               ))}

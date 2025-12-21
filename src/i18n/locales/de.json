@@ -227,6 +227,105 @@
     "partnerDesc": "Treten Sie unserem Partner- und Freiwilligennetzwerk bei",
     "donateButton": "Spenden",
     "comingSoon": "Demnächst verfügbar",
-    "contactUs": "Kontaktieren Sie uns"
+    "contactUs": "Kontaktieren Sie uns",
+    "navLabel": "Unterstützung",
+    "hero": {
+      "title": "Unterstützung & Zeugnisse",
+      "subtitle": "Der Verein ist in Gründung. Im Moment sammeln wir Unterstützungsbekundungen und Partnerschaftsanfragen. Offizielle Spendenkanäle (IBAN/TWINT) werden nach Kontoeröffnung aktiviert.",
+      "bullets": {
+        "1": "Unterstützungsstatement hinterlassen (auf Wunsch veröffentlichbar)",
+        "2": "Benefizkonzert oder Anlass vorschlagen",
+        "3": "Partner*in / Volunteer / Community-Multiplikator werden"
+      },
+      "backBtn": "Zurück zur Unterstützung",
+      "contactBtn": "Kontakt"
+    },
+    "trust": {
+      "title": "Transparenz",
+      "body": "Wir sammeln auf dieser Website keine Spenden, solange Verein und Bankkonto nicht offiziell abgeschlossen sind. Ihre Unterstützung (Statement, Absicht, Kontakt) hilft uns, Partner in der Schweiz zu mobilisieren."
+    },
+    "cards": {
+      "individual": {
+        "title": "Privatpersonen",
+        "body": "Ihr Statement zeigt öffentliches Interesse und stärkt unsere Glaubwürdigkeit für den Start des Vereins."
+      },
+      "organization": {
+        "title": "Organisationen",
+        "body": "Partnerschaften, Orte, Logistik, Kommunikation, Mitorganisation von Veranstaltungen."
+      },
+      "church": {
+        "title": "Kirchen & Gemeinschaften",
+        "body": "Benefizkonzerte, Gastgeberrolle, kulturelle Vermittlung, lokale Community-Netzwerke."
+      }
+    },
+    "tabs": {
+      "individual": "Privatperson",
+      "organization": "Organisation",
+      "church": "Kirche / Gemeinschaft"
+    },
+    "form": {
+      "common": {
+        "name": "Vor- und Nachname",
+        "email": "E-Mail",
+        "phone": "Telefon (optional)",
+        "city": "Ort",
+        "canton": "Kanton (optional)",
+        "country": "Land",
+        "role": "Rolle / Funktion (optional)",
+        "message": "Nachricht / Statement",
+        "interests": "Ich interessiere mich für:",
+        "interests.donateLater": "Später finanziell unterstützen (wenn IBAN/TWINT verfügbar sind)",
+        "interests.hostConcert": "Konzert ausrichten / organisieren",
+        "interests.bookConcert": "Konzert buchen",
+        "interests.partner": "Partnerschaft / Sponsoring",
+        "interests.volunteer": "Freiwilligenarbeit",
+        "interests.share": "In meiner Community teilen",
+        "publishName": "Sie dürfen meinen Namen (oder den Namen meiner Organisation) als Unterstützer auf der Website veröffentlichen.",
+        "publishQuote": "Sie dürfen ein kurzes Zitat aus meinem Statement auf der Website veröffentlichen.",
+        "contactConsent": "Ich bin einverstanden, bezüglich Sonate Solidaire kontaktiert zu werden.",
+        "privacyNote": "Ihre Daten werden nur zur Bearbeitung Ihrer Anfrage und zum Aufbau unseres Partnernetzwerks verwendet."
+      },
+      "individual": {
+        "title": "Unterstützungsstatement (Privatperson)"
+      },
+      "organization": {
+        "title": "Partnerschaftsanfrage (Organisation)",
+        "orgName": "Name der Organisation",
+        "orgType": "Typ (optional)",
+        "orgTypes": {
+          "ngo": "Verein / NGO",
+          "culture": "Kultureinrichtung",
+          "municipality": "Gemeinde / Stadt",
+          "foundation": "Stiftung",
+          "business": "Unternehmen",
+          "school": "Schule / Institution",
+          "other": "Andere"
+        }
+      },
+      "church": {
+        "title": "Unterstützung & Konzert (Kirche / Gemeinschaft)",
+        "orgName": "Name der Kirche / Gemeinschaft",
+        "orgType": "Konfession (optional)"
+      },
+      "submit": "Senden",
+      "sending": "Senden…",
+      "successTitle": "Danke für Ihre Unterstützung",
+      "successBody": "Wir haben Ihre Nachricht erhalten und melden uns zeitnah.",
+      "errorTitle": "Senden nicht möglich",
+      "errorBody": "Bitte erneut versuchen. Wenn das Problem bleibt, kontaktieren Sie uns über die Kontaktseite."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "q1": "Warum sind Spenden noch nicht verfügbar?",
+      "a1": "Der Verein wird finalisiert (Statuten, Governance, Bankkonto). IBAN/TWINT werden nach offizieller Kontoeröffnung aktiviert.",
+      "q2": "Wird mein Statement veröffentlicht?",
+      "a2": "Nur wenn Sie die Veröffentlichung erlauben. Andernfalls bleibt es intern.",
+      "q3": "Was passiert nach dem Absenden?",
+      "a3": "Wir prüfen Ihre Anfrage und kontaktieren Sie bei Bedarf (Konzert, Partnerschaft, Launch-Infos)."
+    },
+    "next": {
+      "title": "Wie geht es weiter?",
+      "body": "Wir lesen die Nachrichten, stärken unser Partnernetzwerk in der Schweiz und veröffentlichen offizielle Kanäle (IBAN/TWINT) nach Kontoeröffnung."
+    }
   }
 }
