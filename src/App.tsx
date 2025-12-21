@@ -18,10 +18,10 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <StructuredData />
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <StructuredData />
           <AnalyticsProvider />
           <Routes>
             <Route path="/" element={<Index />} />
