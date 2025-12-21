@@ -1,20 +1,37 @@
+# Robots.txt for violin.pp.ua
+# Target: Switzerland (de-CH, fr-CH, uk)
+
+# Google
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing
 User-agent: Bingbot
 Allow: /
 
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+# Other crawlers
 User-agent: *
 Allow: /
 
-# Sitemap
+# Disallow non-content paths
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap location
 Sitemap: https://violin.pp.ua/sitemap.xml
 
-# Host
+# Preferred host
 Host: https://violin.pp.ua
