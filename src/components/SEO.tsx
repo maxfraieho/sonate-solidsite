@@ -15,64 +15,71 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 const seoContent = {
   fr: {
     siteName: 'Sonate Solidaire',
-    defaultTitle: 'Sonate Solidaire | Intégration par la Musique',
-    defaultDescription: 'Association à but non lucratif dédiée à l\'intégration culturelle des Ukrainiens en Suisse à travers la musique et les concerts solidaires.',
+    defaultTitle: 'Sonate Solidaire | Intégration par la Musique en Suisse',
+    defaultDescription: 'Association suisse à but non lucratif pour l\'intégration culturelle des Ukrainiens. Concerts solidaires et médiation culturelle dans le canton de Vaud.',
     pages: {
       home: {
-        title: 'Sonate Solidaire | Intégration Culturelle par la Musique',
-        description: 'Association suisse pour l\'intégration culturelle des Ukrainiens. Concerts solidaires, médiation culturelle et inclusion sociale par la musique.',
+        title: 'Sonate Solidaire | Intégration Culturelle par la Musique – Suisse',
+        description: 'Association suisse basée dans le canton de Vaud. Intégration culturelle des Ukrainiens par concerts solidaires, médiation et inclusion sociale.',
       },
       contact: {
-        title: 'Contact | Sonate Solidaire',
-        description: 'Contactez Sonate Solidaire pour collaborations musicales, concerts solidaires ou information sur nos programmes d\'intégration culturelle.',
+        title: 'Contact | Sonate Solidaire – Gland, Suisse',
+        description: 'Contactez Sonate Solidaire à Gland (Vaud). Collaborations musicales, concerts solidaires et programmes d\'intégration culturelle en Suisse.',
       },
       integration: {
-        title: 'Parcours d\'Intégration | Sonate Solidaire',
-        description: 'Découvrez notre parcours d\'intégration culturelle par la musique. Un chemin structuré vers l\'inclusion sociale en Suisse.',
+        title: 'Parcours d\'Intégration | Sonate Solidaire – Suisse',
+        description: 'Parcours d\'intégration culturelle par la musique en Suisse. Un chemin structuré vers l\'inclusion sociale dans le canton de Vaud.',
       },
     },
   },
   de: {
     siteName: 'Sonate Solidaire',
-    defaultTitle: 'Sonate Solidaire | Integration durch Musik',
-    defaultDescription: 'Gemeinnütziger Verein für die kulturelle Integration von Ukrainern in der Schweiz durch Musik und Solidaritätskonzerte.',
+    defaultTitle: 'Sonate Solidaire | Integration durch Musik in der Schweiz',
+    defaultDescription: 'Gemeinnütziger Schweizer Verein für kulturelle Integration von Ukrainern. Solidaritätskonzerte und kulturelle Vermittlung im Kanton Waadt.',
     pages: {
       home: {
-        title: 'Sonate Solidaire | Kulturelle Integration durch Musik',
-        description: 'Schweizer Verein für kulturelle Integration von Ukrainern. Solidaritätskonzerte, kulturelle Vermittlung und soziale Inklusion durch Musik.',
+        title: 'Sonate Solidaire | Kulturelle Integration durch Musik – Schweiz',
+        description: 'Schweizer Verein mit Sitz im Kanton Waadt. Kulturelle Integration von Ukrainern durch Solidaritätskonzerte und soziale Inklusion.',
       },
       contact: {
-        title: 'Kontakt | Sonate Solidaire',
-        description: 'Kontaktieren Sie Sonate Solidaire für musikalische Zusammenarbeit, Solidaritätskonzerte oder Informationen zu unseren Integrationsprogrammen.',
+        title: 'Kontakt | Sonate Solidaire – Gland, Schweiz',
+        description: 'Kontaktieren Sie Sonate Solidaire in Gland (Waadt). Musikalische Zusammenarbeit, Solidaritätskonzerte und Integrationsprogramme in der Schweiz.',
       },
       integration: {
-        title: 'Integrationsweg | Sonate Solidaire',
-        description: 'Entdecken Sie unseren kulturellen Integrationsweg durch Musik. Ein strukturierter Weg zur sozialen Inklusion in der Schweiz.',
+        title: 'Integrationsweg | Sonate Solidaire – Schweiz',
+        description: 'Kultureller Integrationsweg durch Musik in der Schweiz. Strukturierter Weg zur sozialen Inklusion im Kanton Waadt.',
       },
     },
   },
   uk: {
     siteName: 'Sonate Solidaire',
-    defaultTitle: 'Sonate Solidaire | Інтеграція через музику',
-    defaultDescription: 'Неприбуткова асоціація для культурної інтеграції українців у Швейцарії через музику та солідарні концерти.',
+    defaultTitle: 'Sonate Solidaire | Інтеграція через музику у Швейцарії',
+    defaultDescription: 'Швейцарська неприбуткова асоціація для культурної інтеграції українців. Солідарні концерти та культурна медіація в кантоні Во.',
     pages: {
       home: {
-        title: 'Sonate Solidaire | Культурна інтеграція через музику',
-        description: 'Швейцарська асоціація для культурної інтеграції українців. Солідарні концерти, культурна медіація та соціальна інклюзія через музику.',
+        title: 'Sonate Solidaire | Культурна інтеграція через музику – Швейцарія',
+        description: 'Швейцарська асоціація у кантоні Во. Культурна інтеграція українців через солідарні концерти та соціальну інклюзію.',
       },
       contact: {
-        title: 'Контакти | Sonate Solidaire',
-        description: 'Зв\'яжіться з Sonate Solidaire для музичної співпраці, солідарних концертів або інформації про наші програми культурної інтеграції.',
+        title: 'Контакти | Sonate Solidaire – Гланд, Швейцарія',
+        description: 'Зв\'яжіться з Sonate Solidaire у Гланді (Во). Музична співпраця, солідарні концерти та програми інтеграції у Швейцарії.',
       },
       integration: {
-        title: 'Шлях інтеграції | Sonate Solidaire',
-        description: 'Відкрийте наш шлях культурної інтеграції через музику. Структурований шлях до соціальної інклюзії у Швейцарії.',
+        title: 'Шлях інтеграції | Sonate Solidaire – Швейцарія',
+        description: 'Шлях культурної інтеграції через музику у Швейцарії. Структурований шлях до соціальної інклюзії в кантоні Во.',
       },
     },
   },
 };
 
 type PageKey = 'home' | 'contact' | 'integration';
+
+// Hreflang mapping for Swiss regional targeting
+const hreflangMap = {
+  de: 'de-CH',
+  fr: 'fr-CH', 
+  uk: 'uk',
+} as const;
 
 export const SEO = ({ 
   title, 
@@ -83,7 +90,7 @@ export const SEO = ({
 }: SEOProps) => {
   const { i18n } = useTranslation();
   const currentLang = i18n.language as keyof typeof seoContent;
-  const content = seoContent[currentLang] || seoContent.fr;
+  const content = seoContent[currentLang] || seoContent.de; // Default to German (primary)
   
   // Determine page key from path
   const getPageKey = (path: string): PageKey => {
@@ -99,16 +106,31 @@ export const SEO = ({
   const finalDescription = description || pageContent.description;
   const canonicalUrl = `${SITE_URL}${path}`;
   
-  // Language codes for hreflang
-  const languages = ['fr', 'de', 'uk'] as const;
+  // Get html lang attribute with Swiss regional code
+  const getHtmlLang = () => {
+    if (currentLang === 'uk') return 'uk';
+    if (currentLang === 'de') return 'de-CH';
+    return 'fr-CH';
+  };
+  
+  // Get OG locale
+  const getOgLocale = () => {
+    if (currentLang === 'uk') return 'uk_UA';
+    if (currentLang === 'de') return 'de_CH';
+    return 'fr_CH';
+  };
   
   return (
     <Helmet>
       {/* Basic Meta Tags */}
-      <html lang={currentLang === 'uk' ? 'uk' : currentLang} />
+      <html lang={getHtmlLang()} />
       <title>{finalTitle}</title>
       <meta name="description" content={finalDescription} />
       <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Geo targeting for Switzerland */}
+      <meta name="geo.region" content="CH-VD" />
+      <meta name="geo.placename" content="Gland, Vaud, Switzerland" />
       
       {/* Open Graph */}
       <meta property="og:site_name" content={content.siteName} />
@@ -117,7 +139,10 @@ export const SEO = ({
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content={type} />
       <meta property="og:image" content={image} />
-      <meta property="og:locale" content={currentLang === 'uk' ? 'uk_UA' : currentLang === 'de' ? 'de_CH' : 'fr_CH'} />
+      <meta property="og:locale" content={getOgLocale()} />
+      <meta property="og:locale:alternate" content="de_CH" />
+      <meta property="og:locale:alternate" content="fr_CH" />
+      <meta property="og:locale:alternate" content="uk_UA" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -125,16 +150,11 @@ export const SEO = ({
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={image} />
       
-      {/* Hreflang Tags */}
-      {languages.map((lang) => (
-        <link 
-          key={lang}
-          rel="alternate" 
-          hrefLang={lang === 'uk' ? 'uk' : lang} 
-          href={`${SITE_URL}${path}`} 
-        />
-      ))}
-      <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}${path}`} />
+      {/* Hreflang Tags with Swiss regional codes */}
+      <link rel="alternate" hrefLang="de-CH" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="fr-CH" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="uk" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
     </Helmet>
   );
 };
