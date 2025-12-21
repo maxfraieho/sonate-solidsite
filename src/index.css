@@ -121,7 +121,6 @@
     opacity: 1;
     animation: cta-shimmer 2s ease-in-out infinite;
   }
-  }
 
   /* Respect reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
