@@ -203,5 +203,29 @@
       "desc": "Engagement dans la vie culturelle locale."
     },
     "disclaimer": "Ce parcours n'a aucune vocation thérapeutique ou sociale. Il s'inscrit exclusivement dans un cadre culturel et associatif."
+  },
+  "support": {
+    "title": "Soutenir",
+    "subtitle": "Sonate Solidaire",
+    "description": "Accompagnez-nous dans la création d'une association culturelle engagée",
+    "statusTitle": "Association en formation",
+    "statusDisclaimer": "Les canaux de dons officiels seront publiés après l'ouverture du compte bancaire. En attendant, vous pouvez nous soutenir autrement.",
+    "step1": "Constitution",
+    "step1Desc": "Statuts & procès-verbal",
+    "step2": "Enregistrement",
+    "step2Desc": "Inscription formelle",
+    "step3": "Compte bancaire",
+    "step3Desc": "IBAN & TWINT",
+    "step4": "Lancement",
+    "step4Desc": "Premiers concerts",
+    "testimonialCard": "Laisser un témoignage de soutien",
+    "testimonialDesc": "Partagez votre soutien moral ou vos encouragements",
+    "concertCard": "Organiser un concert / événement",
+    "concertDesc": "Proposez une collaboration ou un lieu de concert",
+    "partnerCard": "Devenir partenaire / bénévole",
+    "partnerDesc": "Rejoignez notre réseau de partenaires et bénévoles",
+    "donateButton": "Faire un don",
+    "comingSoon": "Bientôt disponible",
+    "contactUs": "Nous contacter"
   }
 }
