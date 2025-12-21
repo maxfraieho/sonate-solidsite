@@ -36,6 +36,12 @@ export const Footer = () => {
     }
   };
 
+  const privacyLabel = {
+    fr: 'Politique de confidentialité',
+    de: 'Datenschutzerklärung',
+    uk: 'Політика конфіденційності'
+  };
+
   const navItems = [
     { key: 'home', href: '/' },
     { key: 'mission', href: '/integration' },
@@ -131,7 +137,12 @@ export const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-primary/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-subtext">
-          <p>{content.copyright[lang]}</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p>{content.copyright[lang]}</p>
+            <a href="/privacy" className="hover:text-primary transition-colors">
+              {privacyLabel[lang]}
+            </a>
+          </div>
           <p className="flex items-center gap-2">
             {content.madeWith[lang]} <span className="text-primary">♥</span> {content.inSwitzerland[lang]}
           </p>

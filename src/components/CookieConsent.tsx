@@ -18,6 +18,7 @@ export const CookieConsent = ({ onAccept, onDecline }: CookieConsentProps) => {
         'Wir verwenden Google Analytics, um die Nutzung unserer Website zu analysieren und zu verbessern. Gemäss dem Schweizer Datenschutzgesetz (nDSG) und der DSGVO bitten wir um Ihre Zustimmung zur Verwendung von Analyse-Cookies. Ihre Daten werden anonymisiert und nicht für Werbezwecke verwendet.',
       accept: 'Akzeptieren',
       decline: 'Ablehnen',
+      learnMore: 'Mehr erfahren',
     },
     fr: {
       title: 'Protection des données & Cookies',
@@ -25,6 +26,7 @@ export const CookieConsent = ({ onAccept, onDecline }: CookieConsentProps) => {
         "Nous utilisons Google Analytics pour analyser et améliorer l'utilisation de notre site. Conformément à la loi suisse sur la protection des données (nLPD) et au RGPD, nous demandons votre consentement pour l'utilisation de cookies analytiques. Vos données sont anonymisées et ne sont pas utilisées à des fins publicitaires.",
       accept: 'Accepter',
       decline: 'Refuser',
+      learnMore: 'En savoir plus',
     },
     uk: {
       title: 'Захист даних та Cookies',
@@ -32,6 +34,7 @@ export const CookieConsent = ({ onAccept, onDecline }: CookieConsentProps) => {
         'Ми використовуємо Google Analytics для аналізу та покращення роботи нашого сайту. Відповідно до швейцарського закону про захист даних (nDSG) та GDPR, ми просимо вашу згоду на використання аналітичних cookies. Ваші дані анонімізуються та не використовуються для реклами.',
       accept: 'Прийняти',
       decline: 'Відхилити',
+      learnMore: 'Дізнатись більше',
     },
   };
 
@@ -46,7 +49,10 @@ export const CookieConsent = ({ onAccept, onDecline }: CookieConsentProps) => {
             <div>
               <h3 className="font-semibold text-foreground mb-1">{t.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                {t.description}
+                {t.description}{' '}
+                <a href="/privacy" className="text-primary hover:underline">
+                  {t.learnMore}
+                </a>
               </p>
             </div>
           </div>
