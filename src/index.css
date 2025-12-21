@@ -94,6 +94,41 @@
   .animation-delay-400 {
     animation-delay: 400ms;
   }
+
+  /* CTA Glow Animation - subtle and accessible */
+  .cta-glow {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--primary) / 0.4),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  .cta-glow:hover::before {
+    opacity: 1;
+    animation: cta-shimmer 2s ease-in-out infinite;
+  }
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-glow::before {
+      animation: none;
+    }
+  }
 }
 
 @keyframes fadeInUp {
@@ -104,6 +139,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes cta-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 

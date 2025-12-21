@@ -227,6 +227,105 @@
     "partnerDesc": "Rejoignez notre réseau de partenaires et bénévoles",
     "donateButton": "Faire un don",
     "comingSoon": "Bientôt disponible",
-    "contactUs": "Nous contacter"
+    "contactUs": "Nous contacter",
+    "navLabel": "Soutien",
+    "hero": {
+      "title": "Soutien & Témoignages",
+      "subtitle": "L'association est en cours de création. Pour l'instant, nous recueillons des témoignages et des intentions de partenariat. Les canaux de dons officiels (IBAN/TWINT) seront activés dès l'ouverture du compte.",
+      "bullets": {
+        "1": "Laisser un témoignage (citations publiables si vous le souhaitez)",
+        "2": "Proposer un concert solidaire ou un événement",
+        "3": "Devenir partenaire / bénévole / relais communautaire"
+      },
+      "backBtn": "Retour au soutien",
+      "contactBtn": "Nous contacter"
+    },
+    "trust": {
+      "title": "Transparence",
+      "body": "Nous ne collectons pas de dons sur ce site tant que l'association et le compte bancaire ne sont pas officiellement finalisés. En attendant, votre soutien (témoignage, intention, contact) nous aide à mobiliser des partenaires en Suisse."
+    },
+    "cards": {
+      "individual": {
+        "title": "Particuliers",
+        "body": "Votre témoignage montre l'intérêt public et renforce notre crédibilité pour lancer l'association."
+      },
+      "organization": {
+        "title": "Organisations",
+        "body": "Partenariats, lieux, soutien logistique, diffusion, co-organisation d'événements."
+      },
+      "church": {
+        "title": "Églises & Communautés",
+        "body": "Concerts solidaires, accueil, médiation culturelle, relais auprès des communautés locales."
+      }
+    },
+    "tabs": {
+      "individual": "Particulier",
+      "organization": "Organisation",
+      "church": "Église / Communauté"
+    },
+    "form": {
+      "common": {
+        "name": "Nom et prénom",
+        "email": "E-mail",
+        "phone": "Téléphone (optionnel)",
+        "city": "Ville",
+        "canton": "Canton (optionnel)",
+        "country": "Pays",
+        "role": "Rôle / fonction (optionnel)",
+        "message": "Message / témoignage",
+        "interests": "Je suis intéressé(e) par :",
+        "interests.donateLater": "Soutenir financièrement plus tard (quand IBAN/TWINT seront disponibles)",
+        "interests.hostConcert": "Accueillir / organiser un concert",
+        "interests.bookConcert": "Réserver un concert",
+        "interests.partner": "Partenariat / sponsoring",
+        "interests.volunteer": "Bénévolat",
+        "interests.share": "Relayer à ma communauté",
+        "publishName": "Vous pouvez publier mon nom (ou celui de mon organisation) comme soutien sur le site.",
+        "publishQuote": "Vous pouvez publier une courte citation de mon témoignage sur le site.",
+        "contactConsent": "J'accepte d'être contacté(e) au sujet de Sonate Solidaire.",
+        "privacyNote": "Vos données sont utilisées uniquement pour répondre à votre demande et construire notre réseau de partenaires."
+      },
+      "individual": {
+        "title": "Témoignage de soutien (Particulier)"
+      },
+      "organization": {
+        "title": "Demande de partenariat (Organisation)",
+        "orgName": "Nom de l'organisation",
+        "orgType": "Type (optionnel)",
+        "orgTypes": {
+          "ngo": "Association / ONG",
+          "culture": "Institution culturelle",
+          "municipality": "Commune / municipalité",
+          "foundation": "Fondation",
+          "business": "Entreprise",
+          "school": "École / établissement",
+          "other": "Autre"
+        }
+      },
+      "church": {
+        "title": "Soutien & concert (Église / Communauté)",
+        "orgName": "Nom de l'église / communauté",
+        "orgType": "Dénomination (optionnel)"
+      },
+      "submit": "Envoyer",
+      "sending": "Envoi…",
+      "successTitle": "Merci pour votre soutien",
+      "successBody": "Nous avons bien reçu votre message. Nous reviendrons vers vous rapidement.",
+      "errorTitle": "Envoi impossible",
+      "errorBody": "Veuillez réessayer. Si le problème persiste, contactez-nous via la page Contact."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "q1": "Pourquoi les dons ne sont-ils pas encore disponibles ?",
+      "a1": "L'association est en cours de finalisation (statuts, gouvernance, compte bancaire). Nous activerons IBAN/TWINT dès l'ouverture officielle.",
+      "q2": "Mon témoignage sera-t-il publié ?",
+      "a2": "Uniquement si vous cochez l'autorisation. Sinon, il reste interne.",
+      "q3": "Que se passe-t-il après l'envoi ?",
+      "a3": "Nous analysons votre demande et nous vous contactons si nécessaire (concert, partenariat, informations de lancement)."
+    },
+    "next": {
+      "title": "Et ensuite ?",
+      "body": "Nous relisons les messages, consolidons notre réseau de partenaires en Suisse, puis publierons les canaux officiels (IBAN/TWINT) dès l'ouverture du compte."
+    }
   }
 }
