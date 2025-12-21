@@ -34,7 +34,7 @@ export const HeroSection = () => {
 
         <div className="animate-fade-in-up animation-delay-200 flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <a href="#soutenir" aria-label={t('hero.supportCta')}>
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-hover text-lg px-8 py-6 shadow-lg">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary-hover text-lg px-8 py-6 shadow-lg cta-glow">
               {t('hero.supportCta')}
             </Button>
           </a>
