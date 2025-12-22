@@ -88,9 +88,11 @@ export const FounderSection = () => {
             <div className="bg-surface rounded-2xl p-8 md:p-12">
               <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
                 <img
-                  src="https://violin.pp.ua/assets/img/chee-yun-s.jpg"
+                  src="/images/founder.jpg"
                   alt="Arsen Kovalenko"
                   className="w-48 h-48 rounded-full object-cover border-4 border-primary"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <h3 className="font-display text-3xl font-bold mb-3 text-foreground">
