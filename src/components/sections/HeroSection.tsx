@@ -9,10 +9,11 @@ export const HeroSection = () => {
       {/* Background Image */}
       <div className="absolute inset-0" aria-hidden="true">
         <img
-          src="https://violin.pp.ua/assets/img/hero-large-blur3.jpg"
-          alt=""
+          src="/images/hero.jpg"
+          alt="Sonate Solidaire — intégration culturelle par la musique"
           className="w-full h-full object-cover"
           loading="eager"
+          decoding="async"
         />
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
@@ -46,10 +47,11 @@ export const HeroSection = () => {
         </div>
 
         <img
-          src="https://violin.pp.ua/assets/img/logo-sonate.png"
+          src="/images/logo-sonate.png"
           alt="Logo Sonate Solidaire"
           className="hidden md:inline-block h-48 rounded-full opacity-90 shadow-lg shadow-primary/30 animate-fade-in-up animation-delay-300"
           loading="eager"
+          decoding="async"
         />
       </div>
 

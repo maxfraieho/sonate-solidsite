@@ -29,9 +29,11 @@ export const MissionSection = () => {
             {/* Image glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <img
-              src="https://violin.pp.ua/assets/img/chee-yun-s.jpg"
+              src="/images/founder.jpg"
               className="relative w-full rounded-2xl shadow-2xl shadow-primary/20 border border-primary/10"
               alt="Mission Sonate Solidaire"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div>
