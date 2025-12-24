@@ -1,1 +1,5 @@
+# 301 redirect from secondary domain to primary (SEO)
+https://solidare.dpdns.org/* https://violin.pp.ua/:splat 301!
+
+# SPA fallback for client-side routing
 /*    /index.html   200
