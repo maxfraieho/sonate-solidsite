@@ -35,3 +35,12 @@ docs/changelogs/
 sessions/
 .project_promts/
 CLAUDE.md
+
+# Lovable.dev communication (keep protocol, ignore temp files)
+.lovable/prompts/pending/*
+.lovable/prompts/sent/*
+.lovable/changes/incoming/*
+.lovable/changes/reviewed/*
+!.lovable/prompts/TEMPLATE.md
+!.lovable/protocol.md
+!.lovable/metrics.md
