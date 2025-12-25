@@ -23,6 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code directories (local only)
+# Claude Code infrastructure (local development only, NOT for production)
 .claude/
 .claude_session/
+
+# Development workflow directories (Claude + Lovable coordination)
+prompts/
+docs/decisions/
+docs/code-reviews/
+docs/changelogs/
+sessions/
+.project_promts/
+CLAUDE.md
