@@ -2,7 +2,15 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**URL**: https://lovable.dev/projects/d6dcf711-7dfc-4807-8fbe-9a985d54c8d9
+
+**Repository**: https://github.com/maxfraieho/sonate-solidsite
+
+## Sonate Solidaire Project
+
+This is the Sonate Solidaire (Violin.pp.ua) project - a multilingual charitable organization website supporting Ukrainian refugees through music and cultural integration.
+
+**Tech Stack**: React 18 + Vite + TypeScript + Supabase + Tailwind CSS + shadcn/ui
 
 ## How can I edit this code?
 
