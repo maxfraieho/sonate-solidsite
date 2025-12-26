@@ -1,0 +1,249 @@
+#!/usr/bin/env node
+/**
+ * Lovable.dev Automation Script
+ *
+ * Connects to existing Chrome instance (port 9222) and automates:
+ * 1. Login to Lovable.dev
+ * 2. Navigate to project
+ * 3. Submit prompt from file
+ *
+ * Usage: node .lovable/automate-lovable.js <prompt-file>
+ */
+
+const puppeteer = require('puppeteer-core');
+const fs = require('fs');
+const path = require('path');
+
+// Configuration
+const CHROME_WS_ENDPOINT = 'http://localhost:9222';
+const LOVABLE_EMAIL = 'petrohrlavko@gmail.com';
+const LOVABLE_PASSWORD = 'Agni805235io..';
+const PROJECT_URL = 'https://lovable.dev/projects/d6dcf711-7dfc-4807-8fbe-9a985d54c8d9';
+
+async function main() {
+  const promptFile = process.argv[2];
+
+  if (!promptFile) {
+    console.error('Usage: node automate-lovable.js <prompt-file>');
+    console.error('Example: node automate-lovable.js .lovable/prompts/pending/2025-12-25-1825-test-workflow-hello.md');
+    process.exit(1);
+  }
+
+  // Read prompt content
+  const promptPath = path.resolve(promptFile);
+  if (!fs.existsSync(promptPath)) {
+    console.error(`Error: Prompt file not found: ${promptPath}`);
+    process.exit(1);
+  }
+
+  const promptContent = fs.readFileSync(promptPath, 'utf-8');
+  console.log(`📄 Read prompt: ${path.basename(promptFile)} (${promptContent.length} chars)`);
+
+  let browser, page;
+
+  try {
+    // Connect to existing Chrome instance
+    console.log('🔌 Connecting to Chrome on port 9222...');
+    const response = await fetch(`${CHROME_WS_ENDPOINT}/json/version`);
+    const versionInfo = await response.json();
+    const wsEndpoint = versionInfo.webSocketDebuggerUrl;
+
+    browser = await puppeteer.connect({
+      browserWSEndpoint: wsEndpoint,
+      defaultViewport: null
+    });
+
+    console.log(`✅ Connected to Chrome ${versionInfo.Browser}`);
+
+    // Get existing pages or create new one
+    const pages = await browser.pages();
+    page = pages.find(p => p.url().includes('lovable.dev')) || await browser.newPage();
+
+    console.log('🌐 Navigating to Lovable.dev...');
+
+    // Navigate to Lovable homepage (use domcontentloaded - lovable.dev has persistent connections)
+    await page.goto('https://lovable.dev', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for React to hydrate
+
+    // Check if already logged in by trying to access project
+    console.log('🔍 Checking login status...');
+    await page.goto(PROJECT_URL, { waitUntil: 'domcontentloaded', timeout: 15000 });
+
+    const currentUrl = page.url();
+    if (currentUrl.includes('/projects/')) {
+      console.log('✅ Already logged in, proceeding to project');
+    } else {
+      // Need to login - go back to homepage
+      console.log('🔑 Logging in via email...');
+      await page.goto('https://lovable.dev', { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await new Promise(resolve => setTimeout(resolve, 3000);
+
+      // Click "Log in" button in top right (based on screenshot)
+      console.log('📍 Clicking "Log in" button...');
+      await page.waitForSelector('button:has-text("Log in"), a:has-text("Log in")', { timeout: 10000 });
+      await page.click('button:has-text("Log in"), a:has-text("Log in")');
+
+      // Wait for auth modal to appear
+      console.log('⏳ Waiting for auth modal...');
+      await new Promise(resolve => setTimeout(resolve, 2000);
+
+      // Click "Continue with Email" option
+      console.log('📧 Selecting email authentication...');
+      await page.waitForSelector('button:has-text("Email"), button:has-text("Continue with Email")', { timeout: 10000 });
+      await page.click('button:has-text("Email"), button:has-text("Continue with Email")');
+
+      // Wait for email input modal
+      await new Promise(resolve => setTimeout(resolve, 1000);
+
+      // Enter email
+      console.log('✍️  Entering email...');
+      await page.waitForSelector('input[type="email"]', { timeout: 10000 });
+      await page.type('input[type="email"]', LOVABLE_EMAIL);
+
+      // Click continue/next button
+      await page.click('button[type="submit"], button:has-text("Continue")');
+
+      // Wait for password input
+      console.log('🔐 Entering password...');
+      await page.waitForSelector('input[type="password"]', { timeout: 10000 });
+      await page.type('input[type="password"]', LOVABLE_PASSWORD);
+
+      // Submit login
+      await page.click('button[type="submit"], button:has-text("Sign in"), button:has-text("Log in")');
+
+      // Wait for redirect to project or dashboard
+      console.log('⏳ Waiting for authentication...');
+      await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 30000 });
+
+      console.log('✅ Logged in successfully');
+
+      // Navigate to project
+      console.log(`📁 Navigating to project...`);
+      await page.goto(PROJECT_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await new Promise(resolve => setTimeout(resolve, 3000);
+    }
+
+    // Wait for project to load
+    await new Promise(resolve => setTimeout(resolve, 2000);
+
+    // Find prompt input area (this will vary based on Lovable UI)
+    console.log('🔍 Looking for prompt input area...');
+
+    // Try common selectors for textarea/input
+    const promptSelectors = [
+      'textarea[placeholder*="prompt"]',
+      'textarea[placeholder*="describe"]',
+      'textarea[placeholder*="Tell"]',
+      'div[contenteditable="true"]',
+      'textarea.prompt-input',
+      'textarea'
+    ];
+
+    let promptInput = null;
+    for (const selector of promptSelectors) {
+      try {
+        promptInput = await page.$(selector);
+        if (promptInput) {
+          console.log(`✅ Found prompt input: ${selector}`);
+          break;
+        }
+      } catch (e) {
+        // Continue to next selector
+      }
+    }
+
+    if (!promptInput) {
+      console.error('❌ Could not find prompt input area');
+      console.log('💡 Available textareas:');
+      const textareas = await page.$$('textarea');
+      console.log(`   Found ${textareas.length} textarea elements`);
+
+      // Screenshot for debugging
+      await page.screenshot({ path: '/tmp/lovable-debug.png', fullPage: true });
+      console.log('📸 Screenshot saved to /tmp/lovable-debug.png');
+
+      throw new Error('Prompt input not found');
+    }
+
+    // Click and paste prompt
+    console.log('📋 Pasting prompt content...');
+    await promptInput.click();
+    await promptInput.type(promptContent, { delay: 10 }); // Slower typing to avoid issues
+
+    console.log('✅ Prompt pasted successfully');
+
+    // Find and click submit button
+    console.log('🔍 Looking for submit button...');
+    const submitSelectors = [
+      'button:has-text("Generate")',
+      'button:has-text("Submit")',
+      'button:has-text("Send")',
+      'button[type="submit"]',
+      'button.submit-btn'
+    ];
+
+    let submitButton = null;
+    for (const selector of submitSelectors) {
+      try {
+        submitButton = await page.$(selector);
+        if (submitButton) {
+          console.log(`✅ Found submit button: ${selector}`);
+          break;
+        }
+      } catch (e) {
+        // Continue
+      }
+    }
+
+    if (!submitButton) {
+      console.warn('⚠️  Submit button not found automatically');
+      console.log('💡 Manual intervention may be needed');
+
+      // Wait for user to manually submit
+      console.log('⏳ Waiting 30 seconds for manual submission...');
+      await new Promise(resolve => setTimeout(resolve, 30000);
+    } else {
+      console.log('🚀 Submitting prompt...');
+      await submitButton.click();
+
+      // Wait for submission to process
+      await new Promise(resolve => setTimeout(resolve, 3000);
+
+      console.log('✅ Prompt submitted!');
+    }
+
+    // Monitor generation status
+    console.log('⏳ Monitoring generation (30 seconds)...');
+    await new Promise(resolve => setTimeout(resolve, 30000);
+
+    console.log('✅ Automation complete!');
+    console.log('\n📊 Next steps:');
+    console.log('1. Check Lovable.dev for generated code');
+    console.log('2. Push changes from Lovable to GitHub');
+    console.log('3. Run: git pull origin main');
+    console.log('4. Claude will review the changes');
+
+  } catch (error) {
+    console.error('❌ Error:', error.message);
+
+    if (page) {
+      // Save screenshot for debugging
+      try {
+        await page.screenshot({ path: '/tmp/lovable-error.png', fullPage: true });
+        console.log('📸 Error screenshot saved to /tmp/lovable-error.png');
+      } catch (e) {
+        // Ignore screenshot errors
+      }
+    }
+
+    process.exit(1);
+  } finally {
+    if (browser) {
+      // Don't close browser, just disconnect
+      await browser.disconnect();
+      console.log('👋 Disconnected from Chrome');
+    }
+  }
+}
+
+main().catch(console.error);

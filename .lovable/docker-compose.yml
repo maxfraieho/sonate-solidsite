@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  chrome-lovable:
+    build:
+      context: .
+      dockerfile: Dockerfile.chrome-light
+    container_name: chrome-lovable-light
+    ports:
+      - "9222:9222"
+    environment:
+      - DISPLAY=:99
+    shm_size: '256mb'  # Minimal shared memory for Chrome
+    mem_limit: 256m     # Hard limit: 256MB RAM
+    memswap_limit: 256m # No swap usage
+    cpus: '1.0'         # Max 1 CPU core
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9222/json/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - lovable-automation
+
+networks:
+  lovable-automation:
+    driver: bridge
+
+# Usage:
+#   Build: docker-compose -f .lovable/docker-compose.yml build
+#   Start: docker-compose -f .lovable/docker-compose.yml up -d
+#   Stop:  docker-compose -f .lovable/docker-compose.yml down
+#   Logs:  docker-compose -f .lovable/docker-compose.yml logs -f chrome-lovable
+#
+# Expected resources:
+#   - RAM: 100-150MB (hard limit 256MB)
+#   - CPU: 50-80% of 1 core during automation
+#   - Startup: 2-3 seconds
