@@ -37,8 +37,8 @@ export const SupportSection = () => {
       {/* Backward-compatible anchor for old links */}
       <div id="don" className="absolute -top-20" aria-hidden="true" />
       
-      {/* Decorative background */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Decorative background - hidden on mobile to prevent overflow */}
+      <div className="absolute inset-0 opacity-5 hidden md:block overflow-hidden">
         <div className="absolute top-20 left-20 w-64 h-64 border border-primary rounded-full" />
         <div className="absolute bottom-20 right-20 w-48 h-48 border border-primary rounded-full" />
       </div>
