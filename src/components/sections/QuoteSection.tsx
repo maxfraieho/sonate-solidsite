@@ -4,7 +4,7 @@ export const QuoteSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-surface relative overflow-hidden">
+    <section id="manifeste" className="py-20 bg-surface relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 w-32 h-32 border border-primary rounded-full" />
