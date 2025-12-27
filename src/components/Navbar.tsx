@@ -15,8 +15,8 @@ export const Navbar = () => {
     { key: 'mission', href: '/integration', isRoute: true, path: '/integration' },
     { key: 'actions', href: '/#actions', path: '/' },
     { key: 'ensemble', href: '/#ensemble', path: '/' },
-    { key: 'solidarity', href: '/support', isRoute: true, path: '/support' },
     { key: 'portfolio', href: '/#portfolio', path: '/' },
+    { key: 'solidarity', href: '/support', isRoute: true, path: '/support' },
     { key: 'contact', href: '/contact', isRoute: true, path: '/contact' },
   ];
 
