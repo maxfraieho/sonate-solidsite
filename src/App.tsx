@@ -10,6 +10,7 @@ import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 
 // Lazy load route components
@@ -29,6 +30,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollProgressBar />
           <StructuredData />
           <AnalyticsProvider />
           <ScrollToHash />
