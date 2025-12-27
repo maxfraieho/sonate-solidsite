@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,12 +8,16 @@ import { HelmetProvider } from "react-helmet-async";
 import { StructuredData } from "@/components/StructuredData";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { ScrollToHash } from "@/components/ScrollToHash";
-import Index from "./pages/Index";
-import Contact from "./pages/Contact";
-import IntegrationPath from "./pages/IntegrationPath";
-import Privacy from "./pages/Privacy";
-import Support from "./pages/Support";
-import NotFound from "./pages/NotFound";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+
+// Lazy load route components
+const Index = lazy(() => import("./pages/Index"));
+const Contact = lazy(() => import("./pages/Contact"));
+const IntegrationPath = lazy(() => import("./pages/IntegrationPath"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Support = lazy(() => import("./pages/Support"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -26,16 +31,20 @@ const App = () => (
           <StructuredData />
           <AnalyticsProvider />
           <ScrollToHash />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/integration" element={<IntegrationPath />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/donate" element={<Navigate to="/#soutenir" replace />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/integration" element={<IntegrationPath />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/donate" element={<Navigate to="/#soutenir" replace />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

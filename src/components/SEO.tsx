@@ -74,12 +74,6 @@ const seoContent = {
 
 type PageKey = 'home' | 'contact' | 'integration';
 
-// Hreflang mapping for Swiss regional targeting
-const hreflangMap = {
-  de: 'de-CH',
-  fr: 'fr-CH', 
-  uk: 'uk',
-} as const;
 
 export const SEO = ({ 
   title, 

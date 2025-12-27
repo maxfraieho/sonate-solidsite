@@ -3,7 +3,7 @@ import { AudioPlayer } from '@/components/AudioPlayer';
 import { PhotoGallery } from '@/components/PhotoGallery';
 
 export const PortfolioSection = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   

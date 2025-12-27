@@ -390,5 +390,12 @@
     "form_aria_label": "Kontaktformular",
     "consent_label": "Ich stimme der Verarbeitung meiner Daten zu",
     "consent_help": "Daten werden nur zur Beantwortung Ihrer Anfrage verwendet."
+  },
+  "errors": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein Fehler ist aufgetreten. Bitte laden Sie die Seite neu.",
+    "refresh": "Seite neu laden",
+    "mapUnavailable": "Karte nicht verfügbar",
+    "audioUnavailable": "Audioplayer nicht verfügbar"
   }
 }
