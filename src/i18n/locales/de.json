@@ -4,6 +4,7 @@
     "mission": "Mission",
     "actions": "Aktionen",
     "ensemble": "Ensemble",
+    "solidarity": "Solidarität",
     "founder": "Gründer",
     "portfolio": "Portfolio",
     "transparence": "Transparenz",
@@ -357,6 +358,24 @@
     "next": {
       "title": "Wie geht es weiter?",
       "body": "Wir lesen die Nachrichten, stärken unser Partnernetzwerk in der Schweiz und veröffentlichen offizielle Kanäle (IBAN/TWINT) nach Kontoeröffnung."
+    }
+  },
+  "solidarity": {
+    "hero": {
+      "title": "Solidarität",
+      "subtitle": "Ihre Unterstützung steht im Mittelpunkt des Projekts Sonate Solidaire. Teilen Sie Ihre Ermutigung, schlagen Sie eine Zusammenarbeit vor oder werden Sie Partner unserer musikalischen und humanitären Mission.",
+      "welcome": "Sie kommen von unserem Solidaritätsaufruf — willkommen unter unseren Unterstützern!"
+    },
+    "transparency": {
+      "title": "Transparenz",
+      "desc": "Die offiziellen Spendenkanäle (IBAN/TWINT) werden nach der Kontoeröffnung veröffentlicht."
+    },
+    "form": {
+      "thanks": "Danke für Ihr Engagement. Jede Nachricht zählt, um das Projekt lebendig zu halten."
+    },
+    "footer": {
+      "title": "Wie geht es weiter?",
+      "body": "Wir verbinden Ihre Nachrichten und Testimonials zu einem Partnernetzwerk. Gemeinsam lassen wir die Solidarität durch Musik erklingen."
     }
   }
 }

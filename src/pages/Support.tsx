@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, MessageSquare, Calendar, Handshake, ChevronDown, ChevronUp, Shield } from 'lucide-react';
+import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/button';
@@ -155,21 +155,27 @@ const Support = () => {
     <>
       <SEO 
         path="/support"
-        title={`${t('support.hero.title')} | Sonate Solidaire`}
-        description={t('support.hero.subtitle')}
+        title={`${t('solidarity.hero.title')} | Sonate Solidaire`}
+        description={t('solidarity.hero.subtitle')}
       />
       <div className="min-h-screen bg-background">
         <Navbar />
         
         <main className="pt-20">
           {/* Hero Section */}
-          <section className="relative py-16 md:py-24 bg-gradient-to-b from-surface via-background to-background">
+          <section 
+            id="solidarite-hero"
+            className="relative py-16 md:py-24 bg-surface-dark shadow-[0_0_30px_hsl(var(--primary)/0.15)] animate-fade-in"
+          >
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6">
-                {t('support.hero.title')}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary mb-6">
+                {t('solidarity.hero.title')}
               </h1>
-              <p className="text-lg md:text-xl text-subtext max-w-3xl mx-auto mb-8">
-                {t('support.hero.subtitle')}
+              <p className="text-lg md:text-xl text-subtext max-w-3xl mx-auto mb-4">
+                {t('solidarity.hero.subtitle')}
+              </p>
+              <p className="text-subtext italic mb-8">
+                {t('solidarity.hero.welcome')}
               </p>
               
               <ul className="text-left max-w-2xl mx-auto space-y-3 mb-10">
@@ -199,33 +205,27 @@ const Support = () => {
           </section>
 
           {/* Trust/Transparency Block */}
-          <section className="py-8 bg-surface/50 border-y border-primary/10">
-            <div className="max-w-4xl mx-auto px-4 text-center">
-              <div className="flex items-center justify-center gap-3 mb-3">
-                <Shield className="h-6 w-6 text-primary" />
-                <h2 className="text-xl font-display font-bold text-foreground">{t('support.trust.title')}</h2>
-              </div>
-              <p className="text-subtext">{t('support.trust.body')}</p>
-            </div>
-          </section>
+          <div className="my-10 p-6 rounded-lg border border-primary/20 bg-surface text-center max-w-3xl mx-auto">
+            <ShieldCheck className="mx-auto w-6 h-6 text-primary mb-2" />
+            <h3 className="text-lg font-display text-primary">{t('solidarity.transparency.title')}</h3>
+            <p className="text-subtext mt-2">{t('solidarity.transparency.desc')}</p>
+          </div>
 
           {/* How You Can Help Cards */}
           <section className="py-16 bg-background">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 {(['individual', 'organization', 'church'] as const).map((type) => {
                   const Icon = type === 'individual' ? Users : type === 'organization' ? Building2 : Church;
                   return (
                     <div 
                       key={type}
-                      className="bg-surface border border-primary/20 rounded-2xl p-8 text-center hover:border-primary/40 transition-colors"
+                      className="rounded-lg bg-surface p-6 text-center border border-border hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)] transition-shadow"
                     >
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Icon className="h-8 w-8 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-display font-bold text-foreground mb-3">
+                      <Icon className="mx-auto w-8 h-8 text-primary mb-3" />
+                      <h4 className="font-display text-lg text-foreground mb-1">
                         {t(`support.cards.${type}.title`)}
-                      </h3>
+                      </h4>
                       <p className="text-subtext text-sm">
                         {t(`support.cards.${type}.body`)}
                       </p>
@@ -241,15 +241,24 @@ const Support = () => {
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <Tabs value={supporterType} onValueChange={(v) => setSupporterType(v as SupporterType)} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 mb-8">
-                  <TabsTrigger value="individual" className="gap-2">
+                  <TabsTrigger 
+                    value="individual" 
+                    className="gap-2 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary transition-all"
+                  >
                     <Users className="h-4 w-4 hidden sm:block" />
                     {t('support.tabs.individual')}
                   </TabsTrigger>
-                  <TabsTrigger value="organization" className="gap-2">
+                  <TabsTrigger 
+                    value="organization" 
+                    className="gap-2 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary transition-all"
+                  >
                     <Building2 className="h-4 w-4 hidden sm:block" />
                     {t('support.tabs.organization')}
                   </TabsTrigger>
-                  <TabsTrigger value="church" className="gap-2">
+                  <TabsTrigger 
+                    value="church" 
+                    className="gap-2 data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary transition-all"
+                  >
                     <Church className="h-4 w-4 hidden sm:block" />
                     {t('support.tabs.church')}
                   </TabsTrigger>
@@ -257,7 +266,7 @@ const Support = () => {
 
                 {(['individual', 'organization', 'church'] as const).map((type) => (
                   <TabsContent key={type} value={type}>
-                    <div className="bg-surface border border-primary/20 rounded-2xl p-6 md:p-8">
+                    <div className="bg-surface-dark p-8 rounded-xl shadow-[0_0_25px_hsl(var(--primary)/0.1)] transition-all duration-300">
                       <h2 className="text-2xl font-display font-bold text-foreground mb-6">
                         {t(`support.form.${type}.title`)}
                       </h2>
@@ -490,11 +499,19 @@ const Support = () => {
                         <Button 
                           type="submit" 
                           disabled={isSubmitting}
-                          className="w-full bg-primary text-primary-foreground hover:bg-primary-hover py-4 text-lg cta-glow"
+                          className="w-full bg-primary text-primary-foreground relative overflow-hidden group py-4 text-lg"
                         >
-                          <Heart className="mr-2 h-5 w-5" />
-                          {isSubmitting ? t('support.form.sending') : t('support.form.submit')}
+                          <span className="relative z-10 flex items-center justify-center gap-2">
+                            <Heart className="h-5 w-5" />
+                            {isSubmitting ? t('support.form.sending') : t('support.form.submit')}
+                          </span>
+                          <span className="absolute inset-0 bg-gradient-to-r from-yellow-400/0 via-yellow-400/20 to-yellow-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
                         </Button>
+
+                        {/* Gratitude note */}
+                        <p className="text-center text-subtext text-sm mt-3">
+                          {t('solidarity.form.thanks')}
+                        </p>
                       </form>
                     </div>
                   </TabsContent>
@@ -502,6 +519,9 @@ const Support = () => {
               </Tabs>
             </div>
           </section>
+
+          {/* Golden divider before FAQ */}
+          <div className="w-24 h-0.5 bg-primary/40 mx-auto my-10"></div>
 
           {/* FAQ Section */}
           <section className="py-16 bg-background">
@@ -517,14 +537,12 @@ const Support = () => {
                   >
                     <button
                       onClick={() => setExpandedFaq(expandedFaq === n ? null : n)}
-                      className="w-full flex items-center justify-between p-5 text-left"
+                      className="w-full flex items-center justify-between p-5 text-left font-display text-foreground hover:text-primary transition-colors"
                     >
-                      <span className="font-medium text-foreground">{t(`support.faq.q${n}`)}</span>
-                      {expandedFaq === n ? (
-                        <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-subtext flex-shrink-0" />
-                      )}
+                      <span className="flex items-center gap-2">
+                        <ChevronDown className={`w-4 h-4 text-primary transition-transform ${expandedFaq === n ? 'rotate-180' : ''}`} />
+                        {t(`support.faq.q${n}`)}
+                      </span>
                     </button>
                     {expandedFaq === n && (
                       <div className="px-5 pb-5 text-subtext">
@@ -537,17 +555,15 @@ const Support = () => {
             </div>
           </section>
 
-          {/* Next Steps */}
-          <section className="py-16 bg-surface/30 border-t border-primary/10">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-2xl font-display font-bold text-foreground mb-4">
-                {t('support.next.title')}
-              </h2>
-              <p className="text-subtext">
-                {t('support.next.body')}
-              </p>
-            </div>
+          {/* Next Steps / Et ensuite? */}
+          <section className="text-center mt-16 py-10 mx-4 bg-surface-dark shadow-[0_0_30px_hsl(var(--primary)/0.1)] rounded-lg animate-fade-in">
+            <h3 className="font-display text-primary text-2xl mb-3">{t('solidarity.footer.title')}</h3>
+            <p className="text-subtext max-w-2xl mx-auto leading-relaxed px-4">
+              {t('solidarity.footer.body')}
+            </p>
           </section>
+
+          <div className="py-8"></div>
         </main>
 
         <Footer />
