@@ -10,6 +10,7 @@ import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { ScrollToTopButton } from "@/components/ScrollToTopButton";
 
 // Lazy load route components
 const Index = lazy(() => import("./pages/Index"));
@@ -31,6 +32,7 @@ const App = () => (
           <StructuredData />
           <AnalyticsProvider />
           <ScrollToHash />
+          <ScrollToTopButton />
           <ErrorBoundary>
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
