@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ChevronUp, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ShieldCheck } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/button';

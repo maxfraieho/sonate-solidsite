@@ -390,5 +390,12 @@
     "form_aria_label": "Formulaire de contact",
     "consent_label": "J'accepte le traitement de mes données",
     "consent_help": "Les données sont utilisées uniquement pour répondre à votre demande."
+  },
+  "errors": {
+    "title": "Une erreur s'est produite",
+    "description": "Quelque chose s'est mal passé. Veuillez rafraîchir la page.",
+    "refresh": "Rafraîchir la page",
+    "mapUnavailable": "Carte indisponible",
+    "audioUnavailable": "Lecteur audio indisponible"
   }
 }
