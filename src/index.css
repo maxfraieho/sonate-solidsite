@@ -274,3 +274,25 @@
     transform: none;
   }
 }
+
+/* === Scroll-triggered reveal effect === */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.6, 0.4, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion for reveal */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-hidden,
+  .reveal-visible {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
