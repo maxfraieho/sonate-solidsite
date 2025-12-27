@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { User, ChevronDown, ChevronUp, Download, Music } from 'lucide-react';
+import { User, ChevronDown, ChevronUp, FileDown, Music, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export const EnsembleSection = () => {
   const { t, i18n } = useTranslation();
@@ -14,10 +15,17 @@ export const EnsembleSection = () => {
     name: '',
     email: '',
     instrument: '',
+    role: '',
     message: '',
     consent: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const roleOptions = {
+    fr: ['Musicien', 'Enseignant', "Chef d'orchestre", 'Autre'],
+    de: ['Musiker', 'Lehrer', 'Dirigent', 'Andere'],
+    uk: ['Музикант', 'Викладач', 'Диригент', 'Інше']
+  };
 
   const handleMusicianSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,13 +46,14 @@ export const EnsembleSection = () => {
           contactName: musicianForm.name,
           contactEmail: musicianForm.email,
           instrument: musicianForm.instrument,
+          role: musicianForm.role,
           message: musicianForm.message
         }),
       });
 
       if (response.ok) {
         toast.success(t('ensemble.form.success'));
-        setMusicianForm({ name: '', email: '', instrument: '', message: '', consent: false });
+        setMusicianForm({ name: '', email: '', instrument: '', role: '', message: '', consent: false });
       } else {
         throw new Error('Failed to send');
       }
@@ -57,7 +66,10 @@ export const EnsembleSection = () => {
   };
 
   return (
-    <section className="py-20 bg-background" id="ensemble">
+    <section 
+      className="py-20 bg-surface-dark relative shadow-[0_0_25px_hsl(var(--primary)/0.15)]" 
+      id="ensemble"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -70,12 +82,12 @@ export const EnsembleSection = () => {
         </div>
 
         {/* Founder Profile Card with Accordion */}
-        <div className="bg-surface rounded-2xl p-8 md:p-12 mb-12">
+        <div className="bg-surface rounded-2xl p-8 md:p-12 mb-8 border border-primary/10">
           <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
             <img
               src="/images/founder.jpg"
               alt="Arsen Kovalenko"
-              className="w-48 h-48 rounded-full object-cover border-4 border-primary"
+              className="w-48 h-48 rounded-full object-cover border-4 border-primary shadow-lg shadow-primary/20"
               loading="lazy"
               decoding="async"
             />
@@ -120,21 +132,30 @@ export const EnsembleSection = () => {
             {bioExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </button>
 
-          {/* CV Download - Single Button */}
+          {/* CV Download - Single Button with FileDown icon */}
           <div className="mt-8 pt-6 border-t border-primary/20">
             <a
               href="/cv/CV_Arsen_Kovalenko_FR.pdf"
               download="CV_Arsen_Kovalenko_FR.pdf"
               className="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1"
             >
-              <Download className="h-5 w-5" />
+              <FileDown className="h-5 w-5" />
               <span>{t('ensemble.cv_download')}</span>
             </a>
           </div>
         </div>
 
+        {/* Decorative Separator with Quote */}
+        <div className="flex flex-col items-center justify-center my-10">
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mb-6" />
+          <p className="text-primary/80 italic text-lg font-display text-center max-w-xl">
+            {t('ensemble.quote')}
+          </p>
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mt-6" />
+        </div>
+
         {/* Invitation Block */}
-        <div className="bg-surface rounded-2xl p-8 md:p-12 animate-fade-in">
+        <div className="bg-surface/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 animate-fade-in border border-primary/10">
           <div className="flex items-center justify-center gap-3 mb-6">
             <Music className="h-8 w-8 text-primary" />
             <h3 className="font-display text-3xl font-bold text-foreground">
@@ -146,8 +167,12 @@ export const EnsembleSection = () => {
             {t('ensemble.invite_text')}
           </p>
 
-          {/* Join Form */}
-          <form onSubmit={handleMusicianSubmit} className="max-w-2xl mx-auto space-y-6">
+          {/* Join Form with enhanced styling */}
+          <form 
+            onSubmit={handleMusicianSubmit} 
+            id="join-form"
+            className="max-w-2xl mx-auto space-y-6 bg-background/50 rounded-xl p-6 md:p-8 border border-primary/20"
+          >
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-subtext mb-2 font-medium">
@@ -177,18 +202,40 @@ export const EnsembleSection = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block text-subtext mb-2 font-medium">
-                {t('ensemble.form.instrument')}
-              </label>
-              <Input
-                type="text"
-                required
-                value={musicianForm.instrument}
-                onChange={(e) => setMusicianForm({ ...musicianForm, instrument: e.target.value })}
-                className="bg-background border-primary/30 focus:border-primary"
-                placeholder={t('ensemble.form.instrument_placeholder')}
-              />
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-subtext mb-2 font-medium">
+                  {t('ensemble.form.instrument')}
+                </label>
+                <Input
+                  type="text"
+                  required
+                  value={musicianForm.instrument}
+                  onChange={(e) => setMusicianForm({ ...musicianForm, instrument: e.target.value })}
+                  className="bg-background border-primary/30 focus:border-primary"
+                  placeholder={t('ensemble.form.instrument_placeholder')}
+                />
+              </div>
+              <div>
+                <label className="block text-subtext mb-2 font-medium">
+                  {t('ensemble.form.role')}
+                </label>
+                <Select 
+                  value={musicianForm.role} 
+                  onValueChange={(value) => setMusicianForm({ ...musicianForm, role: value })}
+                >
+                  <SelectTrigger className="bg-background border-primary/30 focus:border-primary">
+                    <SelectValue placeholder={t('ensemble.form.role_placeholder')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roleOptions[lang].map((role, index) => (
+                      <SelectItem key={index} value={role}>
+                        {role}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             <div>
@@ -222,12 +269,32 @@ export const EnsembleSection = () => {
                 type="submit" 
                 size="lg" 
                 disabled={isSubmitting} 
-                className="bg-primary text-primary-foreground hover:bg-primary-hover px-10"
+                className="bg-primary text-primary-foreground hover:bg-primary-hover px-10 transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 cta-glow"
               >
                 {isSubmitting ? '...' : t('ensemble.form.submit')}
               </Button>
             </div>
           </form>
+
+          {/* Post-form info paragraph */}
+          <p className="text-center text-subtext/80 text-sm mt-8 max-w-xl mx-auto italic">
+            {t('ensemble.form.post_submit_info')}
+          </p>
+        </div>
+
+        {/* Transition to Music Section */}
+        <div className="text-center mt-16 mb-8">
+          <div className="flex items-center justify-center mb-6">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+            <Headphones className="mx-4 h-8 w-8 text-primary" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+          </div>
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-primary mb-3">
+            {t('ensemble.music_transition_title')}
+          </h3>
+          <p className="text-subtext text-lg max-w-xl mx-auto">
+            {t('ensemble.music_transition_desc')}
+          </p>
         </div>
       </div>
     </section>
