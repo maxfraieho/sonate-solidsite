@@ -4,7 +4,7 @@ import { QuoteSection } from '@/components/sections/QuoteSection';
 import { MissionSection } from '@/components/sections/MissionSection';
 import { ApproachSection } from '@/components/sections/ApproachSection';
 import { ActionsSection } from '@/components/sections/ActionsSection';
-import { FounderSection } from '@/components/sections/FounderSection';
+import { EnsembleSection } from '@/components/sections/EnsembleSection';
 import { PortfolioSection } from '@/components/sections/PortfolioSection';
 import { SupportSection } from '@/components/sections/SupportSection';
 import { Footer } from '@/components/sections/Footer';
@@ -22,7 +22,7 @@ const Index = () => {
           <MissionSection />
           <ApproachSection />
           <ActionsSection />
-          <FounderSection />
+          <EnsembleSection />
           <PortfolioSection />
           <SupportSection />
         </main>

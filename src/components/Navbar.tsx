@@ -13,7 +13,7 @@ export const Navbar = () => {
     { key: 'home', href: '/#home' },
     { key: 'mission', href: '/integration', isRoute: true },
     { key: 'actions', href: '/#actions' },
-    { key: 'founder', href: '/#fondateur' },
+    { key: 'ensemble', href: '/#ensemble' },
     { key: 'portfolio', href: '/#portfolio' },
     { key: 'contact', href: '/contact', isRoute: true },
   ];

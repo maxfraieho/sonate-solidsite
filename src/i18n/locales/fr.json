@@ -3,6 +3,7 @@
     "home": "Accueil",
     "mission": "Mission",
     "actions": "Actions",
+    "ensemble": "Ensemble",
     "founder": "Fondateur",
     "portfolio": "Portfolio",
     "transparence": "Transparence",
@@ -167,6 +168,30 @@
     "message_placeholder": "Parlez-nous de votre parcours musical et de votre motivation...",
     "consent": "J'accepte que mes données soient traitées pour répondre à ma demande.",
     "submit": "Envoyer ma candidature"
+  },
+  "ensemble": {
+    "title": "Rejoindre Sonate Solidaire",
+    "subtitle": "Participez à une aventure humaine et musicale unique – un projet d'intégration par la musique.",
+    "founder_role": "Violoniste et coordinateur du projet",
+    "founder_bio_short": "Arsen Kovalenko – Violoniste et coordinateur du projet. Fondateur de Sonate Solidaire, il allie passion musicale et engagement humanitaire.",
+    "cv_download": "Télécharger le CV (PDF)",
+    "invite_title": "Rejoignez le projet",
+    "invite_text": "Vous êtes musicien, chef d'orchestre ou enseignant ? Rejoignez notre ensemble humanitaire et participez à des concerts solidaires, des ateliers interculturels et des projets éducatifs favorisant la solidarité par la musique.",
+    "form": {
+      "name": "Nom complet",
+      "name_placeholder": "Votre nom",
+      "email": "Email",
+      "email_placeholder": "votre@email.com",
+      "instrument": "Instrument / Rôle",
+      "instrument_placeholder": "Violon, piano, chef d'orchestre...",
+      "message": "Message (optionnel)",
+      "message_placeholder": "Parlez-nous de votre parcours musical et de votre motivation...",
+      "consent": "J'accepte que mes données soient traitées pour répondre à ma demande.",
+      "consent_error": "Veuillez accepter le traitement des données.",
+      "submit": "Rejoindre le projet",
+      "success": "Merci ! Nous vous contacterons très prochainement.",
+      "error": "Erreur d'envoi. Veuillez réessayer."
+    }
   },
   "portfolio": {
     "title": "Portfolio Musical",

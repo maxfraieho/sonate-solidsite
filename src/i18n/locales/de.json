@@ -3,6 +3,7 @@
     "home": "Startseite",
     "mission": "Mission",
     "actions": "Aktionen",
+    "ensemble": "Ensemble",
     "founder": "Gründer",
     "portfolio": "Portfolio",
     "transparence": "Transparenz",
@@ -167,6 +168,30 @@
     "message_placeholder": "Erzählen Sie uns von Ihrem musikalischen Werdegang und Ihrer Motivation...",
     "consent": "Ich stimme der Verarbeitung meiner Daten zu, um auf meine Anfrage zu antworten.",
     "submit": "Bewerbung senden"
+  },
+  "ensemble": {
+    "title": "Mitmachen bei Sonate Solidaire",
+    "subtitle": "Werde Teil eines einzigartigen humanitären Musikprojekts für kulturelle Integration.",
+    "founder_role": "Geiger und Projektkoordinator",
+    "founder_bio_short": "Arsen Kovalenko – Geiger und Projektkoordinator. Gründer von Sonate Solidaire, verbindet er musikalische Leidenschaft mit humanitärem Engagement.",
+    "cv_download": "Lebenslauf herunterladen (PDF)",
+    "invite_title": "Treten Sie dem Projekt bei",
+    "invite_text": "Sie sind Musiker, Dirigent oder Lehrer? Werden Sie Teil unseres humanitären Ensembles und nehmen Sie an Solidaritätskonzerten, interkulturellen Workshops und Bildungsprojekten teil.",
+    "form": {
+      "name": "Vollständiger Name",
+      "name_placeholder": "Ihr Name",
+      "email": "E-Mail",
+      "email_placeholder": "ihre@email.com",
+      "instrument": "Instrument / Rolle",
+      "instrument_placeholder": "Geige, Klavier, Dirigent...",
+      "message": "Nachricht (optional)",
+      "message_placeholder": "Erzählen Sie uns von Ihrem musikalischen Werdegang und Ihrer Motivation...",
+      "consent": "Ich stimme der Verarbeitung meiner Daten zu, um auf meine Anfrage zu antworten.",
+      "consent_error": "Bitte stimmen Sie der Datenverarbeitung zu.",
+      "submit": "Dem Projekt beitreten",
+      "success": "Danke! Wir werden Sie bald kontaktieren.",
+      "error": "Sendefehler. Bitte versuchen Sie es erneut."
+    }
   },
   "portfolio": {
     "title": "Musikalisches Portfolio",
