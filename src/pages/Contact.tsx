@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MapPin, Mail, Phone, Send, Youtube } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
@@ -10,14 +10,34 @@ import { toast } from 'sonner';
 import SEO from '@/components/SEO';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { z } from 'zod';
+
+// Zod validation schema
+const contactSchema = z.object({
+  name: z.string().min(2, "Ім'я має містити мінімум 2 символи.").max(100),
+  email: z.string().email("Невірна адреса електронної пошти.").max(255),
+  subject: z.string().optional(),
+  message: z.string().min(5, "Повідомлення має бути змістовнішим.").max(1000),
+  consent: z.boolean().refine(val => val === true, "Необхідно підтвердити згоду."),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+  consent?: string;
+}
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
+  const lastSubmitRef = useRef<number>(0);
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     subject: 'general',
@@ -25,6 +45,7 @@ const Contact = () => {
     consent: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
 
   // Initialize Leaflet map
   useEffect(() => {
@@ -82,27 +103,47 @@ const Contact = () => {
       media: { fr: 'Presse / Média', de: 'Presse / Medien', uk: 'Преса / Медіа' },
       other: { fr: 'Autre', de: 'Andere', uk: 'Інше' }
     },
-    responseTime: {
-      fr: 'Nous répondons généralement sous 24-48 heures.',
-      de: 'Wir antworten normalerweise innerhalb von 24-48 Stunden.',
-      uk: 'Зазвичай ми відповідаємо протягом 24-48 годин.'
-    },
     privacyNote: {
       fr: 'Les messages sont traités de manière confidentielle et exclusivement pour répondre à votre demande.',
       de: 'Nachrichten werden vertraulich behandelt und ausschliesslich zur Beantwortung Ihrer Anfrage verwendet.',
       uk: 'Повідомлення обробляються конфіденційно та виключно для відповіді на ваш запит.'
-    },
-    phone: { fr: 'Téléphone / WhatsApp', de: 'Telefon / WhatsApp', uk: 'Телефон / WhatsApp' },
-    email: { fr: 'Email', de: 'E-Mail', uk: 'Електронна пошта' },
-    social: { fr: 'Réseaux Sociaux', de: 'Soziale Netzwerke', uk: 'Соціальні мережі' }
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const validateField = (field: keyof ContactFormData, value: string | boolean): string | undefined => {
+    const testData = { ...formData, [field]: value };
+    const result = contactSchema.safeParse(testData);
+    if (!result.success) {
+      const fieldError = result.error.errors.find(e => e.path[0] === field);
+      return fieldError?.message;
+    }
+    return undefined;
+  };
+
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.consent) {
-      toast.error(lang === 'uk' ? 'Будь ласка, погодьтесь з обробкою даних' : 'Veuillez accepter le traitement des données');
+    
+    // Debounce: prevent rapid submissions
+    const now = Date.now();
+    if (now - lastSubmitRef.current < 1000) {
       return;
     }
+    lastSubmitRef.current = now;
+
+    // Validate with Zod
+    const result = contactSchema.safeParse(formData);
+    if (!result.success) {
+      const newErrors: FormErrors = {};
+      result.error.errors.forEach(err => {
+        const field = err.path[0] as keyof FormErrors;
+        newErrors[field] = err.message;
+      });
+      setErrors(newErrors);
+      toast.error(result.error.errors[0].message);
+      return;
+    }
+
+    setErrors({});
     setIsSubmitting(true);
     
     try {
@@ -113,26 +154,33 @@ const Contact = () => {
         },
         body: JSON.stringify({
           type: 'contact-form',
-          contactName: formData.name,
-          contactEmail: formData.email,
-          subject: formData.subject,
-          message: formData.message
+          contactName: result.data.name,
+          contactEmail: result.data.email,
+          subject: result.data.subject,
+          message: result.data.message
         }),
       });
 
-      if (response.ok) {
-        toast.success(t('contact.toastSuccess'));
-        setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
-      } else {
-        throw new Error('Failed to send');
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => null);
+        throw new Error(errorText || 'Failed to send');
       }
+
+      // Verify response
+      const data = await response.json().catch(() => null);
+      if (!data) {
+        throw new Error('Invalid server response');
+      }
+
+      toast.success(t('contact.toastSuccess'));
+      setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error(lang === 'uk' ? 'Помилка надсилання. Спробуйте ще раз.' : 'Erreur d\'envoi. Veuillez réessayer.');
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, lang, t]);
 
   return (
     <>
@@ -155,7 +203,7 @@ const Contact = () => {
           </section>
 
           {/* Contact Info - Centered */}
-          <section className="py-8 bg-background" aria-label="Contact information">
+          <section className="py-8 bg-background" aria-label={t('contact.form_aria_label')}>
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <address className="not-italic grid md:grid-cols-2 gap-6">
                 <div className="flex items-start">
@@ -201,7 +249,12 @@ const Contact = () => {
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-8 text-center">
                   {t('contact.formTitle')}
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
+                <form 
+                  onSubmit={handleSubmit} 
+                  className="space-y-6" 
+                  aria-label={t('contact.form_aria_label')}
+                  noValidate
+                >
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-subtext mb-2">{texts.name[lang]}</label>
@@ -209,10 +262,24 @@ const Contact = () => {
                         id="name"
                         type="text"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (errors.name) {
+                            setErrors({ ...errors, name: validateField('name', e.target.value) });
+                          }
+                        }}
+                        onBlur={(e) => setErrors({ ...errors, name: validateField('name', e.target.value) })}
                         required
+                        aria-required="true"
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                         className="bg-background border-primary/30"
                       />
+                      {errors.name && (
+                        <p id="name-error" className="text-destructive text-sm mt-1" role="alert">
+                          {errors.name}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-subtext mb-2">{texts.emailLabel[lang]}</label>
@@ -220,10 +287,24 @@ const Contact = () => {
                         id="email"
                         type="email"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (errors.email) {
+                            setErrors({ ...errors, email: validateField('email', e.target.value) });
+                          }
+                        }}
+                        onBlur={(e) => setErrors({ ...errors, email: validateField('email', e.target.value) })}
                         required
+                        aria-required="true"
+                        aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                         className="bg-background border-primary/30"
                       />
+                      {errors.email && (
+                        <p id="email-error" className="text-destructive text-sm mt-1" role="alert">
+                          {errors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
                   
@@ -233,6 +314,7 @@ const Contact = () => {
                       id="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      aria-label={texts.subject[lang]}
                       className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                     >
                       {Object.entries(texts.subjects).map(([key, value]) => (
@@ -246,24 +328,57 @@ const Contact = () => {
                     <Textarea
                       id="message"
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, message: e.target.value });
+                        if (errors.message) {
+                          setErrors({ ...errors, message: validateField('message', e.target.value) });
+                        }
+                      }}
+                      onBlur={(e) => setErrors({ ...errors, message: validateField('message', e.target.value) })}
                       required
+                      aria-required="true"
+                      aria-invalid={!!errors.message}
+                      aria-describedby={errors.message ? "message-error" : undefined}
                       rows={5}
                       className="bg-background border-primary/30 resize-none"
                     />
+                    {errors.message && (
+                      <p id="message-error" className="text-destructive text-sm mt-1" role="alert">
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="flex items-center">
-                    <input
-                      id="consent"
-                      type="checkbox"
-                      checked={formData.consent}
-                      onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                      className="w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary"
-                    />
-                    <label htmlFor="consent" className="ml-2 text-sm text-subtext">
-                      {texts.consent[lang]}
-                    </label>
+                  <div className="flex flex-col">
+                    <div className="flex items-start">
+                      <input
+                        id="consent"
+                        type="checkbox"
+                        checked={formData.consent}
+                        onChange={(e) => {
+                          setFormData({ ...formData, consent: e.target.checked });
+                          if (errors.consent) {
+                            setErrors({ ...errors, consent: validateField('consent', e.target.checked) });
+                          }
+                        }}
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.consent}
+                        aria-describedby="consent-help"
+                        className="mt-1 w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary"
+                      />
+                      <label htmlFor="consent" className="ml-2 text-sm text-subtext">
+                        {t('contact.consent_label')}
+                      </label>
+                    </div>
+                    <p id="consent-help" className="text-subtext/60 text-xs mt-1 ml-6">
+                      {t('contact.consent_help')}
+                    </p>
+                    {errors.consent && (
+                      <p className="text-destructive text-sm mt-1 ml-6" role="alert">
+                        {errors.consent}
+                      </p>
+                    )}
                   </div>
 
                   <Button 
@@ -288,7 +403,7 @@ const Contact = () => {
           <section className="py-12 bg-background" aria-label="Location map">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="rounded-2xl border-2 border-primary/30 shadow-[0_0_30px_hsl(var(--primary)/0.2)] overflow-hidden">
-                <div ref={mapRef} className="h-80 w-full" />
+                <div ref={mapRef} className="h-80 w-full" aria-label="Map showing Sonate Solidaire location" />
               </div>
             </div>
           </section>

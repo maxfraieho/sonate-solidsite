@@ -197,7 +197,8 @@
       "submit": "Rejoindre le projet",
       "success": "Merci ! Nous vous contacterons très prochainement.",
       "error": "Erreur d'envoi. Veuillez réessayer.",
-      "post_submit_info": "Après votre envoi, nous prendrons contact pour discuter des possibilités de collaboration musicale."
+      "post_submit_info": "Après votre envoi, nous prendrons contact pour discuter des possibilités de collaboration musicale.",
+      "aria_label": "Formulaire pour musiciens"
     }
   },
   "portfolio": {
@@ -385,6 +386,9 @@
     "address": "Avenue du Mont-Blanc 29, 1196 Gland, Suisse",
     "formTitle": "Écrivez-nous",
     "sendButton": "Envoyer le message",
-    "toastSuccess": "Merci ! Nous vous répondrons très bientôt."
+    "toastSuccess": "Merci ! Nous vous répondrons très bientôt.",
+    "form_aria_label": "Formulaire de contact",
+    "consent_label": "J'accepte le traitement de mes données",
+    "consent_help": "Les données sont utilisées uniquement pour répondre à votre demande."
   }
 }
