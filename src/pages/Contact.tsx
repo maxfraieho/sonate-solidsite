@@ -12,7 +12,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const Contact = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -66,18 +66,6 @@ const Contact = () => {
   }, []);
 
   const texts = {
-    title: { fr: 'Contact', de: 'Kontakt', uk: 'Контакти' },
-    subtitle: {
-      fr: 'Nous sommes à votre écoute. Ensemble, construisons des projets porteurs de sens.',
-      de: 'Wir hören Ihnen zu. Gemeinsam bauen wir sinnvolle Projekte auf.',
-      uk: 'Ми вас слухаємо. Разом будуємо значущі проекти.'
-    },
-    info: { fr: 'Informations', de: 'Informationen', uk: 'Інформація' },
-    address: { fr: 'Adresse', de: 'Adresse', uk: 'Адреса' },
-    email: { fr: 'Email', de: 'E-Mail', uk: 'Електронна пошта' },
-    phone: { fr: 'Téléphone / WhatsApp', de: 'Telefon / WhatsApp', uk: 'Телефон / WhatsApp' },
-    social: { fr: 'Réseaux Sociaux', de: 'Soziale Netzwerke', uk: 'Соціальні мережі' },
-    formTitle: { fr: 'Envoyez-nous un message', de: 'Senden Sie uns eine Nachricht', uk: 'Надішліть нам повідомлення' },
     name: { fr: 'Nom complet', de: 'Vollständiger Name', uk: 'Повне ім\'я' },
     emailLabel: { fr: 'Email', de: 'E-Mail', uk: 'Електронна пошта' },
     subject: { fr: 'Sujet', de: 'Betreff', uk: 'Тема' },
@@ -87,7 +75,6 @@ const Contact = () => {
       de: 'Ich stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage verarbeitet werden.',
       uk: 'Я погоджуюсь на обробку моїх даних для відповіді на мій запит.'
     },
-    send: { fr: 'Envoyer le message', de: 'Nachricht senden', uk: 'Надіслати повідомлення' },
     subjects: {
       general: { fr: 'Question générale', de: 'Allgemeine Frage', uk: 'Загальне питання' },
       partnership: { fr: 'Proposition de partenariat', de: 'Partnerschaftsvorschlag', uk: 'Пропозиція партнерства' },
@@ -100,12 +87,14 @@ const Contact = () => {
       de: 'Wir antworten normalerweise innerhalb von 24-48 Stunden.',
       uk: 'Зазвичай ми відповідаємо протягом 24-48 годин.'
     },
-    success: { fr: 'Message envoyé avec succès!', de: 'Nachricht erfolgreich gesendet!', uk: 'Повідомлення успішно надіслано!' },
     privacyNote: {
       fr: 'Les messages sont traités de manière confidentielle et exclusivement pour répondre à votre demande.',
       de: 'Nachrichten werden vertraulich behandelt und ausschliesslich zur Beantwortung Ihrer Anfrage verwendet.',
       uk: 'Повідомлення обробляються конфіденційно та виключно для відповіді на ваш запит.'
-    }
+    },
+    phone: { fr: 'Téléphone / WhatsApp', de: 'Telefon / WhatsApp', uk: 'Телефон / WhatsApp' },
+    email: { fr: 'Email', de: 'E-Mail', uk: 'Електронна пошта' },
+    social: { fr: 'Réseaux Sociaux', de: 'Soziale Netzwerke', uk: 'Соціальні мережі' }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -132,7 +121,7 @@ const Contact = () => {
       });
 
       if (response.ok) {
-        toast.success(texts.success[lang]);
+        toast.success(t('contact.toastSuccess'));
         setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
       } else {
         throw new Error('Failed to send');
@@ -152,179 +141,157 @@ const Contact = () => {
         <Navbar />
         
         <main>
-          {/* Hero */}
-          <section className="relative h-56 md:h-72 flex items-center justify-center overflow-hidden pt-16" aria-label="Contact header">
+          {/* Hero Header */}
+          <section className="relative py-24 md:py-32 flex items-center justify-center overflow-hidden pt-24" aria-label="Contact header">
             <div className="absolute inset-0 bg-gradient-to-b from-surface via-background/80 to-background" />
-            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-2 text-foreground drop-shadow-2xl">
-                {texts.title[lang]}
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
+                {t('contact.title')}
               </h1>
-              <p className="text-base md:text-lg text-subtext max-w-3xl mx-auto">
-                {texts.subtitle[lang]}
+              <p className="text-lg md:text-xl text-subtext max-w-2xl mx-auto leading-relaxed">
+                {t('contact.subtitle')}
               </p>
             </div>
           </section>
 
-          {/* Content */}
-          <section className="py-8 md:py-12 bg-background" aria-label="Contact information and form">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid lg:grid-cols-2 gap-16">
-                {/* Contact Info */}
-                <article>
-                  <h2 className="text-4xl font-display font-bold text-primary mb-8">{texts.info[lang]}</h2>
-                  <address className="not-italic space-y-8">
-                    <div className="flex items-start">
-                      <MapPin className="text-primary h-8 w-8 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-2">{texts.address[lang]}</h3>
-                        <p className="text-subtext leading-relaxed">
-                          Sonate Solidaire<br />
-                          Avenue du Mont-Blanc 29<br />
-                          1196 Gland, Vaud<br />
-                          Suisse
-                        </p>
-                      </div>
+          {/* Contact Info - Centered */}
+          <section className="py-12 bg-background" aria-label="Contact information">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-10 text-center">
+                {t('contact.infoTitle')}
+              </h2>
+              <address className="not-italic grid md:grid-cols-2 gap-8">
+                <div className="flex items-start">
+                  <MapPin className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
+                  <p className="text-subtext leading-relaxed">
+                    {t('contact.address')}
+                  </p>
+                </div>
+
+                <div className="flex items-start">
+                  <Mail className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
+                  <a href="mailto:arsen.k111999@gmail.com" className="text-subtext hover:text-primary transition-colors">
+                    arsen.k111999@gmail.com
+                  </a>
+                </div>
+
+                <div className="flex items-start">
+                  <Phone className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
+                  <a href="tel:+41783261112" className="text-subtext hover:text-primary transition-colors">
+                    +41 78 326 11 12
+                  </a>
+                </div>
+
+                <div className="flex items-start">
+                  <Youtube className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
+                  <a 
+                    href="https://www.youtube.com/@ArsenKovalenkoViolin" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-subtext hover:text-primary transition-colors"
+                  >
+                    @ArsenKovalenkoViolin
+                  </a>
+                </div>
+              </address>
+            </div>
+          </section>
+
+          {/* Contact Form - Centered */}
+          <section className="py-12 bg-background" aria-label="Contact form">
+            <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-surface border border-primary/30 rounded-2xl p-8 shadow-[0_0_30px_hsl(var(--primary)/0.15)]">
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-8 text-center">
+                  {t('contact.formTitle')}
+                </h2>
+                <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-subtext mb-2">{texts.name[lang]}</label>
+                      <Input
+                        id="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                        className="bg-background border-primary/30"
+                      />
                     </div>
-
-                    <div className="flex items-start">
-                      <Mail className="text-primary h-8 w-8 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-2">{texts.email[lang]}</h3>
-                        <a href="mailto:arsen.k111999@gmail.com" className="text-subtext hover:text-primary transition-colors">
-                          arsen.k111999@gmail.com
-                        </a>
-                        <p className="text-sm text-subtext/70 mt-1">{texts.responseTime[lang]}</p>
-                      </div>
+                    <div>
+                      <label htmlFor="email" className="block text-subtext mb-2">{texts.emailLabel[lang]}</label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                        className="bg-background border-primary/30"
+                      />
                     </div>
-
-                    <div className="flex items-start">
-                      <Phone className="text-primary h-8 w-8 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-2">{texts.phone[lang]}</h3>
-                        <a href="tel:+41783261112" className="text-subtext hover:text-primary transition-colors">
-                          +41 78 326 11 12
-                        </a>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start">
-                      <Send className="text-primary h-8 w-8 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground mb-2">{texts.social[lang]}</h3>
-                        <nav className="flex gap-4 mt-2" aria-label="Social media links">
-                          <a 
-                            href="https://t.me/yourtelegram" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="bg-surface p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
-                            aria-label="Telegram"
-                          >
-                            <Send className="h-6 w-6" />
-                          </a>
-                          <a 
-                            href="https://www.youtube.com/@ArsenKovalenkoViolin" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="bg-surface p-3 rounded-full hover:bg-primary hover:text-primary-foreground transition-all"
-                            aria-label="YouTube"
-                          >
-                            <Youtube className="h-6 w-6" />
-                          </a>
-                        </nav>
-                      </div>
-                    </div>
-                  </address>
-
-                  {/* Leaflet Map */}
-                  <aside className="mt-12 rounded-2xl border border-primary/30 shadow-xl overflow-hidden" aria-label="Location map">
-                    <div ref={mapRef} className="h-80 w-full" />
-                  </aside>
-                </article>
-
-                {/* Contact Form */}
-                <article>
-                  <div className="bg-surface border border-primary/30 rounded-2xl p-8">
-                    <h2 className="text-3xl font-display font-bold text-foreground mb-6">{texts.formTitle[lang]}</h2>
-                    <form onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <label htmlFor="name" className="block text-subtext mb-2">{texts.name[lang]}</label>
-                          <Input
-                            id="name"
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            required
-                            className="bg-background border-primary/30"
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="email" className="block text-subtext mb-2">{texts.emailLabel[lang]}</label>
-                          <Input
-                            id="email"
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            required
-                            className="bg-background border-primary/30"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <label htmlFor="subject" className="block text-subtext mb-2">{texts.subject[lang]}</label>
-                        <select
-                          id="subject"
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                        >
-                          {Object.entries(texts.subjects).map(([key, value]) => (
-                            <option key={key} value={key}>{value[lang]}</option>
-                          ))}
-                        </select>
-                      </div>
-
-                      <div>
-                        <label htmlFor="message" className="block text-subtext mb-2">{texts.message[lang]}</label>
-                        <Textarea
-                          id="message"
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          required
-                          rows={5}
-                          className="bg-background border-primary/30 resize-none"
-                        />
-                      </div>
-
-                      <div className="flex items-center">
-                        <input
-                          id="consent"
-                          type="checkbox"
-                          checked={formData.consent}
-                          onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
-                          className="w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary"
-                        />
-                        <label htmlFor="consent" className="ml-2 text-sm text-subtext">
-                          {texts.consent[lang]}
-                        </label>
-                      </div>
-
-                      <Button 
-                        type="submit" 
-                        disabled={isSubmitting}
-                        className="w-full bg-primary text-primary-foreground hover:bg-primary-hover py-4 text-lg"
-                      >
-                        <Send className="mr-2 h-5 w-5" aria-hidden="true" />
-                        {isSubmitting ? '...' : texts.send[lang]}
-                      </Button>
-
-                      <p className="text-xs text-subtext/60 text-center mt-4">
-                        {texts.privacyNote[lang]}
-                      </p>
-                    </form>
                   </div>
-                </article>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-subtext mb-2">{texts.subject[lang]}</label>
+                    <select
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                    >
+                      {Object.entries(texts.subjects).map(([key, value]) => (
+                        <option key={key} value={key}>{value[lang]}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-subtext mb-2">{texts.message[lang]}</label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      required
+                      rows={5}
+                      className="bg-background border-primary/30 resize-none"
+                    />
+                  </div>
+
+                  <div className="flex items-center">
+                    <input
+                      id="consent"
+                      type="checkbox"
+                      checked={formData.consent}
+                      onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                      className="w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary"
+                    />
+                    <label htmlFor="consent" className="ml-2 text-sm text-subtext">
+                      {texts.consent[lang]}
+                    </label>
+                  </div>
+
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-primary text-primary-foreground py-4 text-lg relative overflow-hidden group hover:shadow-[0_0_25px_hsl(var(--primary)/0.4)] transition-all duration-300"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                    <Send className="mr-2 h-5 w-5" aria-hidden="true" />
+                    {isSubmitting ? '...' : t('contact.sendButton')}
+                  </Button>
+
+                  <p className="text-xs text-subtext/60 text-center mt-4">
+                    {texts.privacyNote[lang]}
+                  </p>
+                </form>
+              </div>
+            </div>
+          </section>
+
+          {/* Map - Centered */}
+          <section className="py-12 bg-background" aria-label="Location map">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="rounded-2xl border-2 border-primary/30 shadow-[0_0_30px_hsl(var(--primary)/0.2)] overflow-hidden">
+                <div ref={mapRef} className="h-80 w-full" />
               </div>
             </div>
           </section>
