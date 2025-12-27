@@ -75,7 +75,14 @@ export const AudioPlayer = () => {
   const initAudioContext = useCallback(() => {
     if (!audioRef.current || audioContextRef.current) return;
     
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    // Type-safe webkitAudioContext access
+    interface WindowWithWebkit extends Window {
+      webkitAudioContext?: typeof AudioContext;
+    }
+    const AudioContextClass = window.AudioContext || (window as WindowWithWebkit).webkitAudioContext;
+    if (!AudioContextClass) return;
+    
+    const audioContext = new AudioContextClass();
     const analyzer = audioContext.createAnalyser();
     analyzer.fftSize = 256;
     

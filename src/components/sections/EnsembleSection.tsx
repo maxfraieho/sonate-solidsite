@@ -1,16 +1,37 @@
-import { useState } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { User, ChevronDown, ChevronUp, FileDown, Music, Headphones } from 'lucide-react';
+import { ChevronDown, ChevronUp, FileDown, Music, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { z } from 'zod';
+
+// Zod validation schema for musician form
+const musicianSchema = z.object({
+  name: z.string().min(2, "Ім'я має містити мінімум 2 символи.").max(100),
+  email: z.string().email("Невірна адреса електронної пошти.").max(255),
+  instrument: z.string().min(2, "Вкажіть інструмент."),
+  role: z.string().optional(),
+  message: z.string().max(1000).optional(),
+  consent: z.boolean().refine(val => val === true, "Необхідно підтвердити згоду."),
+});
+
+type MusicianFormData = z.infer<typeof musicianSchema>;
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  instrument?: string;
+  consent?: string;
+}
 
 export const EnsembleSection = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
   const [bioExpanded, setBioExpanded] = useState(false);
+  const lastSubmitRef = useRef<number>(0);
   const [musicianForm, setMusicianForm] = useState({
     name: '',
     email: '',
@@ -20,6 +41,7 @@ export const EnsembleSection = () => {
     consent: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const roleOptions = {
     fr: ['Musicien', 'Enseignant', "Chef d'orchestre", 'Autre'],
@@ -27,12 +49,40 @@ export const EnsembleSection = () => {
     uk: ['Музикант', 'Викладач', 'Диригент', 'Інше']
   };
 
-  const handleMusicianSubmit = async (e: React.FormEvent) => {
+  const validateField = (field: keyof MusicianFormData, value: string | boolean): string | undefined => {
+    const testData = { ...musicianForm, [field]: value };
+    const result = musicianSchema.safeParse(testData);
+    if (!result.success) {
+      const fieldError = result.error.errors.find(e => e.path[0] === field);
+      return fieldError?.message;
+    }
+    return undefined;
+  };
+
+  const handleMusicianSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!musicianForm.consent) {
-      toast.error(t('ensemble.form.consent_error'));
+    
+    // Debounce: prevent rapid submissions
+    const now = Date.now();
+    if (now - lastSubmitRef.current < 1000) {
       return;
     }
+    lastSubmitRef.current = now;
+
+    // Validate with Zod
+    const result = musicianSchema.safeParse(musicianForm);
+    if (!result.success) {
+      const newErrors: FormErrors = {};
+      result.error.errors.forEach(err => {
+        const field = err.path[0] as keyof FormErrors;
+        newErrors[field] = err.message;
+      });
+      setErrors(newErrors);
+      toast.error(result.error.errors[0].message);
+      return;
+    }
+
+    setErrors({});
     setIsSubmitting(true);
     
     try {
@@ -43,27 +93,34 @@ export const EnsembleSection = () => {
         },
         body: JSON.stringify({
           type: 'musician-join',
-          contactName: musicianForm.name,
-          contactEmail: musicianForm.email,
-          instrument: musicianForm.instrument,
-          role: musicianForm.role,
-          message: musicianForm.message
+          contactName: result.data.name,
+          contactEmail: result.data.email,
+          instrument: result.data.instrument,
+          role: result.data.role,
+          message: result.data.message
         }),
       });
 
-      if (response.ok) {
-        toast.success(t('ensemble.form.success'));
-        setMusicianForm({ name: '', email: '', instrument: '', role: '', message: '', consent: false });
-      } else {
-        throw new Error('Failed to send');
+      if (!response.ok) {
+        const errorText = await response.text().catch(() => null);
+        throw new Error(errorText || 'Failed to send');
       }
+
+      // Verify response
+      const data = await response.json().catch(() => null);
+      if (!data) {
+        throw new Error('Invalid server response');
+      }
+
+      toast.success(t('ensemble.form.success'));
+      setMusicianForm({ name: '', email: '', instrument: '', role: '', message: '', consent: false });
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error(t('ensemble.form.error'));
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [musicianForm, t]);
 
   return (
     <section 
@@ -127,9 +184,11 @@ export const EnsembleSection = () => {
           <button
             onClick={() => setBioExpanded(!bioExpanded)}
             className="mt-6 text-primary hover:text-primary-hover font-semibold inline-flex items-center gap-2 transition-colors"
+            aria-expanded={bioExpanded}
+            aria-controls="bio-expanded"
           >
             <span>{bioExpanded ? t('founder.bio_collapse') : t('founder.bio_expand')}</span>
-            {bioExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+            {bioExpanded ? <ChevronUp className="h-5 w-5" aria-hidden="true" /> : <ChevronDown className="h-5 w-5" aria-hidden="true" />}
           </button>
 
           {/* CV Download - Single Button with FileDown icon */}
@@ -138,8 +197,9 @@ export const EnsembleSection = () => {
               href="/cv/CV_Arsen_Kovalenko_FR.pdf"
               download="CV_Arsen_Kovalenko_FR.pdf"
               className="inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1"
+              aria-label={t('ensemble.cv_download')}
             >
-              <FileDown className="h-5 w-5" />
+              <FileDown className="h-5 w-5" aria-hidden="true" />
               <span>{t('ensemble.cv_download')}</span>
             </a>
           </div>
@@ -147,17 +207,17 @@ export const EnsembleSection = () => {
 
         {/* Decorative Separator with Quote */}
         <div className="flex flex-col items-center justify-center my-10">
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mb-6" />
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mb-6" aria-hidden="true" />
           <p className="text-primary/80 italic text-lg font-display text-center max-w-xl">
             {t('ensemble.quote')}
           </p>
-          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mt-6" />
+          <div className="h-px w-32 bg-gradient-to-r from-transparent via-primary to-transparent mt-6" aria-hidden="true" />
         </div>
 
         {/* Invitation Block */}
         <div className="bg-surface/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 animate-fade-in border border-primary/10">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <Music className="h-8 w-8 text-primary" />
+            <Music className="h-8 w-8 text-primary" aria-hidden="true" />
             <h3 className="font-display text-3xl font-bold text-foreground">
               {t('ensemble.invite_title')}
             </h3>
@@ -172,59 +232,110 @@ export const EnsembleSection = () => {
             onSubmit={handleMusicianSubmit} 
             id="join-form"
             className="max-w-2xl mx-auto space-y-6 bg-background/50 rounded-xl p-6 md:p-8 border border-primary/20"
+            aria-label={t('ensemble.form.aria_label')}
+            noValidate
           >
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-subtext mb-2 font-medium">
+                <label htmlFor="musician-name" className="block text-subtext mb-2 font-medium">
                   {t('ensemble.form.name')}
                 </label>
                 <Input
+                  id="musician-name"
                   type="text"
                   required
+                  aria-required="true"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "musician-name-error" : undefined}
                   value={musicianForm.name}
-                  onChange={(e) => setMusicianForm({ ...musicianForm, name: e.target.value })}
+                  onChange={(e) => {
+                    setMusicianForm({ ...musicianForm, name: e.target.value });
+                    if (errors.name) {
+                      setErrors({ ...errors, name: validateField('name', e.target.value) });
+                    }
+                  }}
+                  onBlur={(e) => setErrors({ ...errors, name: validateField('name', e.target.value) })}
                   className="bg-background border-primary/30 focus:border-primary"
                   placeholder={t('ensemble.form.name_placeholder')}
                 />
+                {errors.name && (
+                  <p id="musician-name-error" className="text-destructive text-sm mt-1" role="alert">
+                    {errors.name}
+                  </p>
+                )}
               </div>
               <div>
-                <label className="block text-subtext mb-2 font-medium">
+                <label htmlFor="musician-email" className="block text-subtext mb-2 font-medium">
                   {t('ensemble.form.email')}
                 </label>
                 <Input
+                  id="musician-email"
                   type="email"
                   required
+                  aria-required="true"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "musician-email-error" : undefined}
                   value={musicianForm.email}
-                  onChange={(e) => setMusicianForm({ ...musicianForm, email: e.target.value })}
+                  onChange={(e) => {
+                    setMusicianForm({ ...musicianForm, email: e.target.value });
+                    if (errors.email) {
+                      setErrors({ ...errors, email: validateField('email', e.target.value) });
+                    }
+                  }}
+                  onBlur={(e) => setErrors({ ...errors, email: validateField('email', e.target.value) })}
                   className="bg-background border-primary/30 focus:border-primary"
                   placeholder={t('ensemble.form.email_placeholder')}
                 />
+                {errors.email && (
+                  <p id="musician-email-error" className="text-destructive text-sm mt-1" role="alert">
+                    {errors.email}
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-subtext mb-2 font-medium">
+                <label htmlFor="musician-instrument" className="block text-subtext mb-2 font-medium">
                   {t('ensemble.form.instrument')}
                 </label>
                 <Input
+                  id="musician-instrument"
                   type="text"
                   required
+                  aria-required="true"
+                  aria-invalid={!!errors.instrument}
+                  aria-describedby={errors.instrument ? "musician-instrument-error" : undefined}
                   value={musicianForm.instrument}
-                  onChange={(e) => setMusicianForm({ ...musicianForm, instrument: e.target.value })}
+                  onChange={(e) => {
+                    setMusicianForm({ ...musicianForm, instrument: e.target.value });
+                    if (errors.instrument) {
+                      setErrors({ ...errors, instrument: validateField('instrument', e.target.value) });
+                    }
+                  }}
+                  onBlur={(e) => setErrors({ ...errors, instrument: validateField('instrument', e.target.value) })}
                   className="bg-background border-primary/30 focus:border-primary"
                   placeholder={t('ensemble.form.instrument_placeholder')}
                 />
+                {errors.instrument && (
+                  <p id="musician-instrument-error" className="text-destructive text-sm mt-1" role="alert">
+                    {errors.instrument}
+                  </p>
+                )}
               </div>
               <div>
-                <label className="block text-subtext mb-2 font-medium">
+                <label htmlFor="musician-role" className="block text-subtext mb-2 font-medium">
                   {t('ensemble.form.role')}
                 </label>
                 <Select 
                   value={musicianForm.role} 
                   onValueChange={(value) => setMusicianForm({ ...musicianForm, role: value })}
                 >
-                  <SelectTrigger className="bg-background border-primary/30 focus:border-primary">
+                  <SelectTrigger 
+                    id="musician-role"
+                    className="bg-background border-primary/30 focus:border-primary"
+                    aria-label={t('ensemble.form.role')}
+                  >
                     <SelectValue placeholder={t('ensemble.form.role_placeholder')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -239,29 +350,47 @@ export const EnsembleSection = () => {
             </div>
 
             <div>
-              <label className="block text-subtext mb-2 font-medium">
+              <label htmlFor="musician-message" className="block text-subtext mb-2 font-medium">
                 {t('ensemble.form.message')}
               </label>
               <Textarea
+                id="musician-message"
                 rows={4}
                 value={musicianForm.message}
                 onChange={(e) => setMusicianForm({ ...musicianForm, message: e.target.value })}
                 placeholder={t('ensemble.form.message_placeholder')}
                 className="bg-background border-primary/30 focus:border-primary resize-none"
+                aria-label={t('ensemble.form.message')}
               />
             </div>
 
-            <div className="flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="ensemble-consent"
-                checked={musicianForm.consent}
-                onChange={(e) => setMusicianForm({ ...musicianForm, consent: e.target.checked })}
-                className="mt-1 w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary focus:ring-2"
-              />
-              <label htmlFor="ensemble-consent" className="text-sm text-subtext">
-                {t('ensemble.form.consent')}
-              </label>
+            <div className="flex flex-col">
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="ensemble-consent"
+                  checked={musicianForm.consent}
+                  onChange={(e) => {
+                    setMusicianForm({ ...musicianForm, consent: e.target.checked });
+                    if (errors.consent) {
+                      setErrors({ ...errors, consent: e.target.checked ? undefined : t('ensemble.form.consent_error') });
+                    }
+                  }}
+                  required
+                  aria-required="true"
+                  aria-invalid={!!errors.consent}
+                  aria-describedby="ensemble-consent-help"
+                  className="mt-1 w-4 h-4 text-primary bg-background border-primary/30 rounded focus:ring-primary focus:ring-2"
+                />
+                <label htmlFor="ensemble-consent" className="text-sm text-subtext">
+                  {t('ensemble.form.consent')}
+                </label>
+              </div>
+              {errors.consent && (
+                <p className="text-destructive text-sm mt-1 ml-7" role="alert">
+                  {errors.consent}
+                </p>
+              )}
             </div>
 
             <div className="text-center pt-4">
@@ -269,8 +398,9 @@ export const EnsembleSection = () => {
                 type="submit" 
                 size="lg" 
                 disabled={isSubmitting} 
-                className="bg-primary text-primary-foreground hover:bg-primary-hover px-10 transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 cta-glow"
+                className="bg-primary text-primary-foreground hover:bg-primary-hover px-10 transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:-translate-y-0.5 cta-glow relative overflow-hidden group"
               >
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
                 {isSubmitting ? '...' : t('ensemble.form.submit')}
               </Button>
             </div>
@@ -285,9 +415,9 @@ export const EnsembleSection = () => {
         {/* Transition to Music Section */}
         <div className="text-center mt-16 mb-8">
           <div className="flex items-center justify-center mb-6">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
-            <Headphones className="mx-4 h-8 w-8 text-primary" />
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" aria-hidden="true" />
+            <Headphones className="mx-4 h-8 w-8 text-primary" aria-hidden="true" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" aria-hidden="true" />
           </div>
           <h3 className="font-display text-2xl md:text-3xl font-bold text-primary mb-3">
             {t('ensemble.music_transition_title')}
