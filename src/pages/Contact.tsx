@@ -142,7 +142,7 @@ const Contact = () => {
         
         <main>
           {/* Hero Header */}
-          <section className="relative py-24 md:py-32 flex items-center justify-center overflow-hidden pt-24" aria-label="Contact header">
+          <section className="relative py-16 md:py-20 flex items-center justify-center overflow-hidden pt-24" aria-label="Contact header">
             <div className="absolute inset-0 bg-gradient-to-b from-surface via-background/80 to-background" />
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
@@ -155,12 +155,9 @@ const Contact = () => {
           </section>
 
           {/* Contact Info - Centered */}
-          <section className="py-12 bg-background" aria-label="Contact information">
+          <section className="py-8 bg-background" aria-label="Contact information">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl md:text-4xl font-display font-bold text-primary mb-10 text-center">
-                {t('contact.infoTitle')}
-              </h2>
-              <address className="not-italic grid md:grid-cols-2 gap-8">
+              <address className="not-italic grid md:grid-cols-2 gap-6">
                 <div className="flex items-start">
                   <MapPin className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
                   <p className="text-subtext leading-relaxed">
