@@ -377,5 +377,14 @@
       "title": "Et ensuite ?",
       "body": "Nous relions vos messages et témoignages pour tisser un réseau de partenaires. Ensemble, faisons résonner la solidarité à travers la musique."
     }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous sommes à votre écoute. Ensemble, construisons des projets porteurs de sens.",
+    "infoTitle": "Informations",
+    "address": "Avenue du Mont-Blanc 29, 1196 Gland, Suisse",
+    "formTitle": "Écrivez-nous",
+    "sendButton": "Envoyer le message",
+    "toastSuccess": "Merci ! Nous vous répondrons très bientôt."
   }
 }
