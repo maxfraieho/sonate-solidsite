@@ -297,8 +297,40 @@
   }
 }
 
-/* Hide YouTube overlay titles in Shorts section */
-.shorts-video-wrapper iframe {
-  mask-image: linear-gradient(to bottom, transparent 0%, transparent 8%, black 12%, black 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 8%, black 12%, black 100%);
+/* Lite YouTube Embed custom styling */
+.lite-youtube-wrapper .yt-lite {
+  background-color: hsl(var(--background));
+  border-radius: 0.75rem;
+}
+
+.lite-youtube-wrapper .yt-lite::before {
+  display: none; /* Hide default gradient overlay */
+}
+
+.lite-youtube-wrapper .lty-playbtn {
+  background-color: hsl(var(--primary)) !important;
+  border-radius: 50%;
+  width: 68px;
+  height: 48px;
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lite-youtube-wrapper .lty-playbtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.6);
+}
+
+.lite-youtube-shorts .yt-lite {
+  height: 100%;
+}
+
+.lite-youtube-shorts .yt-lite > .lty-playbtn {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lite-youtube-shorts .yt-lite:hover > .lty-playbtn {
+  transform: translate(-50%, -50%) scale(1.1);
 }
