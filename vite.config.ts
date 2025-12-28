@@ -19,24 +19,28 @@ export default defineConfig(({ mode }) => ({
       exclude: ["/admin/*", "/404"],
       dynamicRoutes: [
         "/",
+        "/portfolio",
         "/integration",
         "/support",
         "/contact",
         "/privacy",
         // French routes
         "/fr",
+        "/fr/portfolio",
         "/fr/integration",
         "/fr/support",
         "/fr/contact",
         "/fr/privacy",
         // German routes (explicit)
         "/de",
+        "/de/portfolio",
         "/de/integration",
         "/de/support",
         "/de/contact",
         "/de/privacy",
         // Ukrainian routes
         "/uk",
+        "/uk/portfolio",
         "/uk/integration",
         "/uk/support",
         "/uk/contact",

@@ -197,6 +197,31 @@ const videoObjectSchema = [
   },
 ];
 
+// CreativeWork Schema for Portfolio page
+const creativeWorkSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: 'Portfolio Sonate Solidaire',
+  creator: {
+    '@type': 'Person',
+    name: 'Arsen Kovalenko',
+  },
+  dateCreated: '2025-12-30',
+  genre: 'Music Performance',
+  inLanguage: 'fr-CH',
+  description: 'Collection de performances musicales et concerts solidaires pour l\'intégration culturelle des Ukrainiens en Suisse.',
+  image: `${SITE_URL}/og-image.jpg`,
+  video: {
+    '@type': 'VideoObject',
+    name: 'Sonate Solidaire – Live Performance',
+    embedUrl: 'https://www.youtube.com/embed/yzIiImWBuUU',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Sonate Solidaire',
+  },
+};
+
 // Breadcrumb configuration for indexable pages
 const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: string }[]> = {
   '/': [
@@ -217,6 +242,10 @@ const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: st
   '/privacy': [
     { name: 'Accueil', nameKey: 'home', path: '/' },
     { name: 'Politique de Confidentialité', nameKey: 'privacy', path: '/privacy' },
+  ],
+  '/portfolio': [
+    { name: 'Accueil', nameKey: 'home', path: '/' },
+    { name: 'Portfolio', nameKey: 'portfolio', path: '/portfolio' },
   ],
 };
 
@@ -278,6 +307,7 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
   const location = useLocation();
   const breadcrumbSchema = generateBreadcrumbSchema(location.pathname);
   const isHomepage = location.pathname === '/' || /^\/(fr|de|uk)\/?$/.test(location.pathname);
+  const isPortfolioPage = /^\/(fr|de|uk)?\/portfolio/.test(location.pathname) || location.pathname === '/portfolio';
 
   return (
     <Helmet>
@@ -306,6 +336,12 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       {isHomepage && (
         <script type="application/ld+json">
           {JSON.stringify(videoObjectSchema)}
+        </script>
+      )}
+      {/* CreativeWork Schema for Portfolio page */}
+      {isPortfolioPage && (
+        <script type="application/ld+json">
+          {JSON.stringify(creativeWorkSchema)}
         </script>
       )}
       {breadcrumbSchema && (
