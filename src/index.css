@@ -399,3 +399,19 @@
     background: hsl(var(--surface));
   }
 }
+
+/* Lightbox mobile optimization */
+@media (max-width: 768px) {
+  .lightbox img {
+    max-height: 75vh;
+    max-width: 95vw;
+    object-fit: contain;
+  }
+  
+  .lightbox button[aria-label="Previous image"],
+  .lightbox button[aria-label="Next image"] {
+    padding: 0.75rem;
+    background: hsl(var(--background) / 0.8);
+    border-radius: 9999px;
+  }
+}
