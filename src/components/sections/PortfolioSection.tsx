@@ -117,7 +117,7 @@ export const PortfolioSection = () => {
                 <LiteYouTubeEmbed
                   id="uMiQg_sq_-w"
                   title="Short 1"
-                  poster="maxresdefault"
+                  poster="hqdefault"
                   noCookie
                 />
               </div>
@@ -128,7 +128,7 @@ export const PortfolioSection = () => {
                 <LiteYouTubeEmbed
                   id="T15hZVOKaSc"
                   title="Short 2"
-                  poster="maxresdefault"
+                  poster="hqdefault"
                   noCookie
                 />
               </div>
@@ -139,7 +139,7 @@ export const PortfolioSection = () => {
                 <LiteYouTubeEmbed
                   id="yzIiImWBuUU"
                   title="Short 3"
-                  poster="maxresdefault"
+                  poster="hqdefault"
                   noCookie
                 />
               </div>
