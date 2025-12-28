@@ -194,6 +194,12 @@ export const SEO = ({
       <meta name="twitter:title" content={finalTitle} />
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:creator" content="@sonatesolidaire" />
+      
+      {/* Additional CTR & crawl signals */}
+      <meta name="author" content="Sonate Solidaire" />
+      <meta name="theme-color" content="#d4af37" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       
       {/* Hreflang Tags - Language-specific URLs */}
       <link rel="alternate" hrefLang="fr-CH" href={getAlternateUrl('fr')} />
