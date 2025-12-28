@@ -5,7 +5,7 @@ import fr from './locales/fr.json';
 import de from './locales/de.json';
 import uk from './locales/uk.json';
 
-const savedLanguage = localStorage.getItem('language') || 'fr';
+const savedLanguage = localStorage.getItem('language') || 'fr'; // Default to French (Canton de Vaud)
 
 i18n
   .use(initReactI18next)
