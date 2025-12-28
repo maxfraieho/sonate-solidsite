@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -98,6 +98,53 @@ export const PhotoGallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage, nextImage, prevImage, closeLightbox]);
 
+  // Touch swipe navigation for mobile
+  const touchStartX = useRef<number>(0);
+  
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (selectedImage === null) return;
+      
+      const endX = e.changedTouches[0].clientX;
+      const delta = endX - touchStartX.current;
+
+      // Minimum swipe distance of 50px
+      if (Math.abs(delta) > 50) {
+        if (delta > 0) {
+          prevImage();
+        } else {
+          nextImage();
+        }
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [selectedImage, nextImage, prevImage]);
+
+  // Preload adjacent images for smooth navigation
+  useEffect(() => {
+    if (selectedImage !== null) {
+      const nextIndex = (selectedImage + 1) % galleryImages.length;
+      const prevIndex = (selectedImage - 1 + galleryImages.length) % galleryImages.length;
+      
+      const preloadNext = new Image();
+      preloadNext.src = galleryImages[nextIndex].src;
+      
+      const preloadPrev = new Image();
+      preloadPrev.src = galleryImages[prevIndex].src;
+    }
+  }, [selectedImage]);
+
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4" role="list" aria-label="Photo gallery">
@@ -125,7 +172,7 @@ export const PhotoGallery = () => {
       {/* Lightbox */}
       {selectedImage !== null && (
         <div 
-          className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4 lightbox"
           role="dialog"
           aria-modal="true"
           aria-label="Image gallery lightbox"
