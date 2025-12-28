@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hors ligne | Sonate Solidaire</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fafafa;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 480px;
+    }
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(135deg, #d4af37 0%, #c9a227 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon svg {
+      width: 40px;
+      height: 40px;
+      fill: #0a0a0f;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #d4af37;
+    }
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(250, 250, 250, 0.8);
+      margin-bottom: 1.5rem;
+    }
+    .retry-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #d4af37;
+      color: #0a0a0f;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+    .langs {
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: rgba(250, 250, 250, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.75 12c0 5.66 4.59 10.25 10.25 10.25S22.25 17.66 22.25 12 17.66 1.75 12 1.75 1.75 6.34 1.75 12zM12 8v5m0 3.01V16"/>
+      </svg>
+    </div>
+    <h1>Vous êtes hors ligne</h1>
+    <p>Le contenu de cette page n'est pas disponible hors ligne. Veuillez vérifier votre connexion Internet et réessayer.</p>
+    <a href="/" class="retry-btn" onclick="location.reload(); return false;">Réessayer</a>
+    <div class="langs">
+      <p>Sie sind offline • Ви офлайн</p>
+    </div>
+  </div>
+</body>
+</html>

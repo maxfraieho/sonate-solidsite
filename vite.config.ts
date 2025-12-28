@@ -65,6 +65,11 @@ export default defineConfig(({ mode }) => ({
     },
   },
   build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: { drop_console: true, drop_debugger: true },
+      format: { comments: false },
+    },
     rollupOptions: {
       output: {
         manualChunks: {
@@ -72,6 +77,7 @@ export default defineConfig(({ mode }) => ({
           'ui-vendor': ['lucide-react', '@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
           'leaflet-vendor': ['leaflet'],
           'form-vendor': ['zod', 'react-hook-form'],
+          'i18n-vendor': ['i18next', 'react-i18next'],
         },
       },
     },
