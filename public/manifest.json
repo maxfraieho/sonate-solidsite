@@ -1,0 +1,26 @@
+{
+  "name": "Sonate Solidaire",
+  "short_name": "Sonate",
+  "description": "Intégration culturelle par la musique en Suisse. Концерти та культурна інтеграція українців.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#d4af37",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "categories": ["music", "entertainment", "culture"],
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
