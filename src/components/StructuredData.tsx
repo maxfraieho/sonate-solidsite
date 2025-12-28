@@ -154,6 +154,48 @@ const newsArticleSchema = {
   },
 };
 
+// VideoObject Schema for Google Discover
+const videoObjectSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'Sonate Solidaire – Live Performance',
+    description: 'Intégration par la musique – concerts solidaires en Suisse Romande.',
+    thumbnailUrl: `${SITE_URL}/og-image.jpg`,
+    uploadDate: '2025-01-01',
+    duration: 'PT3M15S',
+    contentUrl: 'https://youtu.be/yzIiImWBuUU',
+    embedUrl: 'https://www.youtube.com/embed/yzIiImWBuUU',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sonate Solidaire',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/logo-sonate.png`,
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoObject',
+    name: 'Concert de violon – Sonate Solidaire',
+    description: 'Performance musicale pour l\'intégration culturelle des Ukrainiens en Suisse.',
+    thumbnailUrl: `${SITE_URL}/og-image.jpg`,
+    uploadDate: '2025-01-01',
+    duration: 'PT4M30S',
+    contentUrl: 'https://youtu.be/uMiQg_sq_-w',
+    embedUrl: 'https://www.youtube.com/embed/uMiQg_sq_-w',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sonate Solidaire',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/images/logo-sonate.png`,
+      },
+    },
+  },
+];
+
 // Breadcrumb configuration for indexable pages
 const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: string }[]> = {
   '/': [
@@ -257,6 +299,12 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       {isHomepage && (
         <script type="application/ld+json">
           {JSON.stringify(newsArticleSchema)}
+        </script>
+      )}
+      {/* VideoObject for Discover video carousel */}
+      {isHomepage && (
+        <script type="application/ld+json">
+          {JSON.stringify(videoObjectSchema)}
         </script>
       )}
       {breadcrumbSchema && (

@@ -66,7 +66,7 @@ export const PortfolioSection = () => {
         </div>
 
         {/* Video Section */}
-        <div>
+        <div role="region" aria-label="Video gallery">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
@@ -79,7 +79,7 @@ export const PortfolioSection = () => {
           </div>
           
           {/* Main Videos */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16" role="list" aria-label="Featured videos">
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper">
@@ -110,7 +110,7 @@ export const PortfolioSection = () => {
             <h3 className="mx-6 text-2xl font-display font-bold text-primary">Shorts</h3>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto" role="list" aria-label="Short videos">
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper lite-youtube-shorts">
