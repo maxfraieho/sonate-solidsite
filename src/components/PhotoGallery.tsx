@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import photo1 from '@/assets/gallery/photo-1.jpg';
 import photo2 from '@/assets/gallery/photo-2.jpg';
@@ -11,20 +12,62 @@ import photo7 from '@/assets/gallery/photo-7.jpg';
 import photo8 from '@/assets/gallery/photo-8.jpg';
 import photo9 from '@/assets/gallery/photo-9.jpg';
 
+// Localized alt texts for gallery images
+const galleryAltTexts: Record<string, string[]> = {
+  fr: [
+    'Ensemble folklorique en concert',
+    'Quatuor devant le château',
+    'Duo violon et accordéon',
+    'Performance solo de violon',
+    'Groupe folklorique traditionnel',
+    'Concert de Noël solidaire',
+    'Chorale en costumes traditionnels',
+    'Performance au restaurant',
+    'Trio devant le château de Lutsk',
+  ],
+  de: [
+    'Folkloreensemble beim Konzert',
+    'Quartett vor dem Schloss',
+    'Duo Geige und Akkordeon',
+    'Solo-Geigenperformance',
+    'Traditionelle Folkloregruppe',
+    'Solidaritäts-Weihnachtskonzert',
+    'Chor in traditionellen Kostümen',
+    'Auftritt im Restaurant',
+    'Trio vor dem Schloss Lutsk',
+  ],
+  uk: [
+    'Народний ансамбль на концерті',
+    'Квартет біля замку',
+    'Дует скрипка та акордеон',
+    'Сольний виступ на скрипці',
+    'Традиційний фольклорний гурт',
+    'Різдвяний благодійний концерт',
+    'Хор у традиційних костюмах',
+    'Виступ у ресторані',
+    'Тріо біля Луцького замку',
+  ],
+};
+
 const galleryImages = [
-  { id: 1, src: photo1, alt: 'Народний ансамбль', width: 600, height: 400 },
-  { id: 2, src: photo2, alt: 'Квартет біля замку', width: 600, height: 400 },
-  { id: 3, src: photo3, alt: 'Дует скрипка та акордеон', width: 600, height: 400 },
-  { id: 4, src: photo4, alt: 'Сольний виступ', width: 600, height: 400 },
-  { id: 5, src: photo5, alt: 'Фольклорний гурт', width: 600, height: 400 },
-  { id: 6, src: photo6, alt: 'Різдвяний виступ', width: 600, height: 400 },
-  { id: 7, src: photo7, alt: 'Хор у традиційних костюмах', width: 600, height: 400 },
-  { id: 8, src: photo8, alt: 'Виступ у ресторані', width: 600, height: 400 },
-  { id: 9, src: photo9, alt: 'Тріо біля Луцького замку', width: 600, height: 400 },
+  { id: 1, src: photo1, width: 600, height: 400 },
+  { id: 2, src: photo2, width: 600, height: 400 },
+  { id: 3, src: photo3, width: 600, height: 400 },
+  { id: 4, src: photo4, width: 600, height: 400 },
+  { id: 5, src: photo5, width: 600, height: 400 },
+  { id: 6, src: photo6, width: 600, height: 400 },
+  { id: 7, src: photo7, width: 600, height: 400 },
+  { id: 8, src: photo8, width: 600, height: 400 },
+  { id: 9, src: photo9, width: 600, height: 400 },
 ];
 
 export const PhotoGallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const { i18n } = useTranslation();
+  
+  // Get current language, fallback to French
+  const currentLang = i18n.language?.substring(0, 2) || 'fr';
+  const altTexts = galleryAltTexts[currentLang] || galleryAltTexts.fr;
 
   const openLightbox = (index: number) => setSelectedImage(index);
   const closeLightbox = () => setSelectedImage(null);
@@ -49,11 +92,11 @@ export const PhotoGallery = () => {
             key={image.id}
             onClick={() => openLightbox(index)}
             className="group relative aspect-square overflow-hidden rounded-xl"
-            aria-label={`View photo: ${image.alt}`}
+            aria-label={`View photo: ${altTexts[index]}`}
           >
             <img
               src={image.src}
-              alt={image.alt}
+              alt={altTexts[index]}
               width={image.width}
               height={image.height}
               loading="lazy"
@@ -91,7 +134,7 @@ export const PhotoGallery = () => {
           
           <img
             src={galleryImages[selectedImage].src}
-            alt={galleryImages[selectedImage].alt}
+            alt={altTexts[selectedImage]}
             className="max-w-full max-h-[80vh] rounded-lg shadow-2xl"
           />
           
