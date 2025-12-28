@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 
 export const HeroSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isFrench = i18n.language === 'fr';
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden" aria-label="Hero">
@@ -25,6 +26,11 @@ export const HeroSection = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-4 text-foreground drop-shadow-2xl">
             {t('hero.title')}
           </h1>
+          {isFrench && (
+            <p className="text-base md:text-lg mb-6 text-foreground/80 max-w-3xl mx-auto leading-relaxed">
+              {t('hero.seoParagraph')}
+            </p>
+          )}
           <p className="text-xl md:text-2xl mb-6 text-primary font-semibold">
             {t('hero.tagline')}
           </p>
