@@ -131,10 +131,11 @@ const faqSchema = {
 const newsArticleSchema = {
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
-  headline: 'Concerts de Solidarité pour l\'Intégration Culturelle en Suisse Romande',
-  description: 'Sonate Solidaire organise des concerts de violon pour soutenir l\'intégration culturelle des Ukrainiens en Suisse.',
-  datePublished: '2025-01-01',
+  headline: 'Sonate Solidaire – Intégration par la musique en Suisse Romande',
+  description: 'Association culturelle favorisant l\'intégration des Ukrainiens par la musique. Concerts solidaires, médiation culturelle et inclusion sociale dans le Canton de Vaud.',
+  datePublished: '2025-12-29',
   dateModified: new Date().toISOString().split('T')[0],
+  inLanguage: 'fr-CH',
   author: {
     '@type': 'Person',
     name: 'Arsen Kovalenko',
