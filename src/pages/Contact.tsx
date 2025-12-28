@@ -209,9 +209,14 @@ const Contact = () => {
               <address className="not-italic grid md:grid-cols-2 gap-6">
                 <div className="flex items-start">
                   <MapPin className="text-primary h-7 w-7 mr-4 mt-1 flex-shrink-0" aria-hidden="true" />
-                  <p className="text-subtext leading-relaxed">
+                  <a 
+                    href="https://www.google.com/maps/dir/?api=1&destination=Avenue+du+Mont-Blanc+29,+1196+Gland,+Switzerland"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-subtext hover:text-primary transition-colors leading-relaxed"
+                  >
                     {t('contact.address')}
-                  </p>
+                  </a>
                 </div>
 
                 <div className="flex items-start">
