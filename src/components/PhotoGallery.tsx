@@ -12,15 +12,15 @@ import photo8 from '@/assets/gallery/photo-8.jpg';
 import photo9 from '@/assets/gallery/photo-9.jpg';
 
 const galleryImages = [
-  { id: 1, src: photo1, alt: 'Народний ансамбль' },
-  { id: 2, src: photo2, alt: 'Квартет біля замку' },
-  { id: 3, src: photo3, alt: 'Дует скрипка та акордеон' },
-  { id: 4, src: photo4, alt: 'Сольний виступ' },
-  { id: 5, src: photo5, alt: 'Фольклорний гурт' },
-  { id: 6, src: photo6, alt: 'Різдвяний виступ' },
-  { id: 7, src: photo7, alt: 'Хор у традиційних костюмах' },
-  { id: 8, src: photo8, alt: 'Виступ у ресторані' },
-  { id: 9, src: photo9, alt: 'Тріо біля Луцького замку' },
+  { id: 1, src: photo1, alt: 'Народний ансамбль', width: 600, height: 400 },
+  { id: 2, src: photo2, alt: 'Квартет біля замку', width: 600, height: 400 },
+  { id: 3, src: photo3, alt: 'Дует скрипка та акордеон', width: 600, height: 400 },
+  { id: 4, src: photo4, alt: 'Сольний виступ', width: 600, height: 400 },
+  { id: 5, src: photo5, alt: 'Фольклорний гурт', width: 600, height: 400 },
+  { id: 6, src: photo6, alt: 'Різдвяний виступ', width: 600, height: 400 },
+  { id: 7, src: photo7, alt: 'Хор у традиційних костюмах', width: 600, height: 400 },
+  { id: 8, src: photo8, alt: 'Виступ у ресторані', width: 600, height: 400 },
+  { id: 9, src: photo9, alt: 'Тріо біля Луцького замку', width: 600, height: 400 },
 ];
 
 export const PhotoGallery = () => {
@@ -54,6 +54,8 @@ export const PhotoGallery = () => {
             <img
               src={image.src}
               alt={image.alt}
+              width={image.width}
+              height={image.height}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

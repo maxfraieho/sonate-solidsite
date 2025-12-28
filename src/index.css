@@ -297,13 +297,44 @@
   }
 }
 
+/* Skeleton shimmer effect for video placeholders */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.lite-youtube-wrapper {
+  position: relative;
+  background: linear-gradient(
+    110deg,
+    hsl(var(--background)) 8%,
+    hsl(var(--surface)) 18%,
+    hsl(var(--background)) 33%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* Remove skeleton once LiteYouTube is activated */
+.lite-youtube-wrapper .yt-lite.lyt-activated,
+.lite-youtube-wrapper lite-youtube.lyt-activated {
+  animation: none;
+  background: hsl(var(--background));
+}
+
 /* Lite YouTube Embed custom styling */
 .lite-youtube-wrapper .yt-lite,
 .lite-youtube-wrapper lite-youtube {
   width: 100% !important;
   height: 100% !important;
   display: block;
-  background-color: hsl(var(--background));
+  background-color: transparent;
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -359,4 +390,12 @@
 .lite-youtube-wrapper:not(.lite-youtube-shorts) .yt-lite,
 .lite-youtube-wrapper:not(.lite-youtube-shorts) lite-youtube {
   aspect-ratio: 16 / 9;
+}
+
+/* Respect reduced motion for skeleton */
+@media (prefers-reduced-motion: reduce) {
+  .lite-youtube-wrapper {
+    animation: none;
+    background: hsl(var(--surface));
+  }
 }
