@@ -27,20 +27,22 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-// Component to sync language from URL
+// Component to sync language from URL (only when URL has explicit language prefix)
 const LanguageSync = () => {
   const location = useLocation();
   const { i18n } = useTranslation();
   
   useEffect(() => {
     const path = location.pathname;
-    let lang = 'de'; // Default to German
+    let lang: string | null = null;
     
+    // Only set language if URL explicitly contains a language prefix
     if (path.startsWith('/fr')) lang = 'fr';
     else if (path.startsWith('/de')) lang = 'de';
     else if (path.startsWith('/uk')) lang = 'uk';
     
-    if (i18n.language !== lang) {
+    // Only change language if URL has explicit prefix AND it differs from current
+    if (lang && i18n.language !== lang) {
       i18n.changeLanguage(lang);
     }
   }, [location.pathname, i18n]);
