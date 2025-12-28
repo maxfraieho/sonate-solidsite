@@ -18,7 +18,7 @@ interface StructuredDataProps {
   event?: MusicEventData;
 }
 
-// Organization Schema
+// Organization Schema (enhanced with full address and geo)
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -28,15 +28,32 @@ const organizationSchema = {
   image: `${SITE_URL}/og-image.jpg`,
   description: 'Association suisse à but non lucratif pour l\'intégration culturelle des Ukrainiens par la musique.',
   foundingDate: '2024',
-  areaServed: {
-    '@type': 'AdministrativeArea',
-    name: 'Vaud, Switzerland',
-  },
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Canton de Vaud',
+      containedInPlace: {
+        '@type': 'Country',
+        name: 'Switzerland',
+      },
+    },
+    {
+      '@type': 'Country',
+      name: 'Switzerland',
+    },
+  ],
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Avenue du Mont-Blanc 29',
     addressLocality: 'Gland',
     addressRegion: 'Vaud',
+    postalCode: '1196',
     addressCountry: 'CH',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 46.4192,
+    longitude: 6.2728,
   },
   sameAs: [
     'https://t.me/sonatesolidaire',
@@ -49,6 +66,31 @@ const organizationSchema = {
     email: 'arsen.k111999@gmail.com',
     telephone: '+41 78 326 11 12',
     availableLanguage: ['French', 'German', 'Ukrainian'],
+  },
+};
+
+// Place Schema (linked to Organization for local SEO)
+const placeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Place',
+  name: 'Sonate Solidaire – Projet culturel',
+  description: 'Siège du projet culturel Sonate Solidaire pour l\'intégration par la musique.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Avenue du Mont-Blanc 29',
+    addressLocality: 'Gland',
+    addressRegion: 'Vaud',
+    postalCode: '1196',
+    addressCountry: 'CH',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 46.4192,
+    longitude: 6.2728,
+  },
+  containedInPlace: {
+    '@type': 'AdministrativeArea',
+    name: 'Canton de Vaud, Switzerland',
   },
 };
 
@@ -382,6 +424,10 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       </script>
       <script type="application/ld+json">
         {JSON.stringify(websiteSchema)}
+      </script>
+      {/* Place Schema for local SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify(placeSchema)}
       </script>
       {/* FAQ Schema for Discover visibility */}
       {isHomepage && (
