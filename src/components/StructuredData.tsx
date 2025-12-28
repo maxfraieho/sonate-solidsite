@@ -222,6 +222,35 @@ const creativeWorkSchema = {
   },
 };
 
+// ImageGallery Schema for Portfolio page
+const imageGallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ImageGallery',
+  name: 'Portfolio Photo Gallery – Sonate Solidaire',
+  description: 'Collection de photos de concerts et performances musicales de Sonate Solidaire en Suisse.',
+  image: [
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${SITE_URL}/images/founder.jpg`,
+      description: 'Portrait du fondateur du projet Sonate Solidaire',
+    },
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${SITE_URL}/images/hero.jpg`,
+      description: 'Affiche du concert Sonate Solidaire à Lausanne',
+    },
+    {
+      '@type': 'ImageObject',
+      contentUrl: `${SITE_URL}/og-image.jpg`,
+      description: 'Performance musicale Sonate Solidaire',
+    },
+  ],
+  author: {
+    '@type': 'Person',
+    name: 'Arsen Kovalenko',
+  },
+};
+
 // Breadcrumb configuration for indexable pages
 const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: string }[]> = {
   '/': [
@@ -342,6 +371,12 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       {isPortfolioPage && (
         <script type="application/ld+json">
           {JSON.stringify(creativeWorkSchema)}
+        </script>
+      )}
+      {/* ImageGallery Schema for Portfolio page */}
+      {isPortfolioPage && (
+        <script type="application/ld+json">
+          {JSON.stringify(imageGallerySchema)}
         </script>
       )}
       {breadcrumbSchema && (
