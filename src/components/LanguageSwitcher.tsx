@@ -50,31 +50,39 @@ export const LanguageSwitcher = () => {
   const CurrentFlag = currentLang.Flag;
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2 text-foreground hover:text-primary">
-          <Globe className="h-4 w-4" />
-          <span className="hidden sm:inline flex items-center gap-2">
-            <CurrentFlag /> {currentLang.name}
-          </span>
-          <span className="sm:hidden"><CurrentFlag /></span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-surface border-border">
-        {languages.map((lang) => {
-          const LangFlag = lang.Flag;
-          return (
-            <DropdownMenuItem
-              key={lang.code}
-              onClick={() => changeLanguage(lang.code)}
-              className={`cursor-pointer flex items-center gap-2 ${i18n.language === lang.code ? 'text-primary' : 'text-foreground'}`}
-            >
-              <LangFlag />
-              {lang.name}
-            </DropdownMenuItem>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <nav aria-label="Language selector">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="gap-2 text-foreground hover:text-primary"
+            aria-label={`Current language: ${currentLang.name}. Click to change language.`}
+          >
+            <Globe className="h-4 w-4" aria-hidden="true" />
+            <span className="hidden sm:inline flex items-center gap-2">
+              <CurrentFlag /> {currentLang.name}
+            </span>
+            <span className="sm:hidden"><CurrentFlag /></span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="bg-surface border-border">
+          {languages.map((lang) => {
+            const LangFlag = lang.Flag;
+            return (
+              <DropdownMenuItem
+                key={lang.code}
+                onClick={() => changeLanguage(lang.code)}
+                className={`cursor-pointer flex items-center gap-2 ${i18n.language === lang.code ? 'text-primary' : 'text-foreground'}`}
+                aria-current={i18n.language === lang.code ? 'true' : undefined}
+              >
+                <LangFlag />
+                {lang.name}
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </nav>
   );
 };

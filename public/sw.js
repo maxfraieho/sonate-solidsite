@@ -1,10 +1,11 @@
-// Service Worker for Sonate Solidaire PWA
-const CACHE_NAME = 'sonate-solidaire-v1';
-const OFFLINE_URL = '/';
+// Service Worker for Sonate Solidaire PWA v4.5
+const CACHE_NAME = 'sonate-solidaire-v2';
+const OFFLINE_URL = '/offline.html';
 
 // Assets to cache on install
 const PRECACHE_ASSETS = [
   '/',
+  '/offline.html',
   '/manifest.json',
   '/images/hero.jpg',
   '/images/logo-sonate.png',
@@ -51,7 +52,7 @@ self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests
   if (url.origin !== location.origin) return;
   
-  // For navigation requests (pages) - NetworkFirst
+  // For navigation requests (pages) - NetworkFirst with offline fallback
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request)
@@ -66,7 +67,7 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          // Return cached page or offline fallback
+          // Return cached page or dedicated offline page
           return caches.match(request)
             .then((cached) => cached || caches.match(OFFLINE_URL));
         })
@@ -81,7 +82,8 @@ self.addEventListener('fetch', (event) => {
     url.pathname.endsWith('.jpg') ||
     url.pathname.endsWith('.png') ||
     url.pathname.endsWith('.webp') ||
-    url.pathname.endsWith('.woff2')
+    url.pathname.endsWith('.woff2') ||
+    url.pathname.endsWith('.json')
   ) {
     event.respondWith(
       caches.match(request)

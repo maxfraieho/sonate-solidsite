@@ -87,6 +87,73 @@ const websiteSchema = {
   },
 };
 
+// FAQ Schema for Google Discover
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Comment soutenir Sonate Solidaire ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Vous pouvez faire un don via IBAN ou Twint, ou assister à nos concerts solidaires en Suisse romande.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Où se déroulent les concerts ?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Nos concerts ont lieu dans le Canton de Vaud, en Suisse, principalement à Gland et dans les environs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Wie kann ich Sonate Solidaire unterstützen?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sie können über IBAN oder Twint spenden oder unsere Solidaritätskonzerte in der Romandie besuchen.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Як підтримати Sonate Solidaire?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ви можете зробити донат через IBAN або Twint, або відвідати наші благодійні концерти у Швейцарії.',
+      },
+    },
+  ],
+};
+
+// NewsArticle Schema for Google Discover
+const newsArticleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: 'Concerts de Solidarité pour l\'Intégration Culturelle en Suisse Romande',
+  description: 'Sonate Solidaire organise des concerts de violon pour soutenir l\'intégration culturelle des Ukrainiens en Suisse.',
+  datePublished: '2025-01-01',
+  dateModified: new Date().toISOString().split('T')[0],
+  author: {
+    '@type': 'Person',
+    name: 'Arsen Kovalenko',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Sonate Solidaire',
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}/images/logo-sonate.png`,
+    },
+  },
+  image: `${SITE_URL}/og-image.jpg`,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': SITE_URL,
+  },
+};
+
 // Breadcrumb configuration for indexable pages
 const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: string }[]> = {
   '/': [
@@ -111,7 +178,9 @@ const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: st
 };
 
 const generateBreadcrumbSchema = (pathname: string) => {
-  const breadcrumbs = breadcrumbConfig[pathname];
+  // Normalize pathname by removing language prefix
+  const normalizedPath = pathname.replace(/^\/(fr|de|uk)/, '') || '/';
+  const breadcrumbs = breadcrumbConfig[normalizedPath];
   
   if (!breadcrumbs) return null;
   
@@ -165,6 +234,7 @@ const generateMusicEventSchema = (event: MusicEventData) => {
 export const StructuredData = ({ event }: StructuredDataProps) => {
   const location = useLocation();
   const breadcrumbSchema = generateBreadcrumbSchema(location.pathname);
+  const isHomepage = location.pathname === '/' || /^\/(fr|de|uk)\/?$/.test(location.pathname);
 
   return (
     <Helmet>
@@ -177,6 +247,18 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       <script type="application/ld+json">
         {JSON.stringify(websiteSchema)}
       </script>
+      {/* FAQ Schema for Discover visibility */}
+      {isHomepage && (
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      )}
+      {/* NewsArticle for Discover eligibility */}
+      {isHomepage && (
+        <script type="application/ld+json">
+          {JSON.stringify(newsArticleSchema)}
+        </script>
+      )}
       {breadcrumbSchema && (
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}
