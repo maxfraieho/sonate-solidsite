@@ -16,7 +16,7 @@ import { z } from 'zod';
 const contactSchema = z.object({
   name: z.string().min(2, "Ім'я має містити мінімум 2 символи.").max(100),
   email: z.string().email("Невірна адреса електронної пошти.").max(255),
-  subject: z.string().optional(),
+  subject: z.string().min(1, "Будь ласка, оберіть тему."),
   message: z.string().min(5, "Повідомлення має бути змістовнішим.").max(1000),
   consent: z.boolean().refine(val => val === true, "Необхідно підтвердити згоду."),
 });
@@ -40,7 +40,7 @@ const Contact = () => {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
-    subject: 'general',
+    subject: '',
     message: '',
     consent: false
   });
@@ -96,12 +96,13 @@ const Contact = () => {
       de: 'Ich stimme zu, dass meine Daten zur Bearbeitung meiner Anfrage verarbeitet werden.',
       uk: 'Я погоджуюсь на обробку моїх даних для відповіді на мій запит.'
     },
+    subjectPlaceholder: { fr: 'Choisir un sujet...', de: 'Betreff wählen...', uk: 'Оберіть тему...' },
     subjects: {
-      general: { fr: 'Question générale', de: 'Allgemeine Frage', uk: 'Загальне питання' },
-      partnership: { fr: 'Proposition de partenariat', de: 'Partnerschaftsvorschlag', uk: 'Пропозиція партнерства' },
-      volunteering: { fr: 'Bénévolat / Rejoindre l\'équipe', de: 'Freiwilligenarbeit / Team beitreten', uk: 'Волонтерство / Приєднатись до команди' },
-      media: { fr: 'Presse / Média', de: 'Presse / Medien', uk: 'Преса / Медіа' },
-      other: { fr: 'Autre', de: 'Andere', uk: 'Інше' }
+      cultural: { fr: 'Collaboration culturelle / musicale', de: 'Kulturelle / musikalische Zusammenarbeit', uk: 'Культурна / музична співпраця' },
+      event: { fr: 'Organisation d\'un événement', de: 'Veranstaltungsorganisation', uk: 'Організація заходу' },
+      integration: { fr: 'Projet d\'intégration locale', de: 'Lokales Integrationsprojekt', uk: 'Місцевий інтеграційний проєкт' },
+      institutional: { fr: 'Demande institutionnelle (école, commune, association)', de: 'Institutionelle Anfrage (Schule, Gemeinde, Verein)', uk: 'Інституційний запит (школа, комуна, асоціація)' },
+      other: { fr: 'Autre demande professionnelle', de: 'Andere professionelle Anfrage', uk: 'Інший професійний запит' }
     },
     privacyNote: {
       fr: 'Les messages sont traités de manière confidentielle et exclusivement pour répondre à votre demande.',
@@ -173,7 +174,7 @@ const Contact = () => {
       }
 
       toast.success(t('contact.toastSuccess'));
-      setFormData({ name: '', email: '', subject: 'general', message: '', consent: false });
+      setFormData({ name: '', email: '', subject: '', message: '', consent: false });
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error(lang === 'uk' ? 'Помилка надсилання. Спробуйте ще раз.' : 'Erreur d\'envoi. Veuillez réessayer.');
@@ -314,9 +315,12 @@ const Contact = () => {
                       id="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      required
+                      aria-required="true"
                       aria-label={texts.subject[lang]}
                       className="w-full px-4 py-3 bg-background border border-primary/30 rounded-lg text-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
                     >
+                      <option value="" disabled>{texts.subjectPlaceholder[lang]}</option>
                       {Object.entries(texts.subjects).map(([key, value]) => (
                         <option key={key} value={key}>{value[lang]}</option>
                       ))}
