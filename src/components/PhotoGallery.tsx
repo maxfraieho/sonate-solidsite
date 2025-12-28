@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -70,19 +70,33 @@ export const PhotoGallery = () => {
   const altTexts = galleryAltTexts[currentLang] || galleryAltTexts.fr;
 
   const openLightbox = (index: number) => setSelectedImage(index);
-  const closeLightbox = () => setSelectedImage(null);
+  const closeLightbox = useCallback(() => setSelectedImage(null), []);
   
-  const nextImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage + 1) % galleryImages.length);
-    }
-  };
+  const nextImage = useCallback(() => {
+    setSelectedImage((prev) => 
+      prev !== null ? (prev + 1) % galleryImages.length : null
+    );
+  }, []);
   
-  const prevImage = () => {
-    if (selectedImage !== null) {
-      setSelectedImage((selectedImage - 1 + galleryImages.length) % galleryImages.length);
-    }
-  };
+  const prevImage = useCallback(() => {
+    setSelectedImage((prev) => 
+      prev !== null ? (prev - 1 + galleryImages.length) % galleryImages.length : null
+    );
+  }, []);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage !== null) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape') closeLightbox();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, nextImage, prevImage, closeLightbox]);
 
   return (
     <div>
