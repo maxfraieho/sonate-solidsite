@@ -26,6 +26,12 @@ dist-ssr
 # Claude Code infrastructure (local development only, NOT for production)
 .claude/
 .claude_session/
+.claude-workspace/
+
+# Exception: Version-controlled project skills
+!.claude/skills-local/
+!.claude/skills-installer/
+!.claude/skills-project
 
 # Development workflow directories (Claude + Lovable coordination)
 prompts/
