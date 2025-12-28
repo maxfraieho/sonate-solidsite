@@ -51,3 +51,6 @@ CLAUDE.md
 !.lovable/prompts/TEMPLATE.md
 !.lovable/protocol.md
 !.lovable/metrics.md
+!docs/code-reviews/*performance*.md
+!docs/code-reviews/*validation*.md
+!docs/code-reviews/*lighthouse*.json
