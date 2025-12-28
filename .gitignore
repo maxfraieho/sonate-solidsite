@@ -36,7 +36,8 @@ dist-ssr
 # Development workflow directories (Claude + Lovable coordination)
 prompts/
 docs/decisions/
-docs/code-reviews/
+docs/code-reviews/*
+!docs/code-reviews/*seo*.md
 docs/changelogs/
 sessions/
 .project_promts/
