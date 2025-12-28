@@ -240,6 +240,9 @@ const Contact = () => {
                   </a>
                 </div>
               </address>
+              <p className="text-sm text-subtext/70 mt-4 text-center">
+                {t('contact.localSeo')}
+              </p>
             </div>
           </section>
 
