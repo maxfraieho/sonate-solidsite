@@ -22,6 +22,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const IntegrationPath = lazy(() => import("./pages/IntegrationPath"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Support = lazy(() => import("./pages/Support"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -67,6 +68,7 @@ const App = () => (
               <Routes>
                 {/* Root route (default German) */}
                 <Route path="/" element={<Index />} />
+                <Route path="/portfolio" element={<Portfolio />} />
                 
                 {/* French routes */}
                 <Route path="/fr" element={<Index />} />
@@ -74,6 +76,7 @@ const App = () => (
                 <Route path="/fr/integration" element={<IntegrationPath />} />
                 <Route path="/fr/privacy" element={<Privacy />} />
                 <Route path="/fr/support" element={<Support />} />
+                <Route path="/fr/portfolio" element={<Portfolio />} />
                 
                 {/* German routes */}
                 <Route path="/de" element={<Index />} />
@@ -81,6 +84,7 @@ const App = () => (
                 <Route path="/de/integration" element={<IntegrationPath />} />
                 <Route path="/de/privacy" element={<Privacy />} />
                 <Route path="/de/support" element={<Support />} />
+                <Route path="/de/portfolio" element={<Portfolio />} />
                 
                 {/* Ukrainian routes */}
                 <Route path="/uk" element={<Index />} />
@@ -88,6 +92,7 @@ const App = () => (
                 <Route path="/uk/integration" element={<IntegrationPath />} />
                 <Route path="/uk/privacy" element={<Privacy />} />
                 <Route path="/uk/support" element={<Support />} />
+                <Route path="/uk/portfolio" element={<Portfolio />} />
                 
                 {/* Legacy routes (redirect to root with hash) */}
                 <Route path="/contact" element={<Contact />} />
