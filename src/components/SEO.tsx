@@ -98,6 +98,17 @@ const seoContent = {
 
 type PageKey = 'home' | 'contact' | 'integration' | 'support' | 'privacy';
 
+// Helper to get base path without language prefix
+const getBasePath = (path: string): string => {
+  const prefixes = ['/fr', '/de', '/uk'];
+  for (const prefix of prefixes) {
+    if (path.startsWith(prefix)) {
+      const remaining = path.slice(prefix.length);
+      return remaining || '/';
+    }
+  }
+  return path;
+};
 
 export const SEO = ({ 
   title, 
@@ -110,12 +121,16 @@ export const SEO = ({
   const currentLang = i18n.language as keyof typeof seoContent;
   const content = seoContent[currentLang] || seoContent.de; // Default to German (primary)
   
+  // Get base path for generating alternate URLs
+  const basePath = getBasePath(path);
+  
   // Determine page key from path
   const getPageKey = (path: string): PageKey => {
-    if (path === '/contact') return 'contact';
-    if (path === '/integration') return 'integration';
-    if (path === '/support') return 'support';
-    if (path === '/privacy') return 'privacy';
+    const cleanPath = getBasePath(path);
+    if (cleanPath === '/contact') return 'contact';
+    if (cleanPath === '/integration') return 'integration';
+    if (cleanPath === '/support') return 'support';
+    if (cleanPath === '/privacy') return 'privacy';
     return 'home';
   };
   
@@ -124,11 +139,21 @@ export const SEO = ({
   
   const finalTitle = title || pageContent.title;
   const finalDescription = description || pageContent.description;
-  const canonicalUrl = `${SITE_URL}${path}`;
+  
+  // Canonical URL includes language prefix if present
+  const canonicalUrl = `${SITE_URL}${path === '/' ? '' : path}`;
+  
+  // Generate language-specific alternate URLs
+  const getAlternateUrl = (lang: 'fr' | 'de' | 'uk'): string => {
+    if (basePath === '/') {
+      return lang === 'de' ? SITE_URL : `${SITE_URL}/${lang}/`;
+    }
+    return lang === 'de' ? `${SITE_URL}${basePath}` : `${SITE_URL}/${lang}${basePath}`;
+  };
   
   // Get html lang attribute with Swiss regional code
   const getHtmlLang = () => {
-    if (currentLang === 'uk') return 'uk';
+    if (currentLang === 'uk') return 'uk-UA';
     if (currentLang === 'de') return 'de-CH';
     return 'fr-CH';
   };
@@ -170,11 +195,11 @@ export const SEO = ({
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={image} />
       
-      {/* Hreflang Tags with Swiss regional codes */}
-      <link rel="alternate" hrefLang="de-CH" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="fr-CH" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="uk" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
+      {/* Hreflang Tags - Language-specific URLs */}
+      <link rel="alternate" hrefLang="fr-CH" href={getAlternateUrl('fr')} />
+      <link rel="alternate" hrefLang="de-CH" href={getAlternateUrl('de')} />
+      <link rel="alternate" hrefLang="uk-UA" href={getAlternateUrl('uk')} />
+      <link rel="alternate" hrefLang="x-default" href={getAlternateUrl('de')} />
     </Helmet>
   );
 };
