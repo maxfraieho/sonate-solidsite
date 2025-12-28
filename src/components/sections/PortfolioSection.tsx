@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { AudioPlayer } from '@/components/AudioPlayer';
 import { PhotoGallery } from '@/components/PhotoGallery';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
 export const PortfolioSection = () => {
   const { i18n } = useTranslation();
@@ -80,25 +82,23 @@ export const PortfolioSection = () => {
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
-                <iframe
-                  src="https://www.youtube.com/embed/3jnDrzAo820"
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper">
+                <LiteYouTubeEmbed
+                  id="3jnDrzAo820"
                   title="Concert Arsen Kovalenko"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                  poster="maxresdefault"
+                  noCookie
                 />
               </div>
             </div>
             <div className="group relative">
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
-                <iframe
-                  src="https://www.youtube.com/embed/5-wAIreCeNk"
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper">
+                <LiteYouTubeEmbed
+                  id="5-wAIreCeNk"
                   title="Performance violon"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                  poster="maxresdefault"
+                  noCookie
                 />
               </div>
             </div>
@@ -113,37 +113,34 @@ export const PortfolioSection = () => {
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
-                <iframe
-                  src="https://www.youtube.com/embed/uMiQg_sq_-w?modestbranding=1&rel=0&showinfo=0"
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper lite-youtube-shorts">
+                <LiteYouTubeEmbed
+                  id="uMiQg_sq_-w"
                   title="Short 1"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                  poster="maxresdefault"
+                  noCookie
                 />
               </div>
             </div>
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
-                <iframe
-                  src="https://www.youtube.com/embed/T15hZVOKaSc?modestbranding=1&rel=0&showinfo=0"
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper lite-youtube-shorts">
+                <LiteYouTubeEmbed
+                  id="T15hZVOKaSc"
                   title="Short 2"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                  poster="maxresdefault"
+                  noCookie
                 />
               </div>
             </div>
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
-                <iframe
-                  src="https://www.youtube.com/embed/yzIiImWBuUU?modestbranding=1&rel=0&showinfo=0"
+              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300 lite-youtube-wrapper lite-youtube-shorts">
+                <LiteYouTubeEmbed
+                  id="yzIiImWBuUU"
                   title="Short 3"
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
+                  poster="maxresdefault"
+                  noCookie
                 />
               </div>
             </div>
