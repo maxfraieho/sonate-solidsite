@@ -27,3 +27,11 @@
 
 /robots.txt
   Cache-Control: public, max-age=86400
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+  Service-Worker-Allowed: /
+
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json

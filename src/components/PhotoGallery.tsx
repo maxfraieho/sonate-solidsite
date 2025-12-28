@@ -43,13 +43,13 @@ export const PhotoGallery = () => {
 
   return (
     <div>
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4" role="list" aria-label="Photo gallery">
         {galleryImages.map((image, index) => (
           <button
             key={image.id}
             onClick={() => openLightbox(index)}
             className="group relative aspect-square overflow-hidden rounded-xl"
+            aria-label={`View photo: ${image.alt}`}
           >
             <img
               src={image.src}
@@ -65,19 +65,26 @@ export const PhotoGallery = () => {
 
       {/* Lightbox */}
       {selectedImage !== null && (
-        <div className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4">
+        <div 
+          className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image gallery lightbox"
+        >
           <button
             onClick={closeLightbox}
             className="absolute top-4 right-4 p-2 text-foreground hover:text-primary transition-colors"
+            aria-label="Close gallery"
           >
-            <X className="h-8 w-8" />
+            <X className="h-8 w-8" aria-hidden="true" />
           </button>
           
           <button
             onClick={prevImage}
             className="absolute left-4 p-2 text-foreground hover:text-primary transition-colors"
+            aria-label="Previous image"
           >
-            <ChevronLeft className="h-10 w-10" />
+            <ChevronLeft className="h-10 w-10" aria-hidden="true" />
           </button>
           
           <img
@@ -89,11 +96,12 @@ export const PhotoGallery = () => {
           <button
             onClick={nextImage}
             className="absolute right-4 p-2 text-foreground hover:text-primary transition-colors"
+            aria-label="Next image"
           >
-            <ChevronRight className="h-10 w-10" />
+            <ChevronRight className="h-10 w-10" aria-hidden="true" />
           </button>
           
-          <div className="absolute bottom-4 text-center text-subtext">
+          <div className="absolute bottom-4 text-center text-subtext" aria-live="polite">
             {selectedImage + 1} / {galleryImages.length}
           </div>
         </div>
