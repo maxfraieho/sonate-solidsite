@@ -251,6 +251,40 @@ const imageGallerySchema = {
   },
 };
 
+// VideoGallery Schema for Portfolio page (Discover eligibility)
+const videoGallerySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoGallery',
+  name: 'Portfolio Video Performances – Sonate Solidaire',
+  description: 'Collection de vidéos illustrant les concerts et performances de Sonate Solidaire en Suisse.',
+  video: [
+    {
+      '@type': 'VideoObject',
+      name: 'Concert Performance – Sonate Solidaire',
+      description: 'Performance live de violon pour l\'intégration culturelle.',
+      embedUrl: 'https://www.youtube.com/embed/uMiQg_sq_-w',
+      thumbnailUrl: 'https://i.ytimg.com/vi/uMiQg_sq_-w/hqdefault.jpg',
+      uploadDate: '2025-01-01',
+      duration: 'PT4M30S',
+      inLanguage: 'fr-CH',
+    },
+    {
+      '@type': 'VideoObject',
+      name: 'Shorts – Intégration par la Musique',
+      description: 'Court extrait de performance musicale solidaire.',
+      embedUrl: 'https://www.youtube.com/embed/yzIiImWBuUU',
+      thumbnailUrl: 'https://i.ytimg.com/vi/yzIiImWBuUU/hqdefault.jpg',
+      uploadDate: '2025-01-01',
+      duration: 'PT3M15S',
+      inLanguage: 'fr-CH',
+    },
+  ],
+  author: {
+    '@type': 'Person',
+    name: 'Arsen Kovalenko',
+  },
+};
+
 // Breadcrumb configuration for indexable pages
 const breadcrumbConfig: Record<string, { name: string; nameKey: string; path: string }[]> = {
   '/': [
@@ -377,6 +411,12 @@ export const StructuredData = ({ event }: StructuredDataProps) => {
       {isPortfolioPage && (
         <script type="application/ld+json">
           {JSON.stringify(imageGallerySchema)}
+        </script>
+      )}
+      {/* VideoGallery Schema for Portfolio page */}
+      {isPortfolioPage && (
+        <script type="application/ld+json">
+          {JSON.stringify(videoGallerySchema)}
         </script>
       )}
       {breadcrumbSchema && (
