@@ -113,7 +113,7 @@ export const PortfolioSection = () => {
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
                 <iframe
                   src="https://www.youtube.com/embed/uMiQg_sq_-w?modestbranding=1&rel=0&showinfo=0"
                   title="Short 1"
@@ -125,7 +125,7 @@ export const PortfolioSection = () => {
             </div>
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
                 <iframe
                   src="https://www.youtube.com/embed/T15hZVOKaSc?modestbranding=1&rel=0&showinfo=0"
                   title="Short 2"
@@ -137,7 +137,7 @@ export const PortfolioSection = () => {
             </div>
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-b from-primary/20 to-transparent rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
+              <div className="shorts-video-wrapper relative aspect-[9/16] rounded-xl overflow-hidden bg-background border border-primary/30 group-hover:border-primary/60 transition-colors duration-300">
                 <iframe
                   src="https://www.youtube.com/embed/yzIiImWBuUU?modestbranding=1&rel=0&showinfo=0"
                   title="Short 3"
