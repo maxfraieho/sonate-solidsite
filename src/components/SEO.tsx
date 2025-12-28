@@ -30,6 +30,14 @@ const seoContent = {
         title: 'Parcours d\'Intégration | Sonate Solidaire – Suisse',
         description: 'Parcours d\'intégration culturelle par la musique en Suisse. Un chemin structuré vers l\'inclusion sociale dans le canton de Vaud.',
       },
+      support: {
+        title: 'Solidarité | Sonate Solidaire – Suisse',
+        description: 'Soutenez l\'intégration culturelle des Ukrainiens en Suisse. Devenez partenaire de Sonate Solidaire dans le canton de Vaud.',
+      },
+      privacy: {
+        title: 'Politique de Confidentialité | Sonate Solidaire',
+        description: 'Politique de confidentialité de Sonate Solidaire. Protection des données selon le nDSG suisse et le RGPD européen.',
+      },
     },
   },
   de: {
@@ -48,6 +56,14 @@ const seoContent = {
       integration: {
         title: 'Integrationsweg | Sonate Solidaire – Schweiz',
         description: 'Kultureller Integrationsweg durch Musik in der Schweiz. Strukturierter Weg zur sozialen Inklusion im Kanton Waadt.',
+      },
+      support: {
+        title: 'Solidarität | Sonate Solidaire – Schweiz',
+        description: 'Unterstützen Sie die kulturelle Integration von Ukrainern in der Schweiz. Werden Sie Partner von Sonate Solidaire im Kanton Waadt.',
+      },
+      privacy: {
+        title: 'Datenschutzrichtlinie | Sonate Solidaire',
+        description: 'Datenschutzrichtlinie von Sonate Solidaire. Datenschutz gemäss Schweizer nDSG und EU-DSGVO.',
       },
     },
   },
@@ -68,11 +84,19 @@ const seoContent = {
         title: 'Шлях інтеграції | Sonate Solidaire – Швейцарія',
         description: 'Шлях культурної інтеграції через музику у Швейцарії. Структурований шлях до соціальної інклюзії в кантоні Во.',
       },
+      support: {
+        title: 'Солідарність | Sonate Solidaire – Швейцарія',
+        description: 'Підтримайте культурну інтеграцію українців у Швейцарії. Станьте партнером Sonate Solidaire в кантоні Во.',
+      },
+      privacy: {
+        title: 'Політика конфіденційності | Sonate Solidaire',
+        description: 'Політика конфіденційності Sonate Solidaire. Захист даних відповідно до швейцарського nDSG та європейського GDPR.',
+      },
     },
   },
 };
 
-type PageKey = 'home' | 'contact' | 'integration';
+type PageKey = 'home' | 'contact' | 'integration' | 'support' | 'privacy';
 
 
 export const SEO = ({ 
@@ -90,6 +114,8 @@ export const SEO = ({
   const getPageKey = (path: string): PageKey => {
     if (path === '/contact') return 'contact';
     if (path === '/integration') return 'integration';
+    if (path === '/support') return 'support';
+    if (path === '/privacy') return 'privacy';
     return 'home';
   };
   
