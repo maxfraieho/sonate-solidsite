@@ -242,7 +242,9 @@
       "title": "Integration",
       "desc": "Einbindung in das lokale Kulturleben."
     },
-    "disclaimer": "Dieser Weg hat keine therapeutische oder soziale Zielsetzung. Er findet ausschließlich in einem kulturellen und gemeinnützigen Rahmen statt."
+    "disclaimer": "Dieser Weg hat keine therapeutische oder soziale Zielsetzung. Er findet ausschließlich in einem kulturellen und gemeinnützigen Rahmen statt.",
+    "portfolioLink": "Um konkrete Beispiele zu entdecken, besuchen Sie unser Portfolio.",
+    "contactLink": "Möchten Sie zusammenarbeiten? Kontaktieren Sie uns für mehr Informationen."
   },
   "support": {
     "title": "Unterstützen",
@@ -268,6 +270,7 @@
     "comingSoon": "Demnächst verfügbar",
     "contactUs": "Kontaktieren Sie uns",
     "navLabel": "Unterstützung",
+    "integrationLink": "Erfahren Sie mehr über unseren Ansatz zur kulturellen Integration.",
     "hero": {
       "title": "Unterstützung & Zusammenarbeit",
       "subtitle": "Dieser Bereich richtet sich an Institutionen, Organisationen und Personen, die ein professionelles oder kulturelles Interesse am Projekt Sonate Solidaire haben. In dieser Phase bauen wir ein Netzwerk von Kontakten, Partnern und Unterstützern auf — ohne finanzielle Verpflichtung.",

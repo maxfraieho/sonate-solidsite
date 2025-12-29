@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { PhotoGallery } from '@/components/PhotoGallery';
+import { ArrowRight } from 'lucide-react';
 import LiteYouTubeEmbed from 'react-lite-youtube-embed';
 import 'react-lite-youtube-embed/dist/LiteYouTubeEmbed.css';
 
@@ -39,18 +41,24 @@ const Portfolio = () => {
       intro: 'Ce portfolio présente les enregistrements, concerts et collaborations de Sonate Solidaire, un projet qui unit les cultures à travers la musique.',
       videosTitle: 'Performances Vidéo',
       galleryTitle: 'Galerie Photo',
+      contactLink: 'Intéressé par une collaboration ? Contactez notre équipe.',
+      supportLink: 'En savoir plus sur notre démarche d\'intégration culturelle.',
     },
     de: {
       heading: 'Portfolio',
       intro: 'Dieses Portfolio zeigt die Aufnahmen, Konzerte und Kooperationen von Sonate Solidaire, einem Projekt, das Kulturen durch Musik verbindet.',
       videosTitle: 'Video-Aufführungen',
       galleryTitle: 'Fotogalerie',
+      contactLink: 'Interessiert an einer Zusammenarbeit? Kontaktieren Sie unser Team.',
+      supportLink: 'Mehr über unseren Ansatz zur kulturellen Integration erfahren.',
     },
     uk: {
       heading: 'Портфоліо',
       intro: 'Це портфоліо представляє записи, концерти та колаборації Sonate Solidaire – проєкту, що об\'єднує культури через музику.',
       videosTitle: 'Відео Виступи',
       galleryTitle: 'Фотогалерея',
+      contactLink: 'Зацікавлені у співпраці? Зв\'яжіться з нашою командою.',
+      supportLink: 'Дізнатися більше про наш підхід до культурної інтеграції.',
     },
   };
 
@@ -111,6 +119,17 @@ const Portfolio = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Contextual link to Contact */}
+            <div className="text-center mt-8">
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+              >
+                <span>{text.contactLink}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </section>
 
           {/* Gallery Section */}
@@ -122,6 +141,17 @@ const Portfolio = () => {
               {text.galleryTitle}
             </h2>
             <PhotoGallery />
+            
+            {/* Contextual link to Support */}
+            <div className="text-center mt-8">
+              <Link 
+                to="/support" 
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+              >
+                <span>{text.supportLink}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </section>
         </div>
       </main>

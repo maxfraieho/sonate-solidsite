@@ -243,7 +243,9 @@
       "title": "Intégration",
       "desc": "Engagement dans la vie culturelle locale."
     },
-    "disclaimer": "Ce parcours n'a aucune vocation thérapeutique ou sociale. Il s'inscrit exclusivement dans un cadre culturel et associatif."
+    "disclaimer": "Ce parcours n'a aucune vocation thérapeutique ou sociale. Il s'inscrit exclusivement dans un cadre culturel et associatif.",
+    "portfolioLink": "Pour découvrir des exemples concrets, consultez notre Portfolio.",
+    "contactLink": "Vous souhaitez collaborer ? Contactez-nous pour en savoir plus."
   },
   "support": {
     "title": "Soutenir",
@@ -269,6 +271,7 @@
     "comingSoon": "Bientôt disponible",
     "contactUs": "Nous contacter",
     "navLabel": "Soutien",
+    "integrationLink": "Découvrez notre approche d'intégration culturelle.",
     "hero": {
       "title": "Soutien & Collaborations",
       "subtitle": "Cette section est destinée aux institutions, organisations et personnes exprimant un intérêt professionnel ou culturel pour le projet Sonate Solidaire. À ce stade, nous constituons un réseau de contacts, partenaires et sympathisants — sans engagement financier.",

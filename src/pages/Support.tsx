@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/button';
@@ -239,6 +239,17 @@ const Support = () => {
           {/* Tabs + Form */}
           <section className="py-16 bg-surface/30">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Contextual link to Integration */}
+              <div className="text-center mb-8">
+                <Link 
+                  to="/integration" 
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+                >
+                  <span>{t('support.integrationLink')}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+              
               <Tabs value={supporterType} onValueChange={(v) => setSupporterType(v as SupporterType)} className="w-full">
                 <TabsList className="grid w-full grid-cols-3 mb-8">
                   <TabsTrigger 

@@ -43,20 +43,12 @@ export const Footer = () => {
     uk: 'Політика конфіденційності'
   };
 
-  const supportLabel = {
-    fr: 'Soutien & Témoignages',
-    de: 'Unterstützung & Zeugnisse',
-    uk: 'Підтримка та свідчення'
-  };
-
   const navItems = [
     { key: 'home', href: '/' },
     { key: 'mission', href: '/integration' },
-    { key: 'actions', href: '/#actions' },
-    { key: 'founder', href: '/#fondateur' },
-    { key: 'portfolio', href: '/#portfolio' },
+    { key: 'portfolio', href: '/portfolio' },
+    { key: 'solidarity', href: '/support' },
     { key: 'contact', href: '/contact' },
-    { label: supportLabel[lang], href: '/support' },
   ];
 
   return (
@@ -93,21 +85,12 @@ export const Footer = () => {
             <ul className="space-y-3 text-subtext">
               {navItems.map((item, idx) => (
                 <li key={item.key || idx}>
-                  {item.href.startsWith('/') && !item.href.includes('#') ? (
-                    <Link 
-                      to={item.href} 
-                      className="hover:text-primary transition-colors duration-200"
-                    >
-                      {item.label || t(`nav.${item.key}`)}
-                    </Link>
-                  ) : (
-                    <a 
-                      href={item.href} 
-                      className="hover:text-primary transition-colors duration-200"
-                    >
-                      {item.label || t(`nav.${item.key}`)}
-                    </a>
-                  )}
+                  <Link 
+                    to={item.href} 
+                    className="hover:text-primary transition-colors duration-200"
+                  >
+                    {t(`nav.${item.key}`)}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -140,13 +123,13 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="/#soutenir" 
+                <Link 
+                  to="/support" 
                   className="flex items-center gap-3 hover:text-primary transition-colors duration-200 group"
                 >
                   <Heart className="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
                   {content.donate[lang]}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

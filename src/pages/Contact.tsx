@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Mail, Phone, Send, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Mail, Phone, Send, Youtube, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/button';
@@ -108,6 +109,11 @@ const Contact = () => {
       fr: 'Les messages sont traités de manière confidentielle et exclusivement pour répondre à votre demande.',
       de: 'Nachrichten werden vertraulich behandelt und ausschliesslich zur Beantwortung Ihrer Anfrage verwendet.',
       uk: 'Повідомлення обробляються конфіденційно та виключно для відповіді на ваш запит.'
+    },
+    portfolioLink: {
+      fr: 'Consultez notre Portfolio pour découvrir nos réalisations.',
+      de: 'Entdecken Sie unser Portfolio, um unsere Arbeiten kennenzulernen.',
+      uk: 'Перегляньте наше Портфоліо, щоб ознайомитися з нашими роботами.'
     }
   };
 
@@ -254,6 +260,17 @@ const Contact = () => {
           {/* Contact Form - Centered */}
           <section className="py-12 bg-background" aria-label="Contact form">
             <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Contextual link to Portfolio */}
+              <div className="text-center mb-8">
+                <Link 
+                  to="/portfolio" 
+                  className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+                >
+                  <span>{texts.portfolioLink[lang]}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+              
               <div className="bg-surface border border-primary/30 rounded-2xl p-8 shadow-[0_0_30px_hsl(var(--primary)/0.15)]">
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-2 text-center">
                   {t('contact.formTitle')}
