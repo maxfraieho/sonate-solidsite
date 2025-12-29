@@ -101,20 +101,21 @@
     "expects4Desc": "Volonté de prendre des décisions et d'assumer la responsabilité de son propre parcours."
   },
   "actions": {
-    "title": "Nos Actions",
+    "title": "Axes de travail",
+    "intro": "Cette section présente les axes de travail et formats que Sonate Solidaire envisage de développer en collaboration avec ses partenaires.",
     "concerts": {
-      "title": "Concerts solidaires",
-      "desc": "Événements musicaux au profit de causes culturelles et sociales."
+      "title": "Événements culturels",
+      "desc": "Futurs événements musicaux visant à favoriser le dialogue culturel et la rencontre entre communautés."
     },
     "humanitarian": {
-      "title": "Action solidaire",
-      "desc": "Soutien à la communauté ukrainienne par la médiation culturelle."
+      "title": "Médiation culturelle",
+      "desc": "Initiatives de médiation pouvant contribuer à l'interaction intercommunautaire par la musique."
     },
     "integration": {
-      "title": "Programmes d'intégration",
-      "desc": "Ateliers culturels et musicaux pour faciliter l'insertion."
+      "title": "Formats d'intégration",
+      "desc": "Formats culturels et musicaux susceptibles d'être utilisés pour accompagner les parcours d'intégration."
     },
-    "disclaimer": "Toutes les actions sont menées à titre associatif, sans but lucratif et dans un cadre transparent."
+    "disclaimer": "Ces orientations reflètent les directions envisagées par l'association, dans le respect du cadre légal suisse."
   },
   "founder": {
     "title": "Le Fondateur",

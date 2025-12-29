@@ -13,7 +13,6 @@ export const Navbar = () => {
   const navItems = [
     { key: 'home', href: '/#home', path: '/' },
     { key: 'mission', href: '/integration', isRoute: true, path: '/integration' },
-    { key: 'actions', href: '/#actions', path: '/' },
     { key: 'ensemble', href: '/#ensemble', path: '/' },
     { key: 'portfolio', href: '/portfolio', isRoute: true, path: '/portfolio' },
     { key: 'solidarity', href: '/support', isRoute: true, path: '/support' },

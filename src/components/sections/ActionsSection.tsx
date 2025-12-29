@@ -23,6 +23,9 @@ export const ActionsSection = () => {
           <h2 className="text-4xl md:text-5xl font-display font-bold text-primary">
             {t('actions.title')}
           </h2>
+          <p className="mt-6 text-subtext max-w-3xl mx-auto leading-relaxed">
+            {t('actions.intro')}
+          </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
