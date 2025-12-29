@@ -1,12 +1,12 @@
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Globe } from 'lucide-react';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { Globe, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 // SVG Flag components
 const FlagFR = () => (
@@ -40,10 +40,12 @@ const languages = [
 
 export const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
+  const [open, setOpen] = useState(false);
 
   const changeLanguage = (langCode: string) => {
     i18n.changeLanguage(langCode);
     localStorage.setItem('language', langCode);
+    setOpen(false);
   };
 
   const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
@@ -51,8 +53,8 @@ export const LanguageSwitcher = () => {
 
   return (
     <nav aria-label="Language selector">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
           <Button 
             variant="ghost" 
             size="sm" 
@@ -65,24 +67,36 @@ export const LanguageSwitcher = () => {
             </span>
             <span className="sm:hidden"><CurrentFlag /></span>
           </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-surface border-border">
-          {languages.map((lang) => {
-            const LangFlag = lang.Flag;
-            return (
-              <DropdownMenuItem
-                key={lang.code}
-                onClick={() => changeLanguage(lang.code)}
-                className={`cursor-pointer flex items-center gap-2 ${i18n.language === lang.code ? 'text-primary' : 'text-foreground'}`}
-                aria-current={i18n.language === lang.code ? 'true' : undefined}
-              >
-                <LangFlag />
-                {lang.name}
-              </DropdownMenuItem>
-            );
-          })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+        </PopoverTrigger>
+        <PopoverContent 
+          align="end" 
+          className="w-48 p-1 bg-popover border-border"
+          sideOffset={8}
+        >
+          <div className="flex flex-col">
+            {languages.map((lang) => {
+              const LangFlag = lang.Flag;
+              const isActive = i18n.language === lang.code;
+              return (
+                <button
+                  key={lang.code}
+                  onClick={() => changeLanguage(lang.code)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded-sm text-sm transition-colors cursor-pointer ${
+                    isActive 
+                      ? 'text-primary bg-accent' 
+                      : 'text-popover-foreground hover:bg-accent hover:text-accent-foreground'
+                  }`}
+                  aria-current={isActive ? 'true' : undefined}
+                >
+                  <LangFlag />
+                  <span className="flex-1 text-left">{lang.name}</span>
+                  {isActive && <Check className="h-4 w-4" />}
+                </button>
+              );
+            })}
+          </div>
+        </PopoverContent>
+      </Popover>
     </nav>
   );
 };
