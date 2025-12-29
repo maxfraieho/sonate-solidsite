@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { MapPin, Mail, Phone, Send, Youtube, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
@@ -31,17 +31,36 @@ interface FormErrors {
   consent?: string;
 }
 
+// Map query param values to form subject keys
+const SUBJECT_PARAM_MAP: Record<string, string> = {
+  institutional: 'institutional',
+  cultural: 'cultural',
+  event: 'event',
+  integration: 'integration',
+  other: 'other',
+};
+
 const Contact = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
+  const [searchParams] = useSearchParams();
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const lastSubmitRef = useRef<number>(0);
   
+  // Get initial subject from URL query parameter
+  const getInitialSubject = (): string => {
+    const subjectParam = searchParams.get('subject');
+    if (subjectParam && SUBJECT_PARAM_MAP[subjectParam]) {
+      return SUBJECT_PARAM_MAP[subjectParam];
+    }
+    return '';
+  };
+  
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
-    subject: '',
+    subject: getInitialSubject(),
     message: '',
     consent: false
   });
