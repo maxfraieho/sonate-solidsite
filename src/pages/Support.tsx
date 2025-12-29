@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Mail, Heart, Users, Building2, Church, Check, ChevronDown, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
@@ -62,11 +62,25 @@ const initialFormData: FormData = {
 const Support = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'fr' | 'de' | 'uk';
+  const [searchParams] = useSearchParams();
+  const formRef = useRef<HTMLDivElement>(null);
   
   const [supporterType, setSupporterType] = useState<SupporterType>('individual');
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  // Handle URL params for preselection (e.g., ?type=institutional)
+  useEffect(() => {
+    const typeParam = searchParams.get('type');
+    if (typeParam === 'institutional') {
+      setSupporterType('organization');
+      // Scroll to form after a brief delay
+      setTimeout(() => {
+        formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  }, [searchParams]);
 
   const handleInterestChange = (interest: string, checked: boolean) => {
     setFormData(prev => ({
@@ -238,7 +252,7 @@ const Support = () => {
 
           {/* Tabs + Form */}
           <section className="py-16 bg-surface/30">
-            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div ref={formRef} className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
               {/* Contextual links */}
               <div className="text-center mb-8 space-y-3">
                 <Link 
