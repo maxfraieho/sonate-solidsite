@@ -63,16 +63,24 @@ const IntegrationPath = () => {
                 <div className="mx-4 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50" aria-hidden="true" />
                 <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" aria-hidden="true" />
               </div>
-              <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-6">
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
                 {t('integrationPath.title')}
               </h1>
+              <p className="text-sm text-subtext/80 italic mb-6 max-w-2xl mx-auto">
+                {t('integrationPath.contextDisclaimer')}
+              </p>
               <p className="text-lg text-subtext leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
                 {t('integrationPath.intro')}
               </p>
             </header>
 
+            {/* Principles note */}
+            <p className="text-center text-sm text-subtext/80 italic mb-8 max-w-2xl mx-auto">
+              {t('integrationPath.principlesNote')}
+            </p>
+
             {/* Steps */}
-            <section className="space-y-6 mb-20" aria-label="Integration steps">
+            <section className="space-y-6 mb-20" aria-label="Integration principles">
               {steps.map((step, index) => {
                 const Icon = step.icon;
                 return (
