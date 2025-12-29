@@ -11,10 +11,10 @@ const InstitutionalInterest = () => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   
-  // Get language-aware contact path with preselected subject
-  const getContactPath = () => {
-    const basePath = lang === 'de' ? '/contact' : `/${lang}/contact`;
-    return `${basePath}?subject=institutional`;
+  // Get language-aware support path with institutional context
+  const getSupportPath = () => {
+    const basePath = lang === 'de' ? '/support' : `/${lang}/support`;
+    return `${basePath}?type=institutional`;
   };
 
   const handlePrint = () => {
@@ -273,7 +273,7 @@ const InstitutionalInterest = () => {
                 {t('institutional.cta.text')}
               </p>
               <Button asChild size="lg" className="gap-2 cta-glow">
-                <Link to={getContactPath()}>
+                <Link to={getSupportPath()}>
                   <MessageCircle className="w-5 h-5" aria-hidden="true" />
                   {t('institutional.cta.button')}
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
