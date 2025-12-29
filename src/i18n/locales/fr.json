@@ -404,6 +404,40 @@
     "consent_label": "J'accepte le traitement de mes données",
     "consent_help": "Les données sont utilisées uniquement pour répondre à votre demande."
   },
+  "institutional": {
+    "title": "Intérêt institutionnel",
+    "subtitle": "Projet culturel d'intégration par la musique — Canton de Vaud",
+    "projectStage": {
+      "line1": "Sonate Solidaire est un projet culturel actuellement en phase de structuration dans le canton de Vaud.",
+      "line2": "Cette page s'adresse aux institutions et partenaires souhaitant évaluer l'intérêt de cette démarche avant la constitution formelle de l'association."
+    },
+    "targetAudience": {
+      "title": "Cette démarche peut intéresser :",
+      "schools": "Écoles et établissements de formation",
+      "municipalities": "Communes et services culturels ou sociaux",
+      "cultural": "Institutions culturelles locales",
+      "associations": "Associations actives dans l'intégration et l'interculturalité"
+    },
+    "proposed": {
+      "title": "Ce qui est proposé",
+      "intro": "À ce stade, Sonate Solidaire explore des formes de collaboration non contraignantes, telles que :",
+      "cultural": "Une collaboration culturelle ponctuelle",
+      "pilot": "Un projet pilote ou expérimental",
+      "exchange": "Un échange autour de pratiques musicales et culturelles",
+      "venue": "La mise à disposition d'un lieu ou d'un cadre institutionnel",
+      "exploratory": "Un simple échange exploratoire sans engagement"
+    },
+    "notRequested": {
+      "title": "Ce qui n'est pas demandé",
+      "line1": "Aucune contribution financière n'est demandée à ce stade.",
+      "line2": "L'objectif actuel est de créer un réseau de contacts, d'intérêts et de soutiens institutionnels, en toute transparence."
+    },
+    "cta": {
+      "text": "Si cette initiative vous semble pertinente, un simple message d'intérêt ou de soutien institutionnel nous serait très précieux.",
+      "button": "Laisser un message d'intérêt institutionnel"
+    },
+    "footerNote": "Les messages d'intérêt recueillis pourront être utilisés, avec accord préalable, comme éléments de contexte lors de la constitution officielle de l'association."
+  },
   "errors": {
     "title": "Une erreur s'est produite",
     "description": "Quelque chose s'est mal passé. Veuillez rafraîchir la page.",

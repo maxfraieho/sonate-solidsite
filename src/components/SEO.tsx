@@ -38,6 +38,10 @@ const seoContent = {
         title: 'Politique de Confidentialité | Sonate Solidaire',
         description: 'Politique de confidentialité de Sonate Solidaire. Protection des données selon le nDSG suisse et le RGPD européen.',
       },
+      institutional: {
+        title: 'Intérêt Institutionnel | Sonate Solidaire – Canton de Vaud',
+        description: 'Page destinée aux institutions et partenaires souhaitant évaluer l\'intérêt du projet Sonate Solidaire avant la constitution formelle de l\'association.',
+      },
     },
   },
   de: {
@@ -64,6 +68,10 @@ const seoContent = {
       privacy: {
         title: 'Datenschutzrichtlinie | Sonate Solidaire',
         description: 'Datenschutzrichtlinie von Sonate Solidaire. Datenschutz gemäss Schweizer nDSG und EU-DSGVO.',
+      },
+      institutional: {
+        title: 'Institutionelles Interesse | Sonate Solidaire – Kanton Waadt',
+        description: 'Seite für Institutionen und Partner, die das Interesse am Projekt Sonate Solidaire vor der offiziellen Vereinsgründung evaluieren möchten.',
       },
     },
   },
@@ -92,11 +100,15 @@ const seoContent = {
         title: 'Політика конфіденційності | Sonate Solidaire',
         description: 'Політика конфіденційності Sonate Solidaire. Захист даних відповідно до швейцарського nDSG та європейського GDPR.',
       },
+      institutional: {
+        title: 'Інституційний інтерес | Sonate Solidaire – Кантон Во',
+        description: 'Сторінка для установ та партнерів, які бажають оцінити доцільність проєкту Sonate Solidaire до офіційного створення асоціації.',
+      },
     },
   },
 };
 
-type PageKey = 'home' | 'contact' | 'integration' | 'support' | 'privacy';
+type PageKey = 'home' | 'contact' | 'integration' | 'support' | 'privacy' | 'institutional';
 
 // Helper to get base path without language prefix
 const getBasePath = (path: string): string => {
@@ -131,6 +143,7 @@ export const SEO = ({
     if (cleanPath === '/integration') return 'integration';
     if (cleanPath === '/support') return 'support';
     if (cleanPath === '/privacy') return 'privacy';
+    if (cleanPath === '/interet-institutionnel') return 'institutional';
     return 'home';
   };
   

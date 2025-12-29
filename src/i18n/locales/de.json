@@ -403,6 +403,40 @@
     "consent_label": "Ich stimme der Verarbeitung meiner Daten zu",
     "consent_help": "Daten werden nur zur Beantwortung Ihrer Anfrage verwendet."
   },
+  "institutional": {
+    "title": "Institutionelles Interesse",
+    "subtitle": "Kulturprojekt zur Integration durch Musik — Kanton Waadt",
+    "projectStage": {
+      "line1": "Sonate Solidaire ist ein Kulturprojekt, das sich derzeit in der Strukturierungsphase im Kanton Waadt befindet.",
+      "line2": "Diese Seite richtet sich an Institutionen und Partner, die das Interesse an diesem Vorhaben vor der offiziellen Vereinsgründung evaluieren möchten."
+    },
+    "targetAudience": {
+      "title": "Dieses Vorhaben kann interessieren:",
+      "schools": "Schulen und Bildungseinrichtungen",
+      "municipalities": "Gemeinden und Kultur- oder Sozialdienste",
+      "cultural": "Lokale Kulturinstitutionen",
+      "associations": "Vereine im Bereich Integration und Interkulturalität"
+    },
+    "proposed": {
+      "title": "Was vorgeschlagen wird",
+      "intro": "In dieser Phase erkundet Sonate Solidaire unverbindliche Formen der Zusammenarbeit, wie zum Beispiel:",
+      "cultural": "Eine punktuelle kulturelle Zusammenarbeit",
+      "pilot": "Ein Pilot- oder Experimentierprojekt",
+      "exchange": "Ein Austausch über musikalische und kulturelle Praktiken",
+      "venue": "Die Bereitstellung eines Ortes oder institutionellen Rahmens",
+      "exploratory": "Ein einfacher explorativer Austausch ohne Verpflichtung"
+    },
+    "notRequested": {
+      "title": "Was nicht verlangt wird",
+      "line1": "In dieser Phase wird kein finanzieller Beitrag verlangt.",
+      "line2": "Das aktuelle Ziel ist es, ein Netzwerk von Kontakten, Interessen und institutioneller Unterstützung in voller Transparenz aufzubauen."
+    },
+    "cta": {
+      "text": "Wenn Ihnen diese Initiative relevant erscheint, wäre eine einfache Interessenbekundung oder institutionelle Unterstützungsnachricht für uns sehr wertvoll.",
+      "button": "Nachricht über institutionelles Interesse hinterlassen"
+    },
+    "footerNote": "Die gesammelten Interessenbekundungen können, mit vorheriger Zustimmung, als Kontextelemente bei der offiziellen Vereinsgründung verwendet werden."
+  },
   "errors": {
     "title": "Etwas ist schiefgelaufen",
     "description": "Ein Fehler ist aufgetreten. Bitte laden Sie die Seite neu.",
