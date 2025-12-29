@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
 import { Button } from '@/components/ui/button';
 import { Building2, Users, School, Landmark, Handshake, MessageCircle, ArrowRight, Printer } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import SEO from '@/components/SEO';
 
 const InstitutionalInterest = () => {
@@ -25,6 +26,14 @@ const InstitutionalInterest = () => {
     de: 'Drucken / PDF herunterladen',
     uk: 'Друкувати / Завантажити PDF',
   };
+
+  const qrLabels = {
+    fr: 'Version en ligne du document',
+    de: 'Online-Version dieses Dokuments',
+    uk: 'Онлайн-версія документа',
+  };
+
+  const qrUrl = 'https://violin.pp.ua/fr/interet-institutionnel';
 
   const targetAudience = [
     { icon: School, key: 'schools' },
@@ -272,17 +281,38 @@ const InstitutionalInterest = () => {
               </Button>
             </section>
             
-            {/* Print-only CTA text (shows contact info instead of button) */}
-            <section className="hidden print:block mb-12 text-center">
-              <p className="text-foreground mb-4">
-                {t('institutional.cta.text')}
-              </p>
-              <p className="text-sm">
-                <strong>Contact:</strong> arsen.k111999@gmail.com | +41 78 326 11 12
-              </p>
-              <p className="text-sm">
-                <strong>Web:</strong> violin.pp.ua/contact
-              </p>
+            {/* Print-only CTA text with QR code */}
+            <section className="hidden print:block mb-12">
+              <div className="flex items-start justify-between gap-8">
+                <div className="flex-1">
+                  <p className="text-foreground mb-4">
+                    {t('institutional.cta.text')}
+                  </p>
+                  <p className="text-sm mb-1">
+                    <strong>Contact:</strong> arsen.k111999@gmail.com | +41 78 326 11 12
+                  </p>
+                  <p className="text-sm">
+                    <strong>Web:</strong> violin.pp.ua/contact
+                  </p>
+                </div>
+                
+                {/* QR Code - print only */}
+                <div className="flex-shrink-0 text-center">
+                  <div className="inline-block p-2 bg-white border border-gray-300">
+                    <QRCodeSVG 
+                      value={qrUrl}
+                      size={80}
+                      level="M"
+                      includeMargin={false}
+                      bgColor="#ffffff"
+                      fgColor="#000000"
+                    />
+                  </div>
+                  <p className="text-xs mt-1 text-gray-600 max-w-[100px]">
+                    {qrLabels[lang as keyof typeof qrLabels] || qrLabels.fr}
+                  </p>
+                </div>
+              </div>
             </section>
 
             {/* Footer Note */}
