@@ -23,7 +23,9 @@ const IntegrationPath = lazy(() => import("./pages/IntegrationPath"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Support = lazy(() => import("./pages/Support"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
+const InstitutionalInterest = lazy(() => import("./pages/InstitutionalInterest"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+
 
 const queryClient = new QueryClient();
 
@@ -79,6 +81,7 @@ const App = () => (
                 <Route path="/fr/privacy" element={<Privacy />} />
                 <Route path="/fr/support" element={<Support />} />
                 <Route path="/fr/portfolio" element={<Portfolio />} />
+                <Route path="/fr/interet-institutionnel" element={<InstitutionalInterest />} />
                 
                 {/* German routes */}
                 <Route path="/de" element={<Index />} />
@@ -87,6 +90,7 @@ const App = () => (
                 <Route path="/de/privacy" element={<Privacy />} />
                 <Route path="/de/support" element={<Support />} />
                 <Route path="/de/portfolio" element={<Portfolio />} />
+                <Route path="/de/interet-institutionnel" element={<InstitutionalInterest />} />
                 
                 {/* Ukrainian routes */}
                 <Route path="/uk" element={<Index />} />
@@ -95,12 +99,14 @@ const App = () => (
                 <Route path="/uk/privacy" element={<Privacy />} />
                 <Route path="/uk/support" element={<Support />} />
                 <Route path="/uk/portfolio" element={<Portfolio />} />
+                <Route path="/uk/interet-institutionnel" element={<InstitutionalInterest />} />
                 
                 {/* Legacy routes (redirect to root with hash) */}
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/integration" element={<IntegrationPath />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/support" element={<Support />} />
+                <Route path="/interet-institutionnel" element={<InstitutionalInterest />} />
                 <Route path="/donate" element={<Navigate to="/#soutenir" replace />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
