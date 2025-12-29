@@ -4,7 +4,7 @@
     "mission": "Mission",
     "actions": "Aktionen",
     "ensemble": "Ensemble",
-    "solidarity": "Solidarität",
+    "solidarity": "Unterstützung & Zusammenarbeit",
     "founder": "Gründer",
     "portfolio": "Portfolio",
     "transparence": "Transparenz",
@@ -266,12 +266,13 @@
     "contactUs": "Kontaktieren Sie uns",
     "navLabel": "Unterstützung",
     "hero": {
-      "title": "Unterstützung & Zeugnisse",
-      "subtitle": "Der Verein ist in Gründung. Im Moment sammeln wir Unterstützungsbekundungen und Partnerschaftsanfragen. Offizielle Spendenkanäle (IBAN/TWINT) werden nach Kontoeröffnung aktiviert.",
+      "title": "Unterstützung & Zusammenarbeit",
+      "subtitle": "Dieser Bereich richtet sich an Institutionen, Organisationen und Personen, die ein professionelles oder kulturelles Interesse am Projekt Sonate Solidaire haben. In dieser Phase bauen wir ein Netzwerk von Kontakten, Partnern und Unterstützern auf — ohne finanzielle Verpflichtung.",
       "bullets": {
-        "1": "Unterstützungsstatement hinterlassen (auf Wunsch veröffentlichbar)",
-        "2": "Benefizkonzert oder Anlass vorschlagen",
-        "3": "Partner*in / Volunteer / Community-Multiplikator werden"
+        "1": "Eine Interessenbekundung oder Unterstützungsnachricht hinterlassen",
+        "2": "Kulturelle oder musikalische Zusammenarbeit vorschlagen",
+        "3": "Einen Veranstaltungsort / Event / Format vorschlagen",
+        "4": "Partner- oder Unterstützungsstruktur werden"
       },
       "backBtn": "Zurück zur Unterstützung",
       "contactBtn": "Kontakt"
@@ -310,12 +311,12 @@
         "role": "Rolle / Funktion (optional)",
         "message": "Nachricht / Statement",
         "interests": "Ich interessiere mich für:",
-        "interests.donateLater": "Später finanziell unterstützen (wenn IBAN/TWINT verfügbar sind)",
-        "interests.hostConcert": "Konzert ausrichten / organisieren",
-        "interests.bookConcert": "Konzert buchen",
-        "interests.partner": "Partnerschaft / Sponsoring",
-        "interests.volunteer": "Freiwilligenarbeit",
-        "interests.share": "In meiner Community teilen",
+        "interests.interest": "Interesse am Projekt bekunden",
+        "interests.hostConcert": "Kulturelle oder musikalische Zusammenarbeit vorschlagen",
+        "interests.venue": "Veranstaltungsort / Event / Format vorschlagen",
+        "interests.partner": "Partner- oder Unterstützungsstruktur werden",
+        "interests.volunteer": "Freiwillige Mitarbeit / punktuelle Beteiligung",
+        "interests.share": "In meinem professionellen Netzwerk teilen",
         "publishName": "Sie dürfen meinen Namen (oder den Namen meiner Organisation) als Unterstützer auf der Website veröffentlichen.",
         "publishQuote": "Sie dürfen ein kurzes Zitat aus meinem Statement auf der Website veröffentlichen.",
         "contactConsent": "Ich bin einverstanden, bezüglich Sonate Solidaire kontaktiert zu werden.",
@@ -352,12 +353,12 @@
     },
     "faq": {
       "title": "Häufige Fragen",
-      "q1": "Warum sind Spenden noch nicht verfügbar?",
-      "a1": "Der Verein wird finalisiert (Statuten, Governance, Bankkonto). IBAN/TWINT werden nach offizieller Kontoeröffnung aktiviert.",
-      "q2": "Wird mein Statement veröffentlicht?",
-      "a2": "Nur wenn Sie die Veröffentlichung erlauben. Andernfalls bleibt es intern.",
+      "q1": "Sieht das Projekt finanzielle Unterstützung vor?",
+      "a1": "In dieser Phase konzentriert sich Sonate Solidaire auf den Aufbau von Partnerschaften, kulturellen Kooperationen und einem Unterstützungsnetzwerk. Finanzielle Mechanismen (IBAN/TWINT) werden erst nach der offiziellen Registrierung des Vereins in Betracht gezogen und sind nicht Teil dieser Phase.",
+      "q2": "Wird meine Nachricht veröffentlicht?",
+      "a2": "Nur wenn Sie die Veröffentlichung erlauben. Andernfalls bleibt sie intern.",
       "q3": "Was passiert nach dem Absenden?",
-      "a3": "Wir prüfen Ihre Anfrage und kontaktieren Sie bei Bedarf (Konzert, Partnerschaft, Launch-Infos)."
+      "a3": "Wir prüfen Ihre Anfrage und kontaktieren Sie bei Bedarf (Zusammenarbeit, Partnerschaft, Launch-Infos)."
     },
     "next": {
       "title": "Wie geht es weiter?",
@@ -366,13 +367,13 @@
   },
   "solidarity": {
     "hero": {
-      "title": "Solidarität",
-      "subtitle": "Ihre Unterstützung steht im Mittelpunkt des Projekts Sonate Solidaire. Teilen Sie Ihre Ermutigung, schlagen Sie eine Zusammenarbeit vor oder werden Sie Partner unserer musikalischen und humanitären Mission.",
-      "welcome": "Sie kommen von unserem Solidaritätsaufruf — willkommen unter unseren Unterstützern!"
+      "title": "Unterstützung & Zusammenarbeit",
+      "subtitle": "Dieser Bereich richtet sich an Institutionen, Organisationen und Personen, die ein professionelles oder kulturelles Interesse am Projekt Sonate Solidaire haben.",
+      "welcome": "Willkommen in unserem Netzwerk von Kontakten und potenziellen Partnern."
     },
     "transparency": {
       "title": "Transparenz",
-      "desc": "Die offiziellen Spendenkanäle (IBAN/TWINT) werden nach der Kontoeröffnung veröffentlicht."
+      "desc": "Wir befinden uns in der Netzwerkaufbauphase. Finanzielle Mechanismen werden erst nach der offiziellen Vereinsregistrierung in Betracht gezogen."
     },
     "form": {
       "thanks": "Danke für Ihr Engagement. Jede Nachricht zählt, um das Projekt lebendig zu halten."

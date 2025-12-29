@@ -19,7 +19,7 @@ const SWISS_CANTONS = [
   'Tessin', 'Thurgovie', 'Uri', 'Valais', 'Vaud', 'Zoug', 'Zurich'
 ];
 
-const INTERESTS = ['donateLater', 'hostConcert', 'bookConcert', 'partner', 'volunteer', 'share'] as const;
+const INTERESTS = ['interest', 'hostConcert', 'venue', 'partner', 'volunteer', 'share'] as const;
 
 type SupporterType = 'individual' | 'organization' | 'church';
 
@@ -179,7 +179,7 @@ const Support = () => {
               </p>
               
               <ul className="text-left max-w-2xl mx-auto space-y-3 mb-10">
-                {[1, 2, 3].map(n => (
+                {[1, 2, 3, 4].map(n => (
                   <li key={n} className="flex items-start gap-3">
                     <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <span className="text-subtext">{t(`support.hero.bullets.${n}`)}</span>
