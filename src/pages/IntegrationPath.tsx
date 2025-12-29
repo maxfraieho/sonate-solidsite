@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/sections/Footer';
-import { Music, Users, MessageCircle, Heart, Frame, Eye, Globe, Network, Clock, Award, HandHeart, Compass } from 'lucide-react';
+import { Music, Users, MessageCircle, Heart, Frame, Eye, Globe, Network, Clock, Award, HandHeart, Compass, ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 const IntegrationPath = () => {
@@ -109,6 +110,17 @@ const IntegrationPath = () => {
               })}
             </section>
 
+            {/* Contextual link to Portfolio */}
+            <div className="text-center mb-12">
+              <Link 
+                to="/portfolio" 
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+              >
+                <span>{t('integrationPath.portfolioLink')}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+
             {/* Visual diagram */}
             <aside className="mb-20" aria-label="Integration path visual diagram">
               <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -194,9 +206,17 @@ const IntegrationPath = () => {
 
             {/* Disclaimer */}
             <footer className="text-center border-t border-border/30 pt-10">
-              <p className="text-sm text-subtext leading-relaxed max-w-xl mx-auto italic">
+              <p className="text-sm text-subtext leading-relaxed max-w-xl mx-auto italic mb-6">
                 {t('integrationPath.disclaimer')}
               </p>
+              {/* Contextual link to Contact */}
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+              >
+                <span>{t('integrationPath.contactLink')}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </footer>
           </div>
         </main>

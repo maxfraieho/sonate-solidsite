@@ -5,59 +5,71 @@
   <!-- Homepage -->
   <url>
     <loc>https://violin.pp.ua/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://violin.pp.ua/?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://violin.pp.ua/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://violin.pp.ua/?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/"/>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
-  <!-- Contact -->
+  <!-- Integration -->
   <url>
-    <loc>https://violin.pp.ua/contact</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://violin.pp.ua/contact?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://violin.pp.ua/contact?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://violin.pp.ua/contact?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/contact"/>
-    <lastmod>2025-12-27</lastmod>
+    <loc>https://violin.pp.ua/integration</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/integration"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/integration"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/integration"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/integration"/>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
-  <!-- Integration Path -->
+  <!-- Portfolio -->
   <url>
-    <loc>https://violin.pp.ua/integration</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://violin.pp.ua/integration?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://violin.pp.ua/integration?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://violin.pp.ua/integration?lang=uk"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/integration"/>
-    <lastmod>2025-12-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://violin.pp.ua/portfolio</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/portfolio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/portfolio"/>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   
   <!-- Support -->
   <url>
     <loc>https://violin.pp.ua/support</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://violin.pp.ua/support?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://violin.pp.ua/support?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://violin.pp.ua/support?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/support"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/support"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/support"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/support"/>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Contact -->
+  <url>
+    <loc>https://violin.pp.ua/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/contact"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/contact"/>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   
   <!-- Privacy -->
   <url>
     <loc>https://violin.pp.ua/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://violin.pp.ua/privacy?lang=fr"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://violin.pp.ua/privacy?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="uk" href="https://violin.pp.ua/privacy?lang=uk"/>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://violin.pp.ua/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://violin.pp.ua/privacy"/>
+    <xhtml:link rel="alternate" hreflang="uk-UA" href="https://violin.pp.ua/uk/privacy"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://violin.pp.ua/privacy"/>
-    <lastmod>2025-12-27</lastmod>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
