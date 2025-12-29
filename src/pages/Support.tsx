@@ -239,8 +239,8 @@ const Support = () => {
           {/* Tabs + Form */}
           <section className="py-16 bg-surface/30">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-              {/* Contextual link to Integration */}
-              <div className="text-center mb-8">
+              {/* Contextual links */}
+              <div className="text-center mb-8 space-y-3">
                 <Link 
                   to="/integration" 
                   className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
@@ -248,6 +248,16 @@ const Support = () => {
                   <span>{t('support.integrationLink')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
+                <div>
+                  <Link 
+                    to={`/${lang}/interet-institutionnel`}
+                    className="inline-flex items-center gap-2 text-subtext hover:text-primary transition-colors group"
+                  >
+                    <Building2 className="w-4 h-4" />
+                    <span>{t('support.institutionalLink')}</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
               
               <Tabs value={supporterType} onValueChange={(v) => setSupporterType(v as SupporterType)} className="w-full">
