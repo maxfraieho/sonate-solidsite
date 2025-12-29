@@ -155,7 +155,7 @@ export const Footer = () => {
             </Link>
             <span className="hidden sm:inline text-border">•</span>
             <Link 
-              to="/interet-institutionnel" 
+              to={`/${lang}/interet-institutionnel`} 
               className="hover:text-primary transition-colors duration-200"
             >
               {institutionalLabel[lang]}

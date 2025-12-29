@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Globe, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -40,11 +41,33 @@ const languages = [
 
 export const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const changeLanguage = (langCode: string) => {
+    // Get current path and remove any existing language prefix
+    let currentPath = location.pathname;
+    const langPrefixes = ['/fr', '/de', '/uk'];
+    
+    for (const prefix of langPrefixes) {
+      if (currentPath.startsWith(prefix + '/') || currentPath === prefix) {
+        currentPath = currentPath.slice(prefix.length) || '/';
+        break;
+      }
+    }
+
+    // Construct new path with new language prefix
+    const newPath = currentPath === '/' 
+      ? `/${langCode}` 
+      : `/${langCode}${currentPath}`;
+    
+    // Update i18n and localStorage
     i18n.changeLanguage(langCode);
     localStorage.setItem('language', langCode);
+    
+    // Navigate to new language path
+    navigate(newPath);
     setOpen(false);
   };
 
