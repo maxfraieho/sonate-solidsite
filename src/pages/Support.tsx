@@ -75,6 +75,11 @@ const Support = () => {
     const typeParam = searchParams.get('type');
     if (typeParam === 'institutional') {
       setSupporterType('organization');
+      // Preselect 'partner' interest for institutional users (if not already selected)
+      setFormData(prev => ({
+        ...prev,
+        interests: prev.interests.includes('partner') ? prev.interests : [...prev.interests, 'partner']
+      }));
       // Scroll to form after a brief delay
       setTimeout(() => {
         formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
