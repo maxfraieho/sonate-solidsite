@@ -272,11 +272,11 @@ const InstitutionalInterest = () => {
               <p className="text-lg text-foreground mb-8 max-w-2xl mx-auto">
                 {t('institutional.cta.text')}
               </p>
-              <Button asChild size="lg" className="gap-2 cta-glow">
-                <Link to={getSupportPath()}>
-                  <MessageCircle className="w-5 h-5" aria-hidden="true" />
-                  {t('institutional.cta.button')}
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              <Button asChild size="lg" className="gap-2 cta-glow w-full sm:w-auto max-w-full whitespace-normal text-center">
+                <Link to={getSupportPath()} className="flex items-center justify-center flex-wrap">
+                  <MessageCircle className="w-5 h-5 flex-shrink-0" aria-hidden="true" />
+                  <span className="mx-2">{t('institutional.cta.button')}</span>
+                  <ArrowRight className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                 </Link>
               </Button>
             </section>
