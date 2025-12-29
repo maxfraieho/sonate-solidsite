@@ -43,10 +43,16 @@ export const Footer = () => {
     uk: 'Політика конфіденційності'
   };
 
+  const institutionalLabel = {
+    fr: 'Intérêt institutionnel',
+    de: 'Institutionelles Interesse',
+    uk: 'Інституційний інтерес'
+  };
+
   const navItems = [
     { key: 'home', href: '/' },
     { key: 'mission', href: '/integration' },
-    { key: 'portfolio', href: '/portfolio' },
+    { key: 'portfolio', href: '/#portfolio' },
     { key: 'solidarity', href: '/support' },
     { key: 'contact', href: '/contact' },
   ];
@@ -146,6 +152,13 @@ export const Footer = () => {
               className="hover:text-primary transition-colors duration-200"
             >
               {privacyLabel[lang]}
+            </Link>
+            <span className="hidden sm:inline text-border">•</span>
+            <Link 
+              to="/interet-institutionnel" 
+              className="hover:text-primary transition-colors duration-200"
+            >
+              {institutionalLabel[lang]}
             </Link>
           </div>
           <p className="flex items-center gap-2">
